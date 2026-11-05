@@ -1,4 +1,4 @@
-import type { Vec3, Quat, RawHand, HandFeature } from "../types";
+import type { Vec3, Quat, RawHand, HandFeature } from "../types.js";
 export const add = (a: Vec3, b: Vec3): Vec3 => [
   a[0] + b[0],
   a[1] + b[1],

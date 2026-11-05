@@ -1,6 +1,6 @@
-import type { Sample, Frame, HandFeature } from "../types";
-import { quality } from "./recognizer";
-import { isCustomWordId } from "./words";
+import type { Sample, Frame, HandFeature } from "../types.js";
+import { quality } from "./recognizer.js";
+import { isCustomWordId } from "./words.js";
 const DB = "noi-studio-v1",
   STORE = "samples";
 function open() {

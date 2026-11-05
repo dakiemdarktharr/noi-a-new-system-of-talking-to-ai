@@ -1,4 +1,4 @@
-import type { VocabularyEntry } from "../types";
+import type { VocabularyEntry } from "../types.js";
 
 export const VIDEO_GOAL = 30;
 const WORDS_KEY = "noi-custom-words-v1";

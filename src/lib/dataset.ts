@@ -1,6 +1,6 @@
 import JSZip from "jszip";
-import type { Sample } from "../types";
-import { validateImport } from "./storage";
+import type { Sample } from "../types.js";
+import { validateImport } from "./storage.js";
 const ARCHIVE_LIMIT = 300 * 1024 * 1024;
 const MANIFEST_LIMIT = 128 * 1024 * 1024;
 export function saveBlob(blob: Blob, name: string) {

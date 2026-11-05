@@ -1,5 +1,5 @@
-import type { Frame, HandFeature, Sample, Recognition } from "../types";
-import { quaternionDistance, norm, sub } from "./geometry";
+import type { Frame, HandFeature, Sample, Recognition } from "../types.js";
+import { quaternionDistance, norm, sub } from "./geometry.js";
 const rms = (a: number[], b: number[]) =>
   Math.sqrt(a.reduce((s, v, i) => s + (v - b[i]) ** 2, 0) / a.length);
 export function handDistance(a: HandFeature, b: HandFeature) {

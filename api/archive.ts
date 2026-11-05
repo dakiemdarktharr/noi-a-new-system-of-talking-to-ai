@@ -5,10 +5,10 @@ import {
   listFiles,
   uploadFiles,
 } from "@huggingface/hub";
-import type { Sample } from "../src/types";
-import { packDataset } from "../src/lib/dataset";
-import { validateImport } from "../src/lib/storage";
-import { isCustomWordId, VIDEO_GOAL } from "../src/lib/words";
+import type { Sample } from "../src/types.js";
+import { packDataset } from "../src/lib/dataset.js";
+import { validateImport } from "../src/lib/storage.js";
+import { isCustomWordId, VIDEO_GOAL } from "../src/lib/words.js";
 
 const CLIP_LIMIT = 480_000;
 const REQUEST_LIMIT = 4_000_000;
