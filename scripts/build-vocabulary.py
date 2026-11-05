@@ -1,14 +1,18 @@
 """Authored semantic inventory; these are NOT trained sign-language classes."""
-import json,csv,unicodedata
+import json,csv,unicodedata,re,hashlib
+from collections import Counter
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-old=json.loads((ROOT.parent/'chung-tay-v03/noi-core.json').read_text(encoding='utf8'))
+core_baseline=json.loads((ROOT/'scripts/vocabulary-source/core-775.json').read_text(encoding='utf8'))
+assert len(core_baseline)==775
+old={'entries':[dict(e,layer='core',id=e.get('previousId')) for e in core_baseline[:140]]}
 # Published IDs are labels in saved recordings. Reuse them even when source
 # groups are reordered or a new meaning is added earlier in the source below.
 inventory_path=ROOT/'src/data/vocabulary.json'
 previous=json.loads(inventory_path.read_text(encoding='utf8'))['entries'] if inventory_path.exists() else []
-stable_ids={e['label']:e['id'] for e in previous}
-next_id=max((int(e['id'][3:]) for e in previous),default=0)+1
+stable_ids={e['label']:e['id'] for e in core_baseline}
+stable_ids.update({e['label']:e['id'] for e in previous})
+next_id=max(int(label_id[3:]) for label_id in stable_ids.values())+1
 ADDITIONS={
 'Người và quan hệ':'mình|chúng tôi|chúng ta cùng nhau|anh|chị|em|ông|bà|vợ|chồng|cha mẹ|anh chị em|người yêu|đồng nghiệp|hàng xóm|khách|chủ nhà|trẻ em|người lớn|người lạ|thầy cô|bác sĩ|nhân viên|người phiên dịch|người Điếc|người nghe|người không nói được',
 'Bản thân và thông tin':'tên|tuổi|địa chỉ|số điện thoại|ngày sinh|quê quán|quốc tịch|nghề nghiệp|sở thích|thói quen|kinh nghiệm|khả năng|giới thiệu|liên hệ|riêng tư|bí mật',
@@ -86,23 +90,91 @@ definitions.update({
  'tối':'Buổi tối trong ngày; độ tối dùng mục tối mờ.',
 })
 for e in entries:e['aliases']=aliases.get(e['label'],[]);e['definition']=definitions.get(e['label'],e['definition'])
+
+# Expand with authored practical phrases, followed by dictionary headwords.
+# The lexicon file is pinned and offline; no runtime download is required.
+source_dir=ROOT/'scripts/vocabulary-source'
+source_meta=json.loads((source_dir/'source.json').read_text(encoding='utf8'))
+source_meta['id']='vntk-dictionary'
+source_meta['licenseText']=(ROOT/'public/vocabulary/VNTK-LICENSE.txt').read_text(encoding='utf8')
+source_bytes=(source_dir/'vntk-dictionary.json').read_bytes()
+assert hashlib.sha256(source_bytes).hexdigest()==source_meta['sha256'], 'Lexicon checksum mismatch'
+lexicon=json.loads(source_bytes)
+curated=json.loads((source_dir/'curated.json').read_text(encoding='utf8'))
+def append_proposal(label,group,definition,origin,kind='lexical'):
+ before=len(entries)
+ add(label,group,3 if group.startswith('AI ') else 2)
+ if len(entries)>before:
+  entries[-1].update(definition=definition,provenance=origin,entryKind=kind)
+for group,phrases in curated.items():
+ for phrase in phrases.split('|'):
+  append_proposal(phrase,group,phrase,{'type':'authored','source':'noi-curated-2026-11-06'},'phrase')
+
+def clean(value):return unicodedata.normalize('NFC',value).casefold().strip()
+eligible={}
+for word,senses in lexicon.items():
+ label=unicodedata.normalize('NFC',word).strip()
+ if label!=label.lower() or not re.fullmatch(r'[^\W\d_]+(?: [^\W\d_]+){0,3}',label,re.UNICODE):continue
+ if clean(label) in seen or label in {'địt','đéo','đĩ','đụ','đéo mẹ','địt mẹ'}:continue
+ usable=[s for s in senses if len(s.get('definition',''))>=15 and not re.search(r'^(như |xem |x\.)|\b(từ cũ|ít dùng|tục ngữ cổ|từ cổ|chửi tục)\b',s.get('definition',''),re.I)]
+ if usable:eligible[clean(label)]=(label,usable)
+# Rank by actual occurrences in definitions/examples, not alphabetic order.
+# This is a lexicon-internal relevance heuristic, not a population frequency claim.
+counts=Counter()
+for senses in lexicon.values():
+ for sense in senses:
+  tokens=re.findall(r'[^\W\d_]+',clean(sense.get('definition','')+' '+sense.get('example','')),re.UNICODE)
+  for n in range(1,5):
+   for i in range(len(tokens)-n+1):
+    phrase=' '.join(tokens[i:i+n])
+    if phrase in eligible:counts[phrase]+=1
+ranked=sorted(eligible,key=lambda k:(-counts[k],len(k.split()),k))
+pos_groups={'N':'Danh từ mở rộng','V':'Hành động và trạng thái mở rộng','A':'Tính chất và cảm nhận mở rộng','P':'Đại từ và từ quan hệ mở rộng','R':'Mức độ và cách thức mở rộng','C':'Quan hệ và liên kết mở rộng','E':'Quan hệ và liên kết mở rộng','I':'Biểu đạt cảm xúc mở rộng','M':'Số lượng mở rộng','T':'Biểu đạt giao tiếp mở rộng'}
+for key in ranked:
+ if len(entries)>=6000:break
+ label,senses=eligible[key]
+ # Prefer a sense with a concrete usage example; avoid an obsolete slur being
+ # selected as the default for an ordinary homograph such as "mọi".
+ modern=[s for s in senses if not re.search(r'khinh miệt|kì thị|kỳ thị|thời xưa|thời phong kiến',s['definition'],re.I)]
+ choices=modern or senses
+ sense=next((s for s in choices if s.get('example','').strip()),choices[0])
+ append_proposal(label,pos_groups.get(sense.get('pos'),'Từ vựng phổ thông mở rộng'),sense['definition'],{'type':'lexicon','source':'vntk-dictionary','headword':label,'senseIndex':lexicon[label].index(sense)})
+assert len(entries)==6000, f'Expected 6000 meanings; got {len(entries)}'
+entries.sort(key=lambda e:int(e['id'][3:]))
 current_ids={e['label']:e['id'] for e in entries}
+baseline_ids={e['label']:e['id'] for e in core_baseline}
+assert all(current_ids.get(label)==label_id for label,label_id in baseline_ids.items()), 'Original 775 IDs changed'
+assert entries[:775]==core_baseline, 'Original 775 entries changed'
 changed_ids=[{'label':e['label'],'before':e['id'],'after':current_ids.get(e['label'])} for e in previous if current_ids.get(e['label'])!=e['id']]
 assert not changed_ids, f'Published vocabulary IDs changed: {changed_ids}'
 assert len({e['id'] for e in entries})==len(entries), 'Duplicate vocabulary IDs'
 assert len({unicodedata.normalize('NFC',e['label']).casefold().strip() for e in entries})==len(entries), 'Duplicate visible labels'
-data={'name':'Nối','version':'semantic-inventory-3','date':'2026-11-05','count':len(entries),
+data={'name':'Nối','version':'semantic-inventory-6000-v1','date':'2026-11-06','count':len(entries),
  'note':'Danh mục nghĩa đề xuất để thu mẫu. Chưa phải bộ ký hiệu vùng miền, nhãn đã huấn luyện hoặc ngôn ngữ hoàn chỉnh.',
+ 'sources':[source_meta,{'id':'noi-curated-2026-11-06','type':'authored','description':'Cụm từ giao tiếp và yêu cầu AI được biên soạn riêng, không sinh tích Descartes hoặc gắn số để đủ lượng.'}],
  'entries':entries}
 for folder in [ROOT/'src/data',ROOT/'public/vocabulary']:folder.mkdir(parents=True,exist_ok=True)
 for p in [ROOT/'src/data/vocabulary.json',ROOT/'public/vocabulary/noi-vocabulary.json']:p.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf8')
 with (ROOT/'public/vocabulary/noi-vocabulary.csv').open('w',encoding='utf-8-sig',newline='') as f:
- w=csv.writer(f);w.writerow(['id','tu_y_nghia','nhom','lop','cach_goi_khac','dinh_nghia','trang_thai'])
- for e in entries:w.writerow([e['id'],e['label'],e['group'],e['level'],'; '.join(e['aliases']),e['definition'],e['status']])
+ w=csv.writer(f);w.writerow(['id','tu_y_nghia','nhom','lop','cach_goi_khac','dinh_nghia','trang_thai','loai_muc','nguon','giay_phep_nguon','thong_bao_ban_quyen'])
+ for e in entries:
+  p=e.get('provenance',{});is_lexicon=p.get('type')=='lexicon'
+  w.writerow([e['id'],e['label'],e['group'],e['level'],'; '.join(e['aliases']),e['definition'],e['status'],e.get('entryKind','meaning-proposal'),source_meta['url'] if is_lexicon else p.get('source','Nối: 775 mục ban đầu'),'MIT' if is_lexicon else 'Biên soạn riêng',source_meta['licenseText'] if is_lexicon else ''])
 lines=[f'# Nối — {len(entries)} mục nghĩa đề xuất','',data['note'],'','Lớp 1: 140 nghĩa ban đầu và số 0–9. Lớp 2: giao tiếp mở rộng. Lớp 3: AI/lập trình. Đây là thứ tự thiết kế, không phải khẳng định tần suất sử dụng.','']
 for group in dict.fromkeys(e['group'] for e in entries):
  items=[e['label'] for e in entries if e['group']==group];lines += [f'## {group} ({len(items)})','',', '.join(items)+'.','']
 (ROOT/'public/vocabulary/NOI-VOCABULARY.md').write_text('\n'.join(lines),encoding='utf8')
+provenance_lines=['# Nguồn và giới hạn danh mục Nối 6.000 mục','',
+ 'Giữ nguyên 775 mã/nhãn cũ; thêm 420 cụm từ biên soạn cho giao tiếp và yêu cầu AI, cùng 4.805 mục từ từ nguồn từ điển. Không tạo tích Descartes, gắn số hoặc thay một từ hàng nghìn lần để đủ số lượng.','',
+ '## Nguồn từ điển','',
+ f"- Repository: {source_meta['repository']}",f"- Tệp JSON cố định: {source_meta['url']}",f"- Revision: `{source_meta['revision']}`",f"- SHA-256: `{source_meta['sha256']}`",f"- Giấy phép repository công bố: [MIT]({source_meta['licenseUrl']}). Chỉ lấy `data/dictionary.json`; không dùng các wordlist Viet11K/Viet22K/Viet39K/Viet74K.",'',
+ 'Chọn mục từ 1–4 âm tiết, viết thường, có định nghĩa; ưu tiên theo số lần xuất hiện trong chính định nghĩa/ví dụ của nguồn. Đây là heuristic bao phủ, không phải bảng tần suất sử dụng thực tế. Ưu tiên nghĩa có ví dụ sử dụng, tránh chọn nghĩa miệt thị cũ làm nghĩa mặc định cho từ đồng hình thông thường. Mỗi mục có `provenance` ghi headword và chỉ số nghĩa.','',
+ '## Phần biên soạn','',
+ '420 cụm từ được viết riêng trong `scripts/vocabulary-source/curated.json`, gồm sinh hoạt, ăn uống/mua sắm, tiếp cận giao tiếp, học tập/công việc và bốn nhóm yêu cầu AI. Mỗi cụm được ghi là phrase; không khẳng định một câu yêu cầu tương đương một ký hiệu đơn.','',
+ '## Giới hạn','',
+ 'Đây là danh mục nghĩa đề xuất, chưa phải 6.000 ký hiệu, lớp đã huấn luyện hoặc ngôn ngữ hoàn chỉnh. Các mục từ có thể có nghĩa khác chưa chọn; nhãn hiển thị duy nhất không chứng minh 6.000 khái niệm ngôn ngữ khác nhau vì còn từ đồng nghĩa và biến thể chính tả. Vẫn cần người dùng/chuyên gia ngôn ngữ ký hiệu kiểm tra ký hiệu, vùng miền, khả năng phân biệt và ngữ cảnh. Đã kiểm tra giấy phép MIT trong repository; chưa kiểm toán lịch sử nguồn gốc độc lập của từng định nghĩa. Một phần mục từ mang tính chuyên môn/lịch sử, không phải toàn bộ đều có tần suất giao tiếp cao.','',
+ '## Thông báo bản quyền nguồn','',source_meta['licenseText']]
+(ROOT/'public/vocabulary/SOURCES.md').write_text('\n'.join(provenance_lines),encoding='utf8')
 audit={'version':data['version'],'count':len(entries),'previousCount':len(previous),
  'uniqueIds':len({e['id'] for e in entries}),'uniqueVisibleLabels':len(seen),
  'preservedPreviousIds':len(previous)-len(changed_ids),'changedPreviousIds':changed_ids,
@@ -110,6 +182,14 @@ audit={'version':data['version'],'count':len(entries),'previousCount':len(previo
  'restoredSenses':[{'id':e['id'],'label':e['label']} for e in entries if e['label'] in ['AI (trí tuệ nhân tạo)','từ (đơn vị ngôn ngữ)','năm (số 5)']],
  'definitionsBeyondLabel':sum(e['definition']!=e['label'] for e in entries),
  'repeatedSourceLabels':repeated_labels,
+ 'sourceCounts':dict(Counter(e.get('provenance',{}).get('type','preserved-core') for e in entries)),
+ 'original775PreservedExactly':entries[:775]==core_baseline,
+ 'original775Sha256':hashlib.sha256(json.dumps(core_baseline,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf8')).hexdigest(),
+ 'entryKindCounts':dict(Counter(e.get('entryKind','meaning-proposal') for e in entries)),
+ 'groupCounts':dict(Counter(e['group'] for e in entries)),
+ 'source':source_meta,
+ 'selectionMethod':'Authored practical phrases, then lower-case 1–4-syllable dictionary headwords ranked by occurrences in source definitions/examples; not a validated usage-frequency ranking.',
+ 'limits':['Meaning proposals, not trained signs or a complete sign language.','Dictionary entries may have additional senses not selected here.','Unique display labels do not establish 6000 distinct linguistic concepts; synonyms and orthographic variants remain.','Every new sign and regional variant still needs linguistic review.','Source repository declares MIT; independent historical provenance of each sense was not audited.'],
  'note':'Vietnamese aliases aid search only; they do not assert identical signs. Meaning count is not trained-class coverage.'}
 (ROOT/'docs').mkdir(exist_ok=True)
 audit_path=ROOT/'docs/vocabulary-audit.json'
@@ -119,4 +199,6 @@ if previous_audit.get('version')==data['version'] and not audit['newEntries']:
  for key in ['previousCount','preservedPreviousIds','changedPreviousIds','newEntries']:
   audit[key]=previous_audit[key]
 audit_path.write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding='utf8')
+(ROOT/'public/research').mkdir(exist_ok=True)
+(ROOT/'public/research/vocabulary-audit.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding='utf8')
 print('VOCABULARY',len(entries),'groups',len(set(e['group'] for e in entries)))

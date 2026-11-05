@@ -21,12 +21,22 @@ import {
   ChevronDown,
   Copy,
   Hand,
+  Cloud,
 } from "lucide-react";
 import vocabulary from "./data/vocabulary.json";
 import type { Frame, Sample, Recognition, VocabularyEntry } from "./types";
-import { useCamera } from "./hooks/useCamera";
+import { useCamera, type TrackingVariant } from "./hooks/useCamera";
 import { Overlay } from "./components/Overlay";
 import { Modal } from "./components/Modal";
+import { CloudArchive } from "./components/CloudArchive";
+import {
+  customWord,
+  isCustomWordId,
+  loadCustomWords,
+  saveCustomWords,
+  VIDEO_GOAL,
+  wordKey,
+} from "./lib/words";
 import {
   direction,
   degrees,
@@ -57,7 +67,7 @@ const rest: VocabularyEntry = {
   definition: "Tay xuất hiện nhưng không thực hiện ký hiệu.",
   status: "Chưa có mẫu",
 };
-const entries: VocabularyEntry[] = [rest, ...vocabulary.entries];
+const builtinEntries: VocabularyEntry[] = [rest, ...vocabulary.entries];
 const normalized = (s: string) =>
   s
     .normalize("NFD")
@@ -76,13 +86,14 @@ type Recording = {
   aborted: boolean;
   started: boolean;
   aspect: number;
+  trackingVariant: TrackingVariant;
 };
 
 export default function App() {
   const [view, setView] = useState<"recognize" | "collect">("recognize"),
     [samples, setSamples] = useState<Sample[]>([]);
   const [selected, setSelected] = useState<VocabularyEntry>(
-      entries.find((e) => e.label === "tôi")!,
+      builtinEntries.find((e) => e.label === "tôi")!,
     ),
     [drawer, setDrawer] = useState(false),
     [query, setQuery] = useState(""),
@@ -106,6 +117,20 @@ export default function App() {
     [busyFile, setBusyFile] = useState(false),
     [relabelId, setRelabelId] = useState<string | null>(null);
   const [datasetScope, setDatasetScope] = useState("all");
+  const [customEntries, setCustomEntries] = useState(loadCustomWords);
+  const [newWord, setNewWord] = useState(false),
+    [wordText, setWordText] = useState("");
+  const [showCloud, setShowCloud] = useState(false),
+    [cloudCode, setCloudCode] = useState("");
+  const [cloudCompleted, setCloudCompleted] = useState<string[]>([]);
+  const [onlyComplete, setOnlyComplete] = useState(false);
+  const [trackingVariant, setTrackingVariant] =
+    useState<TrackingVariant>("lite");
+  const entries = useMemo(
+    () => [...builtinEntries, ...customEntries],
+    [customEntries],
+  );
+  const wordCount = entries.length - 1;
   const model = useRef(new TemporalClassifier()),
     rolling = useRef<Frame[]>([]),
     lastPredict = useRef(0),
@@ -264,6 +289,29 @@ export default function App() {
     samples.forEach((s) => map.set(s.labelId, (map.get(s.labelId) || 0) + 1));
     return map;
   }, [samples]);
+  const videoCounts = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const sample of samples)
+      if (sample.videoBlob?.size)
+        map.set(sample.labelId, (map.get(sample.labelId) ?? 0) + 1);
+    for (const label of cloudCompleted)
+      map.set(label, Math.max(map.get(label) ?? 0, VIDEO_GOAL));
+    return map;
+  }, [samples, cloudCompleted]);
+  const selectedVideos = videoCounts.get(selected.id) ?? 0;
+  const completed = useMemo(
+    () =>
+      entries.reduce(
+        (total, entry) =>
+          total +
+          Number(
+            entry.id !== rest.id &&
+              (videoCounts.get(entry.id) ?? 0) >= VIDEO_GOAL,
+          ),
+        0,
+      ),
+    [entries, videoCounts],
+  );
   const sessions = useMemo(
     () => [...new Set(samples.map((sample) => sample.sessionId))],
     [samples],
@@ -282,11 +330,12 @@ export default function App() {
       entries.filter(
         (e) =>
           (group === "all" || e.group === group) &&
+          (!onlyComplete || (videoCounts.get(e.id) ?? 0) >= VIDEO_GOAL) &&
           normalized([e.label, ...e.aliases].join(" ")).includes(
             normalized(query),
           ),
       ),
-    [group, query],
+    [entries, group, query, onlyComplete, videoCounts],
   );
   const predicted = result.accepted ? result.matches[0] : null;
   const finishRecording = useCallback(
@@ -316,6 +365,7 @@ export default function App() {
         videoBlob: blob,
         videoMime: blob.type,
         aspect: rec.aspect,
+        trackingVariant: rec.trackingVariant,
       };
       try {
         await saveSample(sample);
@@ -370,7 +420,7 @@ export default function App() {
     try {
       const recorder = new MediaRecorder(camera.streamRef.current, {
         ...(mime ? { mimeType: mime } : {}),
-        videoBitsPerSecond: 1_500_000,
+        videoBitsPerSecond: 650_000,
       });
       const rec: Recording = {
         start: performance.now() + 1000,
@@ -383,6 +433,7 @@ export default function App() {
         aborted: false,
         started: false,
         aspect: cameraAspect.current,
+        trackingVariant,
       };
       recorder.ondataavailable = (e) => {
         if (e.data.size) rec.chunks.push(e.data);
@@ -453,17 +504,52 @@ export default function App() {
         file,
         new Set(entries.map((e) => e.id)),
       );
-      imported.forEach((s) => {
-        s.label = entries.find((e) => e.id === s.labelId)!.label;
-      });
-      await importSamples(imported);
-      setSamples(await listSamples());
+      await storeImported(imported);
       notify(`Đã nhập ${imported.length} mẫu.`);
     } catch (e) {
       notify(e instanceof Error ? e.message : String(e));
     } finally {
       setBusyFile(false);
     }
+  }
+  async function storeImported(imported: Sample[]) {
+    const known = new Map(entries.map((entry) => [entry.id, entry]));
+    const additions: VocabularyEntry[] = [];
+    for (const sample of imported) {
+      if (!known.has(sample.labelId) && isCustomWordId(sample.labelId)) {
+        const entry = customWord(sample.labelId, sample.label);
+        known.set(entry.id, entry);
+        additions.push(entry);
+      }
+      sample.label = known.get(sample.labelId)?.label ?? sample.label;
+    }
+    if (additions.length) {
+      const next = [...customEntries, ...additions];
+      saveCustomWords(next);
+      setCustomEntries(next);
+    }
+    await importSamples(imported);
+    setSamples(await listSamples());
+  }
+  function addWord() {
+    const label = wordText.normalize("NFC").trim().replace(/\s+/g, " ");
+    if (!label || label.length > 80) return;
+    if (entries.some((entry) => wordKey(entry.label) === wordKey(label))) {
+      notify("Từ này đã có trong danh mục.");
+      return;
+    }
+    const entry = customWord(`NOI_USER_${crypto.randomUUID()}`, label);
+    const next = [...customEntries, entry];
+    try {
+      saveCustomWords(next);
+    } catch {
+      notify("Không lưu được từ mới.");
+      return;
+    }
+    setCustomEntries(next);
+    setNewWord(false);
+    setWordText("");
+    void chooseLabel(entry);
   }
   async function exporting() {
     setBusyFile(true);
@@ -526,11 +612,11 @@ export default function App() {
         </nav>
         <button
           className="icon-button vocabulary-button"
-          aria-label={`${vocabulary.count} từ`}
+          aria-label={`${wordCount} từ`}
           onClick={() => setDrawer(true)}
         >
           <BookOpen size={18} />
-          <span>{vocabulary.count} từ</span>
+          <span>{wordCount.toLocaleString("vi-VN")} từ</span>
         </button>
       </header>
       <main id="workspace" tabIndex={-1}>
@@ -557,6 +643,21 @@ export default function App() {
             </button>
           </div>
         </div>
+        {view === "collect" && (
+          <div className="goal-strip">
+            <strong>Đủ 30 video</strong>
+            <div className="goal-meter">
+              <progress
+                max={wordCount}
+                value={completed}
+                aria-label="Tiến độ danh mục"
+              />
+              <span>
+                {completed}/{wordCount.toLocaleString("vi-VN")} từ
+              </span>
+            </div>
+          </div>
+        )}
         <div className="workspace">
           <section
             className="camera-section"
@@ -592,7 +693,7 @@ export default function App() {
                   )}
                   <button
                     className="primary"
-                    onClick={() => void camera.start()}
+                    onClick={() => void camera.start(trackingVariant)}
                     disabled={camera.status === "starting" || training}
                   >
                     {camera.status === "starting" ? "Đang mở…" : "Bật camera"}
@@ -676,7 +777,21 @@ export default function App() {
             </div>
             {details && (
               <div className="technical-strip">
-                <span>{Math.round(camera.metrics.fps)} fps</span>
+                <select
+                  aria-label="Model theo dõi tay"
+                  value={trackingVariant}
+                  disabled={camera.status !== "off"}
+                  onChange={(e) =>
+                    setTrackingVariant(e.target.value as TrackingVariant)
+                  }
+                >
+                  <option value="lite">Lite</option>
+                  <option value="full">Full</option>
+                </select>
+                <span>
+                  {Math.round(camera.metrics.fps)}/
+                  {Math.round(camera.metrics.captureFps)} fps
+                </span>
                 <span>{Math.round(camera.metrics.ms)} ms/frame</span>
                 <span>{camera.metrics.delegate || "—"}</span>
                 <button onClick={() => setLab(true)} className="text-button">
@@ -780,7 +895,10 @@ export default function App() {
                 <div className="panel-header">
                   <h2>Nhãn ký hiệu</h2>
                   <span className="count-tag">
-                    {counts.get(selected.id) || 0} mẫu
+                    {selectedVideos >= VIDEO_GOAL && (
+                      <Check size={14} aria-label="Đủ 30 video" />
+                    )}
+                    {selectedVideos}/{VIDEO_GOAL}
                   </span>
                 </div>
                 <button
@@ -791,6 +909,31 @@ export default function App() {
                   <span>{selected.label}</span>
                   <ChevronDown size={19} />
                 </button>
+                <progress
+                  max={VIDEO_GOAL}
+                  value={Math.min(selectedVideos, VIDEO_GOAL)}
+                  aria-label={`Video của ${selected.label}`}
+                />
+                <div className="word-actions">
+                  <button
+                    disabled={recording || training}
+                    onClick={() => {
+                      setWordText("");
+                      setNewWord(true);
+                    }}
+                  >
+                    <Plus size={16} />
+                    Thêm từ
+                  </button>
+                  <button
+                    disabled={recording || training}
+                    aria-pressed={showCloud}
+                    onClick={() => setShowCloud(!showCloud)}
+                  >
+                    <Cloud size={16} />
+                    Kho video
+                  </button>
+                </div>
                 <div className="capture-settings">
                   <label htmlFor="duration">Thời lượng</label>
                   <select
@@ -876,6 +1019,21 @@ export default function App() {
             )}
           </aside>
         </div>
+        {view === "collect" && showCloud && (
+          <CloudArchive
+            key={selected.id}
+            entry={selected}
+            samples={samples}
+            code={cloudCode}
+            setCode={(code) => {
+              setCloudCode(code);
+              setCloudCompleted([]);
+            }}
+            onRestore={storeImported}
+            onCompleted={setCloudCompleted}
+            notify={notify}
+          />
+        )}
         {view === "collect" && (
           <section className="dataset-section">
             <div className="section-heading">
@@ -1022,7 +1180,7 @@ export default function App() {
         <div className="dialog-heading">
           <h2>
             {relabelId ? "Đổi nhãn" : "Từ vựng Nối"}{" "}
-            <span>{vocabulary.count}</span>
+            <span>{wordCount.toLocaleString("vi-VN")}</span>
           </h2>
           <button
             className="icon-button"
@@ -1067,32 +1225,65 @@ export default function App() {
             <Download size={18} />
           </a>
         </div>
+        <div className="word-actions vocab-actions">
+          <button
+            disabled={recording || training}
+            onClick={() => {
+              setDrawer(false);
+              setWordText("");
+              setNewWord(true);
+            }}
+          >
+            <Plus size={16} />
+            Thêm từ
+          </button>
+          <button
+            aria-pressed={onlyComplete}
+            onClick={() => {
+              setOnlyComplete(!onlyComplete);
+              setPage(0);
+            }}
+          >
+            <Check size={16} />
+            Đủ 30 video
+          </button>
+        </div>
         <div className="vocab-list">
-          {filtered.slice(page * 40, (page + 1) * 40).map((entry) => (
-            <button
-              className={
-                "vocab-item " + (selected.id === entry.id ? "selected" : "")
-              }
-              key={entry.id}
-              title={entry.definition}
-              onClick={() => void chooseLabel(entry)}
-            >
-              <span>
-                <strong>{entry.label}</strong>
-                <span>{entry.group}</span>
-              </span>
-              <span className="sample-count">
-                {counts.get(entry.id)
-                  ? `${counts.get(entry.id)} mẫu`
-                  : "Chưa có mẫu"}
-              </span>
-              {selected.id === entry.id ? (
-                <Check size={17} />
-              ) : (
-                <Plus size={17} />
-              )}
-            </button>
-          ))}
+          {filtered.slice(page * 40, (page + 1) * 40).map((entry) => {
+            const videos = videoCounts.get(entry.id) ?? 0;
+            const complete = videos >= VIDEO_GOAL;
+            return (
+              <button
+                className={
+                  "vocab-item " +
+                  (selected.id === entry.id ? "selected " : "") +
+                  (complete ? "completed" : "")
+                }
+                key={entry.id}
+                title={entry.definition}
+                onClick={() => void chooseLabel(entry)}
+              >
+                <span>
+                  <strong>{entry.label}</strong>
+                </span>
+                <span className="vocab-progress">
+                  <progress
+                    max={VIDEO_GOAL}
+                    value={Math.min(videos, VIDEO_GOAL)}
+                    aria-label={`Video của ${entry.label}`}
+                  />
+                  <span>
+                    {videos}/{VIDEO_GOAL}
+                  </span>
+                </span>
+                {complete ? (
+                  <Check size={17} aria-label="Đủ 30 video" />
+                ) : (
+                  <ChevronDown size={17} aria-hidden="true" />
+                )}
+              </button>
+            );
+          })}
           {!filtered.length && (
             <div className="dataset-empty">Không tìm thấy từ</div>
           )}
@@ -1115,6 +1306,46 @@ export default function App() {
           </div>
         </div>
       </dialog>
+      {newWord && (
+        <Modal
+          className="new-word-modal"
+          label="Thêm từ"
+          onClose={() => setNewWord(false)}
+        >
+          <div className="dialog-heading">
+            <h2>Thêm từ</h2>
+            <button
+              className="icon-button"
+              aria-label="Đóng thêm từ"
+              onClick={() => setNewWord(false)}
+            >
+              <X size={21} />
+            </button>
+          </div>
+          <form
+            className="field-stack"
+            onSubmit={(e) => {
+              e.preventDefault();
+              addWord();
+            }}
+          >
+            <label>
+              Từ hoặc cụm từ
+              <input
+                data-dialog-focus
+                maxLength={80}
+                value={wordText}
+                onChange={(e) => setWordText(e.target.value)}
+                required
+              />
+            </label>
+            <button className="primary" type="submit">
+              <Check size={17} />
+              Lưu từ
+            </button>
+          </form>
+        </Modal>
+      )}
       {preview && (
         <Modal
           className="preview-modal"

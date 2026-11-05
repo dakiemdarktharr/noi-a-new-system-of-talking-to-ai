@@ -240,10 +240,11 @@ try {
   ).toBeVisible();
   report.relabel = true;
   await page.getByRole("button", { name: "Tắt", exact: true }).click();
-  await page.getByRole("button", { name: "775 từ", exact: true }).click();
+  await page.locator(".vocabulary-button").click();
   await expect(page.locator("dialog")).toBeVisible();
   await page.getByLabel("Tìm từ vựng").fill("trí tuệ");
-  await expect(page.locator(".vocab-item")).toHaveCount(1);
+  await expect(page.locator(".vocab-item").first()).toBeVisible();
+  expect(await page.locator(".vocab-item").count()).toBeGreaterThan(0);
   await page.keyboard.press("Escape");
   await expect(page.locator("dialog")).not.toBeVisible();
   await page.getByRole("button", { name: "Nhận diện", exact: true }).click();

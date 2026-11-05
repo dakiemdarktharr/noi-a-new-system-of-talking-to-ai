@@ -11,26 +11,35 @@ export function saveBlob(blob: Blob, name: string) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
-export async function exportDataset(samples: Sample[]) {
+export async function packDataset(samples: Sample[], compact = false) {
   const sizeError =
     "Bộ dữ liệu vượt giới hạn xuất. Chọn một phiên hoặc nhãn để xuất.";
   if (samples.length > 1000) throw new Error(sizeError);
   const zip = new JSZip();
-  const records = samples.map(({ videoBlob, ...sample }, index) => {
-    const filename = videoBlob
-      ? `videos/${index}-${sample.id.replace(/[^a-z0-9_-]/gi, "_")}.${videoBlob.type.includes("mp4") ? "mp4" : "webm"}`
-      : null;
-    if (videoBlob && filename) zip.file(filename, videoBlob);
-    return { ...sample, videoFile: filename };
-  });
-  const manifest = JSON.stringify({
-    schema: 1,
-    name: "Nối",
-    exportedAt: new Date().toISOString(),
-    coordinates:
-      "Unmirrored input; camera X right Y up Z towards camera; world points centered per hand",
-    samples: records,
-  });
+  const records = await Promise.all(
+    samples.map(async ({ videoBlob, ...sample }, index) => {
+      const filename = videoBlob
+        ? `videos/${index}-${sample.id.replace(/[^a-z0-9_-]/gi, "_")}.${videoBlob.type.includes("mp4") ? "mp4" : "webm"}`
+        : null;
+      if (videoBlob && filename)
+        zip.file(filename, await videoBlob.arrayBuffer());
+      return { ...sample, videoFile: filename };
+    }),
+  );
+  const manifest = JSON.stringify(
+    {
+      schema: 1,
+      name: "Nối",
+      exportedAt: new Date().toISOString(),
+      coordinates:
+        "Unmirrored input; camera X right Y up Z towards camera; world points centered per hand",
+      samples: records,
+    },
+    compact
+      ? (_key, value: unknown) =>
+          typeof value === "number" ? Math.round(value * 1e6) / 1e6 : value
+      : undefined,
+  );
   const manifestBytes = new Blob([manifest]).size;
   const videoBytes = samples.reduce(
     (total, sample) => total + (sample.videoBlob?.size ?? 0),
@@ -42,10 +51,10 @@ export async function exportDataset(samples: Sample[]) {
   )
     throw new Error(sizeError);
   zip.file("dataset.json", manifest, { compression: "DEFLATE" });
-  saveBlob(
-    await zip.generateAsync({ type: "blob", compression: "STORE" }),
-    "noi-dataset.zip",
-  );
+  return zip.generateAsync({ type: "blob", compression: "STORE" });
+}
+export async function exportDataset(samples: Sample[]) {
+  saveBlob(await packDataset(samples), "noi-dataset.zip");
 }
 export async function readDataset(file: File, known: Set<string>) {
   if (file.size > ARCHIVE_LIMIT)
@@ -54,7 +63,7 @@ export async function readDataset(file: File, known: Set<string>) {
     if (file.size > MANIFEST_LIMIT) throw new Error("JSON vượt 128 MB.");
     return validateImport(JSON.parse(await file.text()), known);
   }
-  const zip = await JSZip.loadAsync(file);
+  const zip = await JSZip.loadAsync(await file.arrayBuffer());
   const entries = Object.values(zip.files);
   if (entries.length > 2001) throw new Error("Bộ dữ liệu có quá nhiều tệp.");
   const sizes = entries.map(

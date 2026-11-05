@@ -11,16 +11,18 @@ self.onmessage = async (event: MessageEvent) => {
         true,
       );
       let delegate: "GPU" | "CPU" = "GPU";
+      const variant = data.variant === "full" ? "full" : "lite";
+      if (data.delegate === "CPU") delegate = "CPU";
       const options = {
         baseOptions: {
-          modelAssetPath: data.base + "/models/hand_landmarker.task",
+          modelAssetPath: data.base + (variant === "lite" ? "/models/hand_landmarker_lite.task" : "/models/hand_landmarker.task"),
           delegate,
         },
         runningMode: "VIDEO" as const,
         numHands: 2,
-        minHandDetectionConfidence: 0.6,
-        minHandPresenceConfidence: 0.6,
-        minTrackingConfidence: 0.6,
+        minHandDetectionConfidence: 0.5,
+        minHandPresenceConfidence: 0.5,
+        minTrackingConfidence: 0.5,
       };
       try {
         model = await HandLandmarker.createFromOptions(files, options);
@@ -31,7 +33,7 @@ self.onmessage = async (event: MessageEvent) => {
           baseOptions: { ...options.baseOptions, delegate },
         });
       }
-      self.postMessage({ type: "ready", delegate });
+      self.postMessage({ type: "ready", delegate, variant, model: variant === "lite" ? "MediaPipe Hands Lite" : "MediaPipe Hands Full" });
     } catch (error) {
       self.postMessage({ type: "error", message: String(error) });
     }

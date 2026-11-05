@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/vntk/dictionary",
+  "revision": "2408c9d2c7e6908d166a773b60fd216492326d97",
+  "url": "https://raw.githubusercontent.com/vntk/dictionary/2408c9d2c7e6908d166a773b60fd216492326d97/data/dictionary.json",
+  "sha256": "fb41663096d6a24de8854567e5a4c5aded5bf39ce7bc2172d3cd0211c360c763",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/vntk/dictionary/blob/2408c9d2c7e6908d166a773b60fd216492326d97/LICENSE",
+  "retrieved": "2026-11-06",
+  "scope": "data/dictionary.json only; Viet11K/Viet22K/Viet39K/Viet74K .txt files excluded",
+  "limitation": "Repository declares MIT. Independent provenance of each dictionary sense has not been audited."
+}

@@ -1,9 +1,31 @@
 {
-  "model": "MediaPipe Hand Landmarker full float16 v1",
-  "url": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
-  "bytes": 7819105,
-  "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "model": "MediaPipe Hands Lite, Google Oct 2021 weights, Tasks bundle v1",
+  "defaultVariant": "lite",
+  "taskPath": "/models/hand_landmarker_lite.task",
+  "bytes": 4056425,
+  "sha256": "09e8b06f019471167f6f821c9d4ad1df632e31580de8eeca1049cd5c7b57f25f",
+  "sources": [
+    {
+      "url": "https://storage.googleapis.com/mediapipe-assets/palm_detection_lite.tflite",
+      "bytes": 1985440,
+      "sha256": "e9a4aaddf90dda56a87235303cf00e4c2d3fb28725f68fd88772997dac905c18"
+    },
+    {
+      "url": "https://storage.googleapis.com/mediapipe-assets/hand_landmark_lite.tflite",
+      "bytes": 2071408,
+      "sha256": "d7fde8ac11f8ce03f8663775bfc323f4fc9f2a38062b4f4efa142874ef5b2a48"
+    }
+  ],
+  "packaging": "Learned Lite weights unchanged. Compatible tensor metadata and associated handedness labels adapted from the official Full task bundle using MediaPipe 0.10.21 metadata schema and flatbuffers 25.12.19.",
+  "fullFallback": {
+    "model": "MediaPipe Hand Landmarker full float16 v1",
+    "taskPath": "/models/hand_landmarker.task",
+    "url": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+    "bytes": 7819105,
+    "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+  },
   "sdk": "1.2.2",
   "license": "Apache-2.0 per official model card",
+  "modelCard": "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Hand%20Tracking%20(Lite_Full)%20with%20Fairness%20Oct%202021.pdf",
   "runtime": "Same-origin model and module WASM; no remote inference"
 }

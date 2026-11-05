@@ -1,5 +1,6 @@
 import type { Sample, Frame, HandFeature } from "../types";
 import { quality } from "./recognizer";
+import { isCustomWordId } from "./words";
 const DB = "noi-studio-v1",
   STORE = "samples";
 function open() {
@@ -107,12 +108,13 @@ export function validateImport(
     if (
       !s ||
       s.schema !== 1 ||
-      !knownIds.has(s.labelId) ||
+      (!knownIds.has(s.labelId) && !isCustomWordId(s.labelId)) ||
       typeof s.id !== "string" ||
       !s.id.length ||
       s.id.length > 100 ||
       typeof s.label !== "string" ||
       s.label.length > 150 ||
+      (isCustomWordId(s.labelId) && (!s.label.trim() || s.label.length > 80)) ||
       typeof s.sessionId !== "string" ||
       !s.sessionId.length ||
       s.sessionId.length > 100 ||
@@ -154,6 +156,9 @@ export function validateImport(
       schema: 1,
       durationMs: s.frames.at(-1)!.t - s.frames[0].t,
       frames: s.frames.map((f: Frame) => ({ t: f.t, hands: f.hands })),
+      ...(s.trackingVariant === "lite" || s.trackingVariant === "full"
+        ? { trackingVariant: s.trackingVariant }
+        : {}),
       ...(typeof s.aspect === "number" && s.aspect > 0.2 && s.aspect < 5
         ? { aspect: s.aspect }
         : {}),

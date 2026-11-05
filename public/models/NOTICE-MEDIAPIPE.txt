@@ -1,0 +1,13 @@
+MediaPipe hand tracking models and metadata
+Original project: Google / MediaPipe Authors
+https://github.com/google-ai-edge/mediapipe
+License: Apache License 2.0 (see LICENSE-MEDIAPIPE.txt)
+
+Nối modification notice, 2026-11-06:
+hand_landmarker_lite.task is a locally repackaged bundle, not an official Google
+Tasks release. Original palm_detection_lite.tflite and hand_landmark_lite.tflite
+learned weights are unchanged. Compatible tensor metadata and handedness labels
+from Google's Full float16 v1 Tasks bundle were attached to the Lite models.
+Metadata names/descriptions were updated to identify the Lite models and this
+repackaging. Source URLs, hashes and runtime version are in manifest.json.
+Reproduction: scripts/build-hand-lite.py and docs/FAST-TRACKING.md.

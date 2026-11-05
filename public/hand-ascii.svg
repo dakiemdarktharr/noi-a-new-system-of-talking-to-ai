@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="320" viewBox="0 0 440 320" fill="none">
+  <defs>
+    <pattern id="type" width="11" height="13" patternUnits="userSpaceOnUse">
+      <text x="0" y="11" fill="#141714" font-family="Consolas,monospace" font-size="12" font-weight="700">#</text>
+    </pattern>
+    <clipPath id="hands">
+      <path d="M78 285v-49c-20-14-34-36-40-61l-9-37c-2-10 4-18 13-19 8-1 14 4 17 12l13 35V80c0-11 6-18 14-18 9 0 14 7 14 17v62l4-91c1-11 7-18 16-17 9 0 14 7 13 18l-2 88 10-74c1-10 8-16 16-15 9 1 13 9 12 19l-9 84 13-49c3-10 10-14 18-12 8 3 12 10 9 20l-19 96c-3 17-9 31-21 43v34z"/>
+      <path d="M290 285v-36c-12-12-18-26-21-43l-19-96c-3-10 1-17 9-20 8-2 15 2 18 12l13 49-9-84c-1-10 3-18 12-19 8-1 15 5 16 15l10 74-2-88c-1-11 4-18 13-18 9-1 15 6 16 17l4 91V77c0-10 5-17 14-17 8 0 14 7 14 18v86l13-35c3-8 9-13 17-12 9 1 15 9 13 19l-9 37c-6 25-20 47-40 61v51z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#hands)"><rect x="20" y="25" width="410" height="268" fill="url(#type)"/></g>
+  <path d="M200 163h40M220 143v40" stroke="#141714" stroke-width="3"/>
+  <g stroke="#141714" stroke-width="2"><path d="M13 55V13h42M385 13h42v42M427 265v42h-42M55 307H13v-42"/></g>
+</svg>

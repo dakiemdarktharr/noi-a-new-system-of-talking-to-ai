@@ -28,7 +28,7 @@ try {
   await check("recognize");
   await page.getByRole("button", { name: "Thu mẫu", exact: true }).click();
   await check("collect");
-  await page.getByRole("button", { name: "775 từ", exact: true }).click();
+  await page.locator(".vocabulary-button").click();
   await check("vocabulary");
   await page.keyboard.press("Escape");
   await expect(page.locator(".vocabulary-dialog")).not.toBeVisible();

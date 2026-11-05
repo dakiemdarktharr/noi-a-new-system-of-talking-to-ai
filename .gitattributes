@@ -1,0 +1,2 @@
+scripts/vocabulary-source/vntk-dictionary.json -text
+public/vocabulary/noi-vocabulary.csv -text

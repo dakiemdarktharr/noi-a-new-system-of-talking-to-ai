@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.3.0",
+    "@huggingface/hub": "^2.17.10",
     "@mediapipe/tasks-vision": "^1.2.2",
     "@tensorflow/tfjs": "^4.22.0",
     "jszip": "^3.10.2",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^7.0.2",

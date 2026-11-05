@@ -44,6 +44,7 @@ export interface Sample {
   videoBlob?: Blob;
   videoMime?: string;
   aspect?: number;
+  trackingVariant?: "lite" | "full";
 }
 export interface VocabularyEntry {
   id: string;
