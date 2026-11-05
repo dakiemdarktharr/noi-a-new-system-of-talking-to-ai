@@ -2,6 +2,8 @@
 
 Web desktop để theo dõi hai bàn tay, thu video có nhãn và huấn luyện mô hình nhận diện ký hiệu cá nhân. Giao diện tiếng Việt, hai khu vực, xử lý tại máy.
 
+[Mở Nối trên Vercel](https://noi-a-new-system-of-talking-to-ai.vercel.app).
+
 ## Mở ứng dụng
 
 Trong thư mục này, chạy `npm run dev`, rồi mở **http://127.0.0.1:5173** bằng Chrome hoặc Edge. Có thể nhấp `mo-noi.cmd` để khởi động. Giữ cùng địa chỉ, trình duyệt và hồ sơ để dùng lại dữ liệu.
