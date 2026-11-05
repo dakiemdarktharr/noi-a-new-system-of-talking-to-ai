@@ -1,0 +1,776 @@
+﻿id,tu_y_nghia,nhom,lop,cach_goi_khac,dinh_nghia,trang_thai
+NOI0001,tôi,Người và quan hệ,1,,tôi,Chưa thiết kế ký hiệu
+NOI0002,bạn,Người và quan hệ,1,,Người đang được nói chuyện trực tiếp; quan hệ bạn bè có mục riêng.,Chưa thiết kế ký hiệu
+NOI0003,chúng ta,Người và quan hệ,1,,Nhóm gồm người nói và người đang được nói chuyện trực tiếp.,Chưa thiết kế ký hiệu
+NOI0004,họ,Người và quan hệ,1,,họ,Chưa thiết kế ký hiệu
+NOI0005,người,Người và quan hệ,1,,người,Chưa thiết kế ký hiệu
+NOI0006,gia đình,Người và quan hệ,1,,gia đình,Chưa thiết kế ký hiệu
+NOI0007,bố,Người và quan hệ,1,ba; cha,bố,Chưa thiết kế ký hiệu
+NOI0008,mẹ,Người và quan hệ,1,má; mạ,mẹ,Chưa thiết kế ký hiệu
+NOI0009,con,Người và quan hệ,1,,Quan hệ con với cha mẹ; không dùng làm loại từ động vật.,Chưa thiết kế ký hiệu
+NOI0010,bạn bè,Người và quan hệ,1,,bạn bè,Chưa thiết kế ký hiệu
+NOI0011,này,Chỉ định và vị trí,1,,này,Chưa thiết kế ký hiệu
+NOI0012,kia,Chỉ định và vị trí,1,,kia,Chưa thiết kế ký hiệu
+NOI0013,ở đây,Chỉ định và vị trí,1,,ở đây,Chưa thiết kế ký hiệu
+NOI0014,ở đó,Chỉ định và vị trí,1,,ở đó,Chưa thiết kế ký hiệu
+NOI0015,trong,Chỉ định và vị trí,1,,trong,Chưa thiết kế ký hiệu
+NOI0016,ngoài,Chỉ định và vị trí,1,,ngoài,Chưa thiết kế ký hiệu
+NOI0017,trên,Chỉ định và vị trí,1,,trên,Chưa thiết kế ký hiệu
+NOI0018,dưới,Chỉ định và vị trí,1,,dưới,Chưa thiết kế ký hiệu
+NOI0019,gần,Chỉ định và vị trí,1,,gần,Chưa thiết kế ký hiệu
+NOI0020,xa,Chỉ định và vị trí,1,,xa,Chưa thiết kế ký hiệu
+NOI0021,ai,Câu hỏi và xác nhận,1,,Hỏi danh tính một người; không phải AI (trí tuệ nhân tạo).,Chưa thiết kế ký hiệu
+NOI0022,gì,Câu hỏi và xác nhận,1,,gì,Chưa thiết kế ký hiệu
+NOI0023,ở đâu,Câu hỏi và xác nhận,1,,ở đâu,Chưa thiết kế ký hiệu
+NOI0024,khi nào,Câu hỏi và xác nhận,1,,khi nào,Chưa thiết kế ký hiệu
+NOI0025,vì sao,Câu hỏi và xác nhận,1,,vì sao,Chưa thiết kế ký hiệu
+NOI0026,như thế nào,Câu hỏi và xác nhận,1,,như thế nào,Chưa thiết kế ký hiệu
+NOI0027,bao nhiêu,Câu hỏi và xác nhận,1,,bao nhiêu,Chưa thiết kế ký hiệu
+NOI0028,cái nào,Câu hỏi và xác nhận,1,,cái nào,Chưa thiết kế ký hiệu
+NOI0029,có…không?,Câu hỏi và xác nhận,1,,Ý định hỏi có/không. Đề xuất của giao thức Nối là một ký hiệu tay riêng; chưa được thiết kế hoặc xác nhận. Đây không phải mô tả ngữ pháp hay vai trò nét mặt trong ngôn ngữ ký hiệu Việt Nam.,Chưa thiết kế ký hiệu
+NOI0030,có đúng không?,Câu hỏi và xác nhận,1,,có đúng không?,Chưa thiết kế ký hiệu
+NOI0031,muốn,Nhu cầu và ý định,1,,muốn,Chưa thiết kế ký hiệu
+NOI0032,cần,Nhu cầu và ý định,1,,cần,Chưa thiết kế ký hiệu
+NOI0033,thích,Nhu cầu và ý định,1,,thích,Chưa thiết kế ký hiệu
+NOI0034,biết,Nhu cầu và ý định,1,,biết,Chưa thiết kế ký hiệu
+NOI0035,hiểu,Nhu cầu và ý định,1,,hiểu,Chưa thiết kế ký hiệu
+NOI0036,có thể,Nhu cầu và ý định,1,,có thể,Chưa thiết kế ký hiệu
+NOI0037,đề nghị,Nhu cầu và ý định,1,,đề nghị,Chưa thiết kế ký hiệu
+NOI0038,giúp,Nhu cầu và ý định,1,,giúp,Chưa thiết kế ký hiệu
+NOI0039,đồng ý,Nhu cầu và ý định,1,,Chấp thuận một đề nghị; không đồng nghĩa thông tin đúng.,Chưa thiết kế ký hiệu
+NOI0040,từ chối,Nhu cầu và ý định,1,,từ chối,Chưa thiết kế ký hiệu
+NOI0041,có,Phủ định và trạng thái,1,,Tồn tại hoặc sở hữu; tách khỏi xác nhận đúng và đồng ý.,Chưa thiết kế ký hiệu
+NOI0042,không,Phủ định và trạng thái,1,,Phủ định nội dung; cần đánh dấu phạm vi phủ định.,Chưa thiết kế ký hiệu
+NOI0043,chưa,Phủ định và trạng thái,1,,Sự việc chưa xảy ra tính đến thời điểm nói.,Chưa thiết kế ký hiệu
+NOI0044,đã,Phủ định và trạng thái,1,,đã,Chưa thiết kế ký hiệu
+NOI0045,đang,Phủ định và trạng thái,1,,đang,Chưa thiết kế ký hiệu
+NOI0046,sẽ,Phủ định và trạng thái,1,,sẽ,Chưa thiết kế ký hiệu
+NOI0047,vẫn,Phủ định và trạng thái,1,,vẫn,Chưa thiết kế ký hiệu
+NOI0048,hết,Phủ định và trạng thái,1,,Không còn một lượng hoặc trạng thái trước đó.,Chưa thiết kế ký hiệu
+NOI0049,xong,Phủ định và trạng thái,1,,xong,Chưa thiết kế ký hiệu
+NOI0050,lại,Phủ định và trạng thái,1,,Lặp một hành động; khác với hoàn tác hoặc sửa câu.,Chưa thiết kế ký hiệu
+NOI0051,bây giờ,Thời gian,1,,bây giờ,Chưa thiết kế ký hiệu
+NOI0052,hôm nay,Thời gian,1,,hôm nay,Chưa thiết kế ký hiệu
+NOI0053,hôm qua,Thời gian,1,,hôm qua,Chưa thiết kế ký hiệu
+NOI0054,ngày mai,Thời gian,1,,ngày mai,Chưa thiết kế ký hiệu
+NOI0055,trước,Thời gian,1,,Thứ tự thời gian; vị trí dùng phía trước.,Chưa thiết kế ký hiệu
+NOI0056,sau,Thời gian,1,,Thứ tự thời gian; vị trí dùng phía sau.,Chưa thiết kế ký hiệu
+NOI0057,sáng,Thời gian,1,,Buổi sáng trong ngày; độ sáng dùng mục sáng rõ.,Chưa thiết kế ký hiệu
+NOI0058,trưa,Thời gian,1,,trưa,Chưa thiết kế ký hiệu
+NOI0059,chiều,Thời gian,1,,chiều,Chưa thiết kế ký hiệu
+NOI0060,tối,Thời gian,1,,Buổi tối trong ngày; độ tối dùng mục tối mờ.,Chưa thiết kế ký hiệu
+NOI0061,đi,Sinh hoạt,1,,đi,Chưa thiết kế ký hiệu
+NOI0062,đến,Sinh hoạt,1,,đến,Chưa thiết kế ký hiệu
+NOI0063,về,Sinh hoạt,1,,Di chuyển trở lại nơi gắn với người nói; chủ đề dùng mục về việc.,Chưa thiết kế ký hiệu
+NOI0064,ở,Sinh hoạt,1,,Lưu trú hoặc hiện diện tại một nơi; nghĩa quan hệ vị trí cần ngữ cảnh khi thu mẫu.,Chưa thiết kế ký hiệu
+NOI0065,ăn,Sinh hoạt,1,,ăn,Chưa thiết kế ký hiệu
+NOI0066,uống,Sinh hoạt,1,,uống,Chưa thiết kế ký hiệu
+NOI0067,ngủ,Sinh hoạt,1,,ngủ,Chưa thiết kế ký hiệu
+NOI0068,nghỉ,Sinh hoạt,1,,nghỉ,Chưa thiết kế ký hiệu
+NOI0069,làm,Sinh hoạt,1,,Thực hiện một hoạt động hoặc công việc; cần ghi rõ hoạt động trong câu thu mẫu.,Chưa thiết kế ký hiệu
+NOI0070,học,Sinh hoạt,1,,học,Chưa thiết kế ký hiệu
+NOI0071,nói,Giao tiếp,1,,nói,Chưa thiết kế ký hiệu
+NOI0072,nghe,Giao tiếp,1,,nghe,Chưa thiết kế ký hiệu
+NOI0073,nhìn,Giao tiếp,1,,nhìn,Chưa thiết kế ký hiệu
+NOI0074,đọc,Giao tiếp,1,,đọc,Chưa thiết kế ký hiệu
+NOI0075,viết,Giao tiếp,1,,viết,Chưa thiết kế ký hiệu
+NOI0076,hỏi,Giao tiếp,1,,Hành động đặt câu hỏi.,Chưa thiết kế ký hiệu
+NOI0077,trả lời,Giao tiếp,1,,trả lời,Chưa thiết kế ký hiệu
+NOI0078,chào,Giao tiếp,1,,chào,Chưa thiết kế ký hiệu
+NOI0079,cảm ơn,Giao tiếp,1,,cảm ơn,Chưa thiết kế ký hiệu
+NOI0080,xin lỗi,Giao tiếp,1,,xin lỗi,Chưa thiết kế ký hiệu
+NOI0081,lấy,Thao tác cơ bản,1,,lấy,Chưa thiết kế ký hiệu
+NOI0082,đưa,Thao tác cơ bản,1,,đưa,Chưa thiết kế ký hiệu
+NOI0083,mở,Thao tác cơ bản,1,,Chuyển vật từ trạng thái đóng sang mở; mở ứng dụng và bật điện cần mô tả riêng.,Chưa thiết kế ký hiệu
+NOI0084,đóng,Thao tác cơ bản,1,,Chuyển vật đang mở về trạng thái khép; không phải đóng tiền hoặc đóng vai.,Chưa thiết kế ký hiệu
+NOI0085,bắt đầu,Thao tác cơ bản,1,,bắt đầu,Chưa thiết kế ký hiệu
+NOI0086,dừng,Thao tác cơ bản,1,,dừng,Chưa thiết kế ký hiệu
+NOI0087,chờ,Thao tác cơ bản,1,,chờ,Chưa thiết kế ký hiệu
+NOI0088,chọn,Thao tác cơ bản,1,,chọn,Chưa thiết kế ký hiệu
+NOI0089,đổi,Thao tác cơ bản,1,,đổi,Chưa thiết kế ký hiệu
+NOI0090,sửa,Thao tác cơ bản,1,,sửa,Chưa thiết kế ký hiệu
+NOI0091,nhà,Nơi chốn và vật thiết yếu,1,,nhà,Chưa thiết kế ký hiệu
+NOI0092,trường,Nơi chốn và vật thiết yếu,1,,trường,Chưa thiết kế ký hiệu
+NOI0093,bệnh viện,Nơi chốn và vật thiết yếu,1,,bệnh viện,Chưa thiết kế ký hiệu
+NOI0094,nhà vệ sinh,Nơi chốn và vật thiết yếu,1,toilet; WC,nhà vệ sinh,Chưa thiết kế ký hiệu
+NOI0095,chợ,Nơi chốn và vật thiết yếu,1,,chợ,Chưa thiết kế ký hiệu
+NOI0096,đồ ăn,Nơi chốn và vật thiết yếu,1,,đồ ăn,Chưa thiết kế ký hiệu
+NOI0097,nước,Nơi chốn và vật thiết yếu,1,,nước,Chưa thiết kế ký hiệu
+NOI0098,thuốc,Nơi chốn và vật thiết yếu,1,,thuốc,Chưa thiết kế ký hiệu
+NOI0099,tiền,Nơi chốn và vật thiết yếu,1,,tiền,Chưa thiết kế ký hiệu
+NOI0100,điện thoại,Nơi chốn và vật thiết yếu,1,,điện thoại,Chưa thiết kế ký hiệu
+NOI0101,vui,Cảm giác và đánh giá,1,,vui,Chưa thiết kế ký hiệu
+NOI0102,buồn,Cảm giác và đánh giá,1,,buồn,Chưa thiết kế ký hiệu
+NOI0103,mệt,Cảm giác và đánh giá,1,,mệt,Chưa thiết kế ký hiệu
+NOI0104,đau,Cảm giác và đánh giá,1,,đau,Chưa thiết kế ký hiệu
+NOI0105,đói,Cảm giác và đánh giá,1,,đói,Chưa thiết kế ký hiệu
+NOI0106,khát,Cảm giác và đánh giá,1,,khát,Chưa thiết kế ký hiệu
+NOI0107,tốt,Cảm giác và đánh giá,1,,tốt,Chưa thiết kế ký hiệu
+NOI0108,xấu,Cảm giác và đánh giá,1,,Đánh giá không tốt; hình thức dùng xấu về hình thức.,Chưa thiết kế ký hiệu
+NOI0109,đúng,Cảm giác và đánh giá,1,,Thông tin hoặc kết quả đúng.,Chưa thiết kế ký hiệu
+NOI0110,sai,Cảm giác và đánh giá,1,,sai,Chưa thiết kế ký hiệu
+NOI0111,và,Nối ý và quan hệ,1,,và,Chưa thiết kế ký hiệu
+NOI0112,hoặc,Nối ý và quan hệ,1,,hoặc,Chưa thiết kế ký hiệu
+NOI0113,nhưng,Nối ý và quan hệ,1,,nhưng,Chưa thiết kế ký hiệu
+NOI0114,vì,Nối ý và quan hệ,1,,vì,Chưa thiết kế ký hiệu
+NOI0115,nên,Nối ý và quan hệ,1,,Kết quả/suy ra trong vì…nên; lời khuyên dùng khuyên.,Chưa thiết kế ký hiệu
+NOI0116,nếu,Nối ý và quan hệ,1,,nếu,Chưa thiết kế ký hiệu
+NOI0117,thì,Nối ý và quan hệ,1,,thì,Chưa thiết kế ký hiệu
+NOI0118,của,Nối ý và quan hệ,1,,của,Chưa thiết kế ký hiệu
+NOI0119,cho,Nối ý và quan hệ,1,,Quan hệ hướng tới người nhận hoặc người hưởng lợi; cho phép có mục riêng.,Chưa thiết kế ký hiệu
+NOI0120,cùng,Nối ý và quan hệ,1,,cùng,Chưa thiết kế ký hiệu
+NOI0121,tất cả,Lượng và so sánh,1,,tất cả,Chưa thiết kế ký hiệu
+NOI0122,một phần,Lượng và so sánh,1,,một phần,Chưa thiết kế ký hiệu
+NOI0123,nhiều,Lượng và so sánh,1,,nhiều,Chưa thiết kế ký hiệu
+NOI0124,ít,Lượng và so sánh,1,,ít,Chưa thiết kế ký hiệu
+NOI0125,thêm,Lượng và so sánh,1,,thêm,Chưa thiết kế ký hiệu
+NOI0126,bớt,Lượng và so sánh,1,,bớt,Chưa thiết kế ký hiệu
+NOI0127,giống,Lượng và so sánh,1,,giống,Chưa thiết kế ký hiệu
+NOI0128,khác,Lượng và so sánh,1,,khác,Chưa thiết kế ký hiệu
+NOI0129,hơn,Lượng và so sánh,1,,hơn,Chưa thiết kế ký hiệu
+NOI0130,kém,Lượng và so sánh,1,,kém,Chưa thiết kế ký hiệu
+NOI0131,lớn,Đặc điểm và mức độ,1,,lớn,Chưa thiết kế ký hiệu
+NOI0132,nhỏ,Đặc điểm và mức độ,1,,nhỏ,Chưa thiết kế ký hiệu
+NOI0133,dài,Đặc điểm và mức độ,1,,dài,Chưa thiết kế ký hiệu
+NOI0134,ngắn,Đặc điểm và mức độ,1,,ngắn,Chưa thiết kế ký hiệu
+NOI0135,nhanh,Đặc điểm và mức độ,1,,nhanh,Chưa thiết kế ký hiệu
+NOI0136,chậm,Đặc điểm và mức độ,1,,chậm,Chưa thiết kế ký hiệu
+NOI0137,nóng,Đặc điểm và mức độ,1,,nóng,Chưa thiết kế ký hiệu
+NOI0138,lạnh,Đặc điểm và mức độ,1,,lạnh,Chưa thiết kế ký hiệu
+NOI0139,rõ,Đặc điểm và mức độ,1,,rõ,Chưa thiết kế ký hiệu
+NOI0140,khẩn cấp,Đặc điểm và mức độ,1,,khẩn cấp,Chưa thiết kế ký hiệu
+NOI0141,mình,Người và quan hệ,2,,Cách người nói tự chỉ bản thân; nghĩa người đối thoại hoặc cơ thể chưa thuộc mục này.,Chưa thiết kế ký hiệu
+NOI0142,chúng tôi,Người và quan hệ,2,,Nhóm có người nói và không gồm người đang được nói chuyện trực tiếp.,Chưa thiết kế ký hiệu
+NOI0143,chúng ta cùng nhau,Người và quan hệ,2,,chúng ta cùng nhau,Chưa thiết kế ký hiệu
+NOI0144,anh,Người và quan hệ,2,,anh,Chưa thiết kế ký hiệu
+NOI0145,chị,Người và quan hệ,2,,chị,Chưa thiết kế ký hiệu
+NOI0146,em,Người và quan hệ,2,,em,Chưa thiết kế ký hiệu
+NOI0147,ông,Người và quan hệ,2,,ông,Chưa thiết kế ký hiệu
+NOI0148,bà,Người và quan hệ,2,,bà,Chưa thiết kế ký hiệu
+NOI0149,vợ,Người và quan hệ,2,,vợ,Chưa thiết kế ký hiệu
+NOI0150,chồng,Người và quan hệ,2,,chồng,Chưa thiết kế ký hiệu
+NOI0151,cha mẹ,Người và quan hệ,2,,cha mẹ,Chưa thiết kế ký hiệu
+NOI0152,anh chị em,Người và quan hệ,2,,anh chị em,Chưa thiết kế ký hiệu
+NOI0153,người yêu,Người và quan hệ,2,,người yêu,Chưa thiết kế ký hiệu
+NOI0154,đồng nghiệp,Người và quan hệ,2,,đồng nghiệp,Chưa thiết kế ký hiệu
+NOI0155,hàng xóm,Người và quan hệ,2,,hàng xóm,Chưa thiết kế ký hiệu
+NOI0156,khách,Người và quan hệ,2,,khách,Chưa thiết kế ký hiệu
+NOI0157,chủ nhà,Người và quan hệ,2,,chủ nhà,Chưa thiết kế ký hiệu
+NOI0158,trẻ em,Người và quan hệ,2,,trẻ em,Chưa thiết kế ký hiệu
+NOI0159,người lớn,Người và quan hệ,2,,người lớn,Chưa thiết kế ký hiệu
+NOI0160,người lạ,Người và quan hệ,2,,người lạ,Chưa thiết kế ký hiệu
+NOI0161,thầy cô,Người và quan hệ,2,,thầy cô,Chưa thiết kế ký hiệu
+NOI0162,bác sĩ,Người và quan hệ,2,,bác sĩ,Chưa thiết kế ký hiệu
+NOI0163,nhân viên,Người và quan hệ,2,,nhân viên,Chưa thiết kế ký hiệu
+NOI0164,người phiên dịch,Người và quan hệ,2,,người phiên dịch,Chưa thiết kế ký hiệu
+NOI0165,người Điếc,Người và quan hệ,2,,người Điếc,Chưa thiết kế ký hiệu
+NOI0166,người nghe,Người và quan hệ,2,,người nghe,Chưa thiết kế ký hiệu
+NOI0167,người không nói được,Người và quan hệ,2,,Người không thể phát lời nói bằng giọng ở tình huống được đề cập; không suy ra khả năng nghe hoặc khả năng dùng ngôn ngữ ký hiệu.,Chưa thiết kế ký hiệu
+NOI0168,tên,Bản thân và thông tin,2,,tên,Chưa thiết kế ký hiệu
+NOI0169,tuổi,Bản thân và thông tin,2,,tuổi,Chưa thiết kế ký hiệu
+NOI0170,địa chỉ,Bản thân và thông tin,2,,địa chỉ,Chưa thiết kế ký hiệu
+NOI0171,số điện thoại,Bản thân và thông tin,2,,số điện thoại,Chưa thiết kế ký hiệu
+NOI0172,ngày sinh,Bản thân và thông tin,2,,ngày sinh,Chưa thiết kế ký hiệu
+NOI0173,quê quán,Bản thân và thông tin,2,,quê quán,Chưa thiết kế ký hiệu
+NOI0174,quốc tịch,Bản thân và thông tin,2,,quốc tịch,Chưa thiết kế ký hiệu
+NOI0175,nghề nghiệp,Bản thân và thông tin,2,,nghề nghiệp,Chưa thiết kế ký hiệu
+NOI0176,sở thích,Bản thân và thông tin,2,,sở thích,Chưa thiết kế ký hiệu
+NOI0177,thói quen,Bản thân và thông tin,2,,thói quen,Chưa thiết kế ký hiệu
+NOI0178,kinh nghiệm,Bản thân và thông tin,2,,kinh nghiệm,Chưa thiết kế ký hiệu
+NOI0179,khả năng,Bản thân và thông tin,2,,khả năng,Chưa thiết kế ký hiệu
+NOI0180,giới thiệu,Bản thân và thông tin,2,,giới thiệu,Chưa thiết kế ký hiệu
+NOI0181,liên hệ,Bản thân và thông tin,2,,liên hệ,Chưa thiết kế ký hiệu
+NOI0182,riêng tư,Bản thân và thông tin,2,,riêng tư,Chưa thiết kế ký hiệu
+NOI0183,bí mật,Bản thân và thông tin,2,,bí mật,Chưa thiết kế ký hiệu
+NOI0184,nhờ,Nhu cầu và ý định,2,,nhờ,Chưa thiết kế ký hiệu
+NOI0185,xin phép,Nhu cầu và ý định,2,,xin phép,Chưa thiết kế ký hiệu
+NOI0186,cho phép,Nhu cầu và ý định,2,,cho phép,Chưa thiết kế ký hiệu
+NOI0187,không cho phép,Nhu cầu và ý định,2,,không cho phép,Chưa thiết kế ký hiệu
+NOI0188,hứa,Nhu cầu và ý định,2,,hứa,Chưa thiết kế ký hiệu
+NOI0189,quyết định,Nhu cầu và ý định,2,,quyết định,Chưa thiết kế ký hiệu
+NOI0190,dự định,Nhu cầu và ý định,2,,dự định,Chưa thiết kế ký hiệu
+NOI0191,hy vọng,Nhu cầu và ý định,2,,hy vọng,Chưa thiết kế ký hiệu
+NOI0192,lo ngại,Nhu cầu và ý định,2,,lo ngại,Chưa thiết kế ký hiệu
+NOI0193,ưu tiên,Nhu cầu và ý định,2,,ưu tiên,Chưa thiết kế ký hiệu
+NOI0194,chấp nhận,Nhu cầu và ý định,2,,chấp nhận,Chưa thiết kế ký hiệu
+NOI0195,phản đối,Nhu cầu và ý định,2,,phản đối,Chưa thiết kế ký hiệu
+NOI0196,yêu cầu,Nhu cầu và ý định,2,,yêu cầu,Chưa thiết kế ký hiệu
+NOI0197,mời,Nhu cầu và ý định,2,,mời,Chưa thiết kế ký hiệu
+NOI0198,khuyên,Nhu cầu và ý định,2,,khuyên,Chưa thiết kế ký hiệu
+NOI0199,cảnh báo,Nhu cầu và ý định,2,,cảnh báo,Chưa thiết kế ký hiệu
+NOI0200,nhắc,Nhu cầu và ý định,2,,nhắc,Chưa thiết kế ký hiệu
+NOI0201,đề xuất,Nhu cầu và ý định,2,,đề xuất,Chưa thiết kế ký hiệu
+NOI0202,thử,Nhu cầu và ý định,2,,thử,Chưa thiết kế ký hiệu
+NOI0203,cố gắng,Nhu cầu và ý định,2,,cố gắng,Chưa thiết kế ký hiệu
+NOI0204,nghĩ,Hiểu và suy nghĩ,2,,nghĩ,Chưa thiết kế ký hiệu
+NOI0205,nhớ,Hiểu và suy nghĩ,2,,nhớ,Chưa thiết kế ký hiệu
+NOI0206,quên,Hiểu và suy nghĩ,2,,quên,Chưa thiết kế ký hiệu
+NOI0207,đoán,Hiểu và suy nghĩ,2,,đoán,Chưa thiết kế ký hiệu
+NOI0208,chắc chắn,Hiểu và suy nghĩ,2,,chắc chắn,Chưa thiết kế ký hiệu
+NOI0209,chưa chắc,Hiểu và suy nghĩ,2,,chưa chắc,Chưa thiết kế ký hiệu
+NOI0210,tin,Hiểu và suy nghĩ,2,,Cho rằng thông tin là đúng; bản tin hoặc tin nhắn không thuộc nghĩa này.,Chưa thiết kế ký hiệu
+NOI0211,nghi ngờ,Hiểu và suy nghĩ,2,,nghi ngờ,Chưa thiết kế ký hiệu
+NOI0212,nhận ra,Hiểu và suy nghĩ,2,,nhận ra,Chưa thiết kế ký hiệu
+NOI0213,tập trung,Hiểu và suy nghĩ,2,,tập trung,Chưa thiết kế ký hiệu
+NOI0214,chú ý,Hiểu và suy nghĩ,2,,chú ý,Chưa thiết kế ký hiệu
+NOI0215,tưởng tượng,Hiểu và suy nghĩ,2,,tưởng tượng,Chưa thiết kế ký hiệu
+NOI0216,hiểu nhầm,Hiểu và suy nghĩ,2,,hiểu nhầm,Chưa thiết kế ký hiệu
+NOI0217,không biết,Hiểu và suy nghĩ,2,,không biết,Chưa thiết kế ký hiệu
+NOI0218,không hiểu,Hiểu và suy nghĩ,2,,không hiểu,Chưa thiết kế ký hiệu
+NOI0219,ý tưởng,Hiểu và suy nghĩ,2,,ý tưởng,Chưa thiết kế ký hiệu
+NOI0220,ý nghĩa,Hiểu và suy nghĩ,2,,ý nghĩa,Chưa thiết kế ký hiệu
+NOI0221,lý do,Hiểu và suy nghĩ,2,,lý do,Chưa thiết kế ký hiệu
+NOI0222,kết quả,Hiểu và suy nghĩ,2,,kết quả,Chưa thiết kế ký hiệu
+NOI0223,mục đích,Hiểu và suy nghĩ,2,,mục đích,Chưa thiết kế ký hiệu
+NOI0224,của ai,Hỏi và làm rõ,2,,của ai,Chưa thiết kế ký hiệu
+NOI0225,với ai,Hỏi và làm rõ,2,,với ai,Chưa thiết kế ký hiệu
+NOI0226,từ đâu,Hỏi và làm rõ,2,,từ đâu,Chưa thiết kế ký hiệu
+NOI0227,đi đâu,Hỏi và làm rõ,2,,đi đâu,Chưa thiết kế ký hiệu
+NOI0228,bao lâu,Hỏi và làm rõ,2,,bao lâu,Chưa thiết kế ký hiệu
+NOI0229,mấy giờ,Hỏi và làm rõ,2,,mấy giờ,Chưa thiết kế ký hiệu
+NOI0230,bao xa,Hỏi và làm rõ,2,,bao xa,Chưa thiết kế ký hiệu
+NOI0231,bao giờ xong,Hỏi và làm rõ,2,,bao giờ xong,Chưa thiết kế ký hiệu
+NOI0232,ý bạn là gì,Hỏi và làm rõ,2,,ý bạn là gì,Chưa thiết kế ký hiệu
+NOI0233,xin nói rõ,Hỏi và làm rõ,2,,xin nói rõ,Chưa thiết kế ký hiệu
+NOI0234,xin cho ví dụ,Hỏi và làm rõ,2,,xin cho ví dụ,Chưa thiết kế ký hiệu
+NOI0235,bạn hiểu không,Hỏi và làm rõ,2,,bạn hiểu không,Chưa thiết kế ký hiệu
+NOI0236,tôi hiểu rồi,Hỏi và làm rõ,2,,tôi hiểu rồi,Chưa thiết kế ký hiệu
+NOI0237,tôi chưa hiểu,Hỏi và làm rõ,2,,tôi chưa hiểu,Chưa thiết kế ký hiệu
+NOI0238,xin nhắc lại,Hỏi và làm rõ,2,,xin nhắc lại,Chưa thiết kế ký hiệu
+NOI0239,xin đánh vần,Hỏi và làm rõ,2,,xin đánh vần,Chưa thiết kế ký hiệu
+NOI0240,tên riêng,Hỏi và làm rõ,2,,tên riêng,Chưa thiết kế ký hiệu
+NOI0241,từ mới,Hỏi và làm rõ,2,,từ mới,Chưa thiết kế ký hiệu
+NOI0242,đến lượt bạn,Hỏi và làm rõ,2,,đến lượt bạn,Chưa thiết kế ký hiệu
+NOI0243,đến lượt tôi,Hỏi và làm rõ,2,,đến lượt tôi,Chưa thiết kế ký hiệu
+NOI0244,ngày,Thời gian mở rộng,2,,ngày,Chưa thiết kế ký hiệu
+NOI0245,tuần,Thời gian mở rộng,2,,tuần,Chưa thiết kế ký hiệu
+NOI0246,tháng,Thời gian mở rộng,2,,tháng,Chưa thiết kế ký hiệu
+NOI0247,năm,Thời gian mở rộng,2,,Đơn vị thời gian năm hoặc năm lịch; số lượng 5 có mục riêng.,Chưa thiết kế ký hiệu
+NOI0248,giờ,Thời gian mở rộng,2,,giờ,Chưa thiết kế ký hiệu
+NOI0249,phút,Thời gian mở rộng,2,,phút,Chưa thiết kế ký hiệu
+NOI0250,giây,Thời gian mở rộng,2,,giây,Chưa thiết kế ký hiệu
+NOI0251,hôm kia,Thời gian mở rộng,2,,hôm kia,Chưa thiết kế ký hiệu
+NOI0252,ngày kia,Thời gian mở rộng,2,,ngày kia,Chưa thiết kế ký hiệu
+NOI0253,tuần này,Thời gian mở rộng,2,,tuần này,Chưa thiết kế ký hiệu
+NOI0254,tuần sau,Thời gian mở rộng,2,,tuần sau,Chưa thiết kế ký hiệu
+NOI0255,tuần trước,Thời gian mở rộng,2,,tuần trước,Chưa thiết kế ký hiệu
+NOI0256,cuối tuần,Thời gian mở rộng,2,,cuối tuần,Chưa thiết kế ký hiệu
+NOI0257,buổi đêm,Thời gian mở rộng,2,,buổi đêm,Chưa thiết kế ký hiệu
+NOI0258,sớm,Thời gian mở rộng,2,,sớm,Chưa thiết kế ký hiệu
+NOI0259,muộn,Thời gian mở rộng,2,,muộn,Chưa thiết kế ký hiệu
+NOI0260,đúng giờ,Thời gian mở rộng,2,,đúng giờ,Chưa thiết kế ký hiệu
+NOI0261,trễ,Thời gian mở rộng,2,,trễ,Chưa thiết kế ký hiệu
+NOI0262,lúc nãy,Thời gian mở rộng,2,,lúc nãy,Chưa thiết kế ký hiệu
+NOI0263,lát nữa,Thời gian mở rộng,2,,lát nữa,Chưa thiết kế ký hiệu
+NOI0264,vừa mới,Thời gian mở rộng,2,,vừa mới,Chưa thiết kế ký hiệu
+NOI0265,sắp,Thời gian mở rộng,2,,sắp,Chưa thiết kế ký hiệu
+NOI0266,ngay lập tức,Thời gian mở rộng,2,,ngay lập tức,Chưa thiết kế ký hiệu
+NOI0267,tạm thời,Thời gian mở rộng,2,,tạm thời,Chưa thiết kế ký hiệu
+NOI0268,lâu dài,Thời gian mở rộng,2,,lâu dài,Chưa thiết kế ký hiệu
+NOI0269,thường xuyên,Thời gian mở rộng,2,,thường xuyên,Chưa thiết kế ký hiệu
+NOI0270,đôi khi,Thời gian mở rộng,2,,đôi khi,Chưa thiết kế ký hiệu
+NOI0271,hiếm khi,Thời gian mở rộng,2,,hiếm khi,Chưa thiết kế ký hiệu
+NOI0272,luôn luôn,Thời gian mở rộng,2,,luôn luôn,Chưa thiết kế ký hiệu
+NOI0273,không bao giờ,Thời gian mở rộng,2,,không bao giờ,Chưa thiết kế ký hiệu
+NOI0274,bên trái,Vị trí và phương hướng,2,,bên trái,Chưa thiết kế ký hiệu
+NOI0275,bên phải,Vị trí và phương hướng,2,,bên phải,Chưa thiết kế ký hiệu
+NOI0276,phía trước,Vị trí và phương hướng,2,,phía trước,Chưa thiết kế ký hiệu
+NOI0277,phía sau,Vị trí và phương hướng,2,,phía sau,Chưa thiết kế ký hiệu
+NOI0278,ở giữa,Vị trí và phương hướng,2,,ở giữa,Chưa thiết kế ký hiệu
+NOI0279,bên cạnh,Vị trí và phương hướng,2,,bên cạnh,Chưa thiết kế ký hiệu
+NOI0280,đối diện,Vị trí và phương hướng,2,,đối diện,Chưa thiết kế ký hiệu
+NOI0281,xung quanh,Vị trí và phương hướng,2,,xung quanh,Chưa thiết kế ký hiệu
+NOI0282,bên trong,Vị trí và phương hướng,2,,bên trong,Chưa thiết kế ký hiệu
+NOI0283,bên ngoài,Vị trí và phương hướng,2,,bên ngoài,Chưa thiết kế ký hiệu
+NOI0284,bên trên,Vị trí và phương hướng,2,,bên trên,Chưa thiết kế ký hiệu
+NOI0285,bên dưới,Vị trí và phương hướng,2,,bên dưới,Chưa thiết kế ký hiệu
+NOI0286,hướng lên,Vị trí và phương hướng,2,,hướng lên,Chưa thiết kế ký hiệu
+NOI0287,hướng xuống,Vị trí và phương hướng,2,,hướng xuống,Chưa thiết kế ký hiệu
+NOI0288,hướng vào,Vị trí và phương hướng,2,,hướng vào,Chưa thiết kế ký hiệu
+NOI0289,hướng ra,Vị trí và phương hướng,2,,hướng ra,Chưa thiết kế ký hiệu
+NOI0290,thẳng,Vị trí và phương hướng,2,,thẳng,Chưa thiết kế ký hiệu
+NOI0291,quay lại,Vị trí và phương hướng,2,,quay lại,Chưa thiết kế ký hiệu
+NOI0292,góc,Vị trí và phương hướng,2,,góc,Chưa thiết kế ký hiệu
+NOI0293,chỗ,Vị trí và phương hướng,2,,chỗ,Chưa thiết kế ký hiệu
+NOI0294,vị trí,Vị trí và phương hướng,2,,vị trí,Chưa thiết kế ký hiệu
+NOI0295,khoảng cách,Vị trí và phương hướng,2,,khoảng cách,Chưa thiết kế ký hiệu
+NOI0296,đường,Vị trí và phương hướng,2,,Đường đi hoặc tuyến đường; chất tạo vị ngọt dùng mục đường ăn.,Chưa thiết kế ký hiệu
+NOI0297,ngã rẽ,Vị trí và phương hướng,2,,ngã rẽ,Chưa thiết kế ký hiệu
+NOI0298,đứng,Di chuyển và đi lại,2,,đứng,Chưa thiết kế ký hiệu
+NOI0299,ngồi,Di chuyển và đi lại,2,,ngồi,Chưa thiết kế ký hiệu
+NOI0300,nằm,Di chuyển và đi lại,2,,nằm,Chưa thiết kế ký hiệu
+NOI0301,chạy,Di chuyển và đi lại,2,,chạy,Chưa thiết kế ký hiệu
+NOI0302,đi bộ,Di chuyển và đi lại,2,,đi bộ,Chưa thiết kế ký hiệu
+NOI0303,lên,Di chuyển và đi lại,2,,lên,Chưa thiết kế ký hiệu
+NOI0304,xuống,Di chuyển và đi lại,2,,xuống,Chưa thiết kế ký hiệu
+NOI0305,ra,Di chuyển và đi lại,2,,ra,Chưa thiết kế ký hiệu
+NOI0306,vào,Di chuyển và đi lại,2,,vào,Chưa thiết kế ký hiệu
+NOI0307,rời đi,Di chuyển và đi lại,2,,rời đi,Chưa thiết kế ký hiệu
+NOI0308,trở lại,Di chuyển và đi lại,2,,trở lại,Chưa thiết kế ký hiệu
+NOI0309,dừng lại,Di chuyển và đi lại,2,,dừng lại,Chưa thiết kế ký hiệu
+NOI0310,đón,Di chuyển và đi lại,2,,đón,Chưa thiết kế ký hiệu
+NOI0311,tiễn,Di chuyển và đi lại,2,,tiễn,Chưa thiết kế ký hiệu
+NOI0312,chở,Di chuyển và đi lại,2,,chở,Chưa thiết kế ký hiệu
+NOI0313,đi cùng,Di chuyển và đi lại,2,,đi cùng,Chưa thiết kế ký hiệu
+NOI0314,đi trước,Di chuyển và đi lại,2,,đi trước,Chưa thiết kế ký hiệu
+NOI0315,theo sau,Di chuyển và đi lại,2,,theo sau,Chưa thiết kế ký hiệu
+NOI0316,xe máy,Di chuyển và đi lại,2,,xe máy,Chưa thiết kế ký hiệu
+NOI0317,ô tô,Di chuyển và đi lại,2,xe hơi,ô tô,Chưa thiết kế ký hiệu
+NOI0318,xe buýt,Di chuyển và đi lại,2,,xe buýt,Chưa thiết kế ký hiệu
+NOI0319,tàu,Di chuyển và đi lại,2,,tàu,Chưa thiết kế ký hiệu
+NOI0320,máy bay,Di chuyển và đi lại,2,,máy bay,Chưa thiết kế ký hiệu
+NOI0321,vé,Di chuyển và đi lại,2,,vé,Chưa thiết kế ký hiệu
+NOI0322,bến xe,Di chuyển và đi lại,2,,bến xe,Chưa thiết kế ký hiệu
+NOI0323,sân bay,Di chuyển và đi lại,2,,sân bay,Chưa thiết kế ký hiệu
+NOI0324,kẹt xe,Di chuyển và đi lại,2,,kẹt xe,Chưa thiết kế ký hiệu
+NOI0325,bản đồ,Di chuyển và đi lại,2,,bản đồ,Chưa thiết kế ký hiệu
+NOI0326,cơm,Ăn uống,2,,cơm,Chưa thiết kế ký hiệu
+NOI0327,bánh,Ăn uống,2,,bánh,Chưa thiết kế ký hiệu
+NOI0328,rau,Ăn uống,2,,rau,Chưa thiết kế ký hiệu
+NOI0329,thịt,Ăn uống,2,,thịt,Chưa thiết kế ký hiệu
+NOI0330,cá,Ăn uống,2,,cá,Chưa thiết kế ký hiệu
+NOI0331,trứng,Ăn uống,2,,trứng,Chưa thiết kế ký hiệu
+NOI0332,sữa,Ăn uống,2,,sữa,Chưa thiết kế ký hiệu
+NOI0333,trái cây,Ăn uống,2,,trái cây,Chưa thiết kế ký hiệu
+NOI0334,trà,Ăn uống,2,,trà,Chưa thiết kế ký hiệu
+NOI0335,cà phê,Ăn uống,2,,cà phê,Chưa thiết kế ký hiệu
+NOI0336,đường ăn,Ăn uống,2,,Chất tạo vị ngọt dùng trong thực phẩm; không phải đường đi.,Chưa thiết kế ký hiệu
+NOI0337,muối,Ăn uống,2,,muối,Chưa thiết kế ký hiệu
+NOI0338,bữa ăn,Ăn uống,2,,bữa ăn,Chưa thiết kế ký hiệu
+NOI0339,ăn sáng,Ăn uống,2,,ăn sáng,Chưa thiết kế ký hiệu
+NOI0340,ăn trưa,Ăn uống,2,,ăn trưa,Chưa thiết kế ký hiệu
+NOI0341,ăn tối,Ăn uống,2,,ăn tối,Chưa thiết kế ký hiệu
+NOI0342,nấu,Ăn uống,2,,nấu,Chưa thiết kế ký hiệu
+NOI0343,rửa,Ăn uống,2,,rửa,Chưa thiết kế ký hiệu
+NOI0344,cắt,Ăn uống,2,,cắt,Chưa thiết kế ký hiệu
+NOI0345,trộn,Ăn uống,2,,trộn,Chưa thiết kế ký hiệu
+NOI0346,đun,Ăn uống,2,,đun,Chưa thiết kế ký hiệu
+NOI0347,chiên,Ăn uống,2,,chiên,Chưa thiết kế ký hiệu
+NOI0348,luộc,Ăn uống,2,,luộc,Chưa thiết kế ký hiệu
+NOI0349,ngon,Ăn uống,2,,ngon,Chưa thiết kế ký hiệu
+NOI0350,no,Ăn uống,2,,no,Chưa thiết kế ký hiệu
+NOI0351,cay,Ăn uống,2,,cay,Chưa thiết kế ký hiệu
+NOI0352,ngọt,Ăn uống,2,,ngọt,Chưa thiết kế ký hiệu
+NOI0353,chua,Ăn uống,2,,chua,Chưa thiết kế ký hiệu
+NOI0354,mặn,Ăn uống,2,,mặn,Chưa thiết kế ký hiệu
+NOI0355,dị ứng thức ăn,Ăn uống,2,,dị ứng thức ăn,Chưa thiết kế ký hiệu
+NOI0356,phòng,Nhà và đồ dùng,2,,phòng,Chưa thiết kế ký hiệu
+NOI0357,bếp,Nhà và đồ dùng,2,,bếp,Chưa thiết kế ký hiệu
+NOI0358,phòng ngủ,Nhà và đồ dùng,2,,phòng ngủ,Chưa thiết kế ký hiệu
+NOI0359,phòng khách,Nhà và đồ dùng,2,,phòng khách,Chưa thiết kế ký hiệu
+NOI0360,cửa,Nhà và đồ dùng,2,,cửa,Chưa thiết kế ký hiệu
+NOI0361,cửa sổ,Nhà và đồ dùng,2,,cửa sổ,Chưa thiết kế ký hiệu
+NOI0362,bàn,Nhà và đồ dùng,2,,bàn,Chưa thiết kế ký hiệu
+NOI0363,ghế,Nhà và đồ dùng,2,,ghế,Chưa thiết kế ký hiệu
+NOI0364,giường,Nhà và đồ dùng,2,,giường,Chưa thiết kế ký hiệu
+NOI0365,đèn,Nhà và đồ dùng,2,,đèn,Chưa thiết kế ký hiệu
+NOI0366,quạt,Nhà và đồ dùng,2,,quạt,Chưa thiết kế ký hiệu
+NOI0367,máy lạnh,Nhà và đồ dùng,2,điều hòa,máy lạnh,Chưa thiết kế ký hiệu
+NOI0368,tủ lạnh,Nhà và đồ dùng,2,,tủ lạnh,Chưa thiết kế ký hiệu
+NOI0369,khóa,Nhà và đồ dùng,2,,Vật dùng để khóa cửa hoặc đồ chứa; chưa gồm khóa học hay hành động khóa tài khoản.,Chưa thiết kế ký hiệu
+NOI0370,chìa khóa,Nhà và đồ dùng,2,,chìa khóa,Chưa thiết kế ký hiệu
+NOI0371,quần áo,Nhà và đồ dùng,2,,quần áo,Chưa thiết kế ký hiệu
+NOI0372,giày,Nhà và đồ dùng,2,,giày,Chưa thiết kế ký hiệu
+NOI0373,túi,Nhà và đồ dùng,2,,túi,Chưa thiết kế ký hiệu
+NOI0374,cốc,Nhà và đồ dùng,2,ly,cốc,Chưa thiết kế ký hiệu
+NOI0375,bát,Nhà và đồ dùng,2,,bát,Chưa thiết kế ký hiệu
+NOI0376,đĩa,Nhà và đồ dùng,2,,đĩa,Chưa thiết kế ký hiệu
+NOI0377,đũa,Nhà và đồ dùng,2,,đũa,Chưa thiết kế ký hiệu
+NOI0378,thìa,Nhà và đồ dùng,2,muỗng,thìa,Chưa thiết kế ký hiệu
+NOI0379,giấy,Nhà và đồ dùng,2,,giấy,Chưa thiết kế ký hiệu
+NOI0380,bút,Nhà và đồ dùng,2,,bút,Chưa thiết kế ký hiệu
+NOI0381,sách,Nhà và đồ dùng,2,,sách,Chưa thiết kế ký hiệu
+NOI0382,ổ điện,Nhà và đồ dùng,2,,ổ điện,Chưa thiết kế ký hiệu
+NOI0383,sạc,Nhà và đồ dùng,2,,Thiết bị dùng để nạp điện cho pin; hành động nạp điện cần được xác định riêng khi thu mẫu.,Chưa thiết kế ký hiệu
+NOI0384,pin,Nhà và đồ dùng,2,,pin,Chưa thiết kế ký hiệu
+NOI0385,đồ dùng,Nhà và đồ dùng,2,,đồ dùng,Chưa thiết kế ký hiệu
+NOI0386,dọn,Việc nhà và chăm sóc,2,,dọn,Chưa thiết kế ký hiệu
+NOI0387,lau,Việc nhà và chăm sóc,2,,lau,Chưa thiết kế ký hiệu
+NOI0388,quét,Việc nhà và chăm sóc,2,,quét,Chưa thiết kế ký hiệu
+NOI0389,giặt,Việc nhà và chăm sóc,2,,giặt,Chưa thiết kế ký hiệu
+NOI0390,phơi,Việc nhà và chăm sóc,2,,phơi,Chưa thiết kế ký hiệu
+NOI0391,gấp,Việc nhà và chăm sóc,2,,"Gập một vật, ví dụ gấp quần áo; không phải khẩn cấp hoặc phép nhân gấp đôi.",Chưa thiết kế ký hiệu
+NOI0392,cất,Việc nhà và chăm sóc,2,,cất,Chưa thiết kế ký hiệu
+NOI0393,sắp xếp,Việc nhà và chăm sóc,2,,sắp xếp,Chưa thiết kế ký hiệu
+NOI0394,đổ rác,Việc nhà và chăm sóc,2,,đổ rác,Chưa thiết kế ký hiệu
+NOI0395,vứt,Việc nhà và chăm sóc,2,,vứt,Chưa thiết kế ký hiệu
+NOI0396,sửa chữa,Việc nhà và chăm sóc,2,,sửa chữa,Chưa thiết kế ký hiệu
+NOI0397,bật điện,Việc nhà và chăm sóc,2,,bật điện,Chưa thiết kế ký hiệu
+NOI0398,tắt điện,Việc nhà và chăm sóc,2,,tắt điện,Chưa thiết kế ký hiệu
+NOI0399,tắm,Việc nhà và chăm sóc,2,,tắm,Chưa thiết kế ký hiệu
+NOI0400,rửa tay,Việc nhà và chăm sóc,2,,rửa tay,Chưa thiết kế ký hiệu
+NOI0401,đánh răng,Việc nhà và chăm sóc,2,,đánh răng,Chưa thiết kế ký hiệu
+NOI0402,thay đồ,Việc nhà và chăm sóc,2,,thay đồ,Chưa thiết kế ký hiệu
+NOI0403,chăm sóc,Việc nhà và chăm sóc,2,,chăm sóc,Chưa thiết kế ký hiệu
+NOI0404,trông trẻ,Việc nhà và chăm sóc,2,,trông trẻ,Chưa thiết kế ký hiệu
+NOI0405,nghỉ ngơi,Việc nhà và chăm sóc,2,,nghỉ ngơi,Chưa thiết kế ký hiệu
+NOI0406,mua,Mua bán và dịch vụ,2,,mua,Chưa thiết kế ký hiệu
+NOI0407,bán,Mua bán và dịch vụ,2,,bán,Chưa thiết kế ký hiệu
+NOI0408,giá,Mua bán và dịch vụ,2,,giá,Chưa thiết kế ký hiệu
+NOI0409,trả tiền,Mua bán và dịch vụ,2,,trả tiền,Chưa thiết kế ký hiệu
+NOI0410,tiền mặt,Mua bán và dịch vụ,2,,tiền mặt,Chưa thiết kế ký hiệu
+NOI0411,chuyển khoản,Mua bán và dịch vụ,2,,chuyển khoản,Chưa thiết kế ký hiệu
+NOI0412,hóa đơn,Mua bán và dịch vụ,2,,hóa đơn,Chưa thiết kế ký hiệu
+NOI0413,giảm giá,Mua bán và dịch vụ,2,,giảm giá,Chưa thiết kế ký hiệu
+NOI0414,đắt,Mua bán và dịch vụ,2,,đắt,Chưa thiết kế ký hiệu
+NOI0415,rẻ,Mua bán và dịch vụ,2,,rẻ,Chưa thiết kế ký hiệu
+NOI0416,đủ tiền,Mua bán và dịch vụ,2,,đủ tiền,Chưa thiết kế ký hiệu
+NOI0417,thiếu tiền,Mua bán và dịch vụ,2,,thiếu tiền,Chưa thiết kế ký hiệu
+NOI0418,đặt hàng,Mua bán và dịch vụ,2,,đặt hàng,Chưa thiết kế ký hiệu
+NOI0419,giao hàng,Mua bán và dịch vụ,2,,giao hàng,Chưa thiết kế ký hiệu
+NOI0420,nhận hàng,Mua bán và dịch vụ,2,,nhận hàng,Chưa thiết kế ký hiệu
+NOI0421,đổi hàng,Mua bán và dịch vụ,2,,đổi hàng,Chưa thiết kế ký hiệu
+NOI0422,trả hàng,Mua bán và dịch vụ,2,,trả hàng,Chưa thiết kế ký hiệu
+NOI0423,còn hàng,Mua bán và dịch vụ,2,,còn hàng,Chưa thiết kế ký hiệu
+NOI0424,hết hàng,Mua bán và dịch vụ,2,,hết hàng,Chưa thiết kế ký hiệu
+NOI0425,kích cỡ,Mua bán và dịch vụ,2,,kích cỡ,Chưa thiết kế ký hiệu
+NOI0426,màu sắc,Mua bán và dịch vụ,2,,màu sắc,Chưa thiết kế ký hiệu
+NOI0427,số lượng,Mua bán và dịch vụ,2,,số lượng,Chưa thiết kế ký hiệu
+NOI0428,chất lượng,Mua bán và dịch vụ,2,,chất lượng,Chưa thiết kế ký hiệu
+NOI0429,bảo hành,Mua bán và dịch vụ,2,,bảo hành,Chưa thiết kế ký hiệu
+NOI0430,đầu,Cơ thể và sức khỏe,2,,đầu,Chưa thiết kế ký hiệu
+NOI0431,mặt,Cơ thể và sức khỏe,2,,mặt,Chưa thiết kế ký hiệu
+NOI0432,mắt,Cơ thể và sức khỏe,2,,mắt,Chưa thiết kế ký hiệu
+NOI0433,tai,Cơ thể và sức khỏe,2,,tai,Chưa thiết kế ký hiệu
+NOI0434,miệng,Cơ thể và sức khỏe,2,,miệng,Chưa thiết kế ký hiệu
+NOI0435,răng,Cơ thể và sức khỏe,2,,răng,Chưa thiết kế ký hiệu
+NOI0436,cổ,Cơ thể và sức khỏe,2,,cổ,Chưa thiết kế ký hiệu
+NOI0437,vai,Cơ thể và sức khỏe,2,,vai,Chưa thiết kế ký hiệu
+NOI0438,cánh tay,Cơ thể và sức khỏe,2,,cánh tay,Chưa thiết kế ký hiệu
+NOI0439,bàn tay,Cơ thể và sức khỏe,2,,bàn tay,Chưa thiết kế ký hiệu
+NOI0440,ngón tay,Cơ thể và sức khỏe,2,,ngón tay,Chưa thiết kế ký hiệu
+NOI0441,cổ tay,Cơ thể và sức khỏe,2,,cổ tay,Chưa thiết kế ký hiệu
+NOI0442,ngực,Cơ thể và sức khỏe,2,,ngực,Chưa thiết kế ký hiệu
+NOI0443,bụng,Cơ thể và sức khỏe,2,,bụng,Chưa thiết kế ký hiệu
+NOI0444,lưng,Cơ thể và sức khỏe,2,,lưng,Chưa thiết kế ký hiệu
+NOI0445,chân,Cơ thể và sức khỏe,2,,chân,Chưa thiết kế ký hiệu
+NOI0446,bàn chân,Cơ thể và sức khỏe,2,,bàn chân,Chưa thiết kế ký hiệu
+NOI0447,ốm,Cơ thể và sức khỏe,2,,ốm,Chưa thiết kế ký hiệu
+NOI0448,sốt,Cơ thể và sức khỏe,2,,sốt,Chưa thiết kế ký hiệu
+NOI0449,ho,Cơ thể và sức khỏe,2,,ho,Chưa thiết kế ký hiệu
+NOI0450,chóng mặt,Cơ thể và sức khỏe,2,,chóng mặt,Chưa thiết kế ký hiệu
+NOI0451,buồn nôn,Cơ thể và sức khỏe,2,,buồn nôn,Chưa thiết kế ký hiệu
+NOI0452,khó thở,Cơ thể và sức khỏe,2,,khó thở,Chưa thiết kế ký hiệu
+NOI0453,bị thương,Cơ thể và sức khỏe,2,,bị thương,Chưa thiết kế ký hiệu
+NOI0454,chảy máu,Cơ thể và sức khỏe,2,,chảy máu,Chưa thiết kế ký hiệu
+NOI0455,đau đầu,Cơ thể và sức khỏe,2,,đau đầu,Chưa thiết kế ký hiệu
+NOI0456,đau bụng,Cơ thể và sức khỏe,2,,đau bụng,Chưa thiết kế ký hiệu
+NOI0457,dị ứng,Cơ thể và sức khỏe,2,,dị ứng,Chưa thiết kế ký hiệu
+NOI0458,khám bệnh,Cơ thể và sức khỏe,2,,khám bệnh,Chưa thiết kế ký hiệu
+NOI0459,uống thuốc,Cơ thể và sức khỏe,2,,uống thuốc,Chưa thiết kế ký hiệu
+NOI0460,cứu,An toàn và hỗ trợ,2,,cứu,Chưa thiết kế ký hiệu
+NOI0461,cấp cứu,An toàn và hỗ trợ,2,,cấp cứu,Chưa thiết kế ký hiệu
+NOI0462,nguy hiểm,An toàn và hỗ trợ,2,,nguy hiểm,Chưa thiết kế ký hiệu
+NOI0463,an toàn,An toàn và hỗ trợ,2,,an toàn,Chưa thiết kế ký hiệu
+NOI0464,cháy,An toàn và hỗ trợ,2,,cháy,Chưa thiết kế ký hiệu
+NOI0465,tai nạn,An toàn và hỗ trợ,2,,tai nạn,Chưa thiết kế ký hiệu
+NOI0466,mất đồ,An toàn và hỗ trợ,2,,mất đồ,Chưa thiết kế ký hiệu
+NOI0467,lạc đường,An toàn và hỗ trợ,2,,lạc đường,Chưa thiết kế ký hiệu
+NOI0468,bị đe dọa,An toàn và hỗ trợ,2,,bị đe dọa,Chưa thiết kế ký hiệu
+NOI0469,gọi giúp,An toàn và hỗ trợ,2,,gọi giúp,Chưa thiết kế ký hiệu
+NOI0470,gọi cấp cứu,An toàn và hỗ trợ,2,,gọi cấp cứu,Chưa thiết kế ký hiệu
+NOI0471,gọi người thân,An toàn và hỗ trợ,2,,gọi người thân,Chưa thiết kế ký hiệu
+NOI0472,đừng chạm,An toàn và hỗ trợ,2,,đừng chạm,Chưa thiết kế ký hiệu
+NOI0473,đừng đi,An toàn và hỗ trợ,2,,đừng đi,Chưa thiết kế ký hiệu
+NOI0474,tránh,An toàn và hỗ trợ,2,,tránh,Chưa thiết kế ký hiệu
+NOI0475,cẩn thận,An toàn và hỗ trợ,2,,cẩn thận,Chưa thiết kế ký hiệu
+NOI0476,bảo vệ,An toàn và hỗ trợ,2,,bảo vệ,Chưa thiết kế ký hiệu
+NOI0477,công an,An toàn và hỗ trợ,2,,công an,Chưa thiết kế ký hiệu
+NOI0478,lối thoát,An toàn và hỗ trợ,2,,lối thoát,Chưa thiết kế ký hiệu
+NOI0479,số khẩn cấp,An toàn và hỗ trợ,2,,số khẩn cấp,Chưa thiết kế ký hiệu
+NOI0480,sợ,Cảm xúc và quan hệ,2,,sợ,Chưa thiết kế ký hiệu
+NOI0481,lo,Cảm xúc và quan hệ,2,,lo,Chưa thiết kế ký hiệu
+NOI0482,giận,Cảm xúc và quan hệ,2,,giận,Chưa thiết kế ký hiệu
+NOI0483,bình tĩnh,Cảm xúc và quan hệ,2,,bình tĩnh,Chưa thiết kế ký hiệu
+NOI0484,xấu hổ,Cảm xúc và quan hệ,2,,xấu hổ,Chưa thiết kế ký hiệu
+NOI0485,ngạc nhiên,Cảm xúc và quan hệ,2,,ngạc nhiên,Chưa thiết kế ký hiệu
+NOI0486,cô đơn,Cảm xúc và quan hệ,2,,cô đơn,Chưa thiết kế ký hiệu
+NOI0487,thất vọng,Cảm xúc và quan hệ,2,,thất vọng,Chưa thiết kế ký hiệu
+NOI0488,hài lòng,Cảm xúc và quan hệ,2,,hài lòng,Chưa thiết kế ký hiệu
+NOI0489,tự hào,Cảm xúc và quan hệ,2,,tự hào,Chưa thiết kế ký hiệu
+NOI0490,yêu,Cảm xúc và quan hệ,2,,yêu,Chưa thiết kế ký hiệu
+NOI0491,ghét,Cảm xúc và quan hệ,2,,ghét,Chưa thiết kế ký hiệu
+NOI0492,thương,Cảm xúc và quan hệ,2,,thương,Chưa thiết kế ký hiệu
+NOI0493,quan tâm,Cảm xúc và quan hệ,2,,quan tâm,Chưa thiết kế ký hiệu
+NOI0494,tôn trọng,Cảm xúc và quan hệ,2,,tôn trọng,Chưa thiết kế ký hiệu
+NOI0495,tin tưởng,Cảm xúc và quan hệ,2,,tin tưởng,Chưa thiết kế ký hiệu
+NOI0496,an ủi,Cảm xúc và quan hệ,2,,an ủi,Chưa thiết kế ký hiệu
+NOI0497,chúc mừng,Cảm xúc và quan hệ,2,,chúc mừng,Chưa thiết kế ký hiệu
+NOI0498,tha thứ,Cảm xúc và quan hệ,2,,tha thứ,Chưa thiết kế ký hiệu
+NOI0499,làm quen,Cảm xúc và quan hệ,2,,làm quen,Chưa thiết kế ký hiệu
+NOI0500,đẹp,Đặc điểm và cảm nhận,2,,đẹp,Chưa thiết kế ký hiệu
+NOI0501,xấu về hình thức,Đặc điểm và cảm nhận,2,,xấu về hình thức,Chưa thiết kế ký hiệu
+NOI0502,sạch,Đặc điểm và cảm nhận,2,,sạch,Chưa thiết kế ký hiệu
+NOI0503,bẩn,Đặc điểm và cảm nhận,2,,bẩn,Chưa thiết kế ký hiệu
+NOI0504,mới,Đặc điểm và cảm nhận,2,,mới,Chưa thiết kế ký hiệu
+NOI0505,cũ,Đặc điểm và cảm nhận,2,,cũ,Chưa thiết kế ký hiệu
+NOI0506,dễ,Đặc điểm và cảm nhận,2,,dễ,Chưa thiết kế ký hiệu
+NOI0507,khó,Đặc điểm và cảm nhận,2,,khó,Chưa thiết kế ký hiệu
+NOI0508,nặng,Đặc điểm và cảm nhận,2,,nặng,Chưa thiết kế ký hiệu
+NOI0509,nhẹ,Đặc điểm và cảm nhận,2,,nhẹ,Chưa thiết kế ký hiệu
+NOI0510,cao,Đặc điểm và cảm nhận,2,,cao,Chưa thiết kế ký hiệu
+NOI0511,thấp,Đặc điểm và cảm nhận,2,,thấp,Chưa thiết kế ký hiệu
+NOI0512,rộng,Đặc điểm và cảm nhận,2,,rộng,Chưa thiết kế ký hiệu
+NOI0513,hẹp,Đặc điểm và cảm nhận,2,,hẹp,Chưa thiết kế ký hiệu
+NOI0514,dày,Đặc điểm và cảm nhận,2,,dày,Chưa thiết kế ký hiệu
+NOI0515,mỏng,Đặc điểm và cảm nhận,2,,mỏng,Chưa thiết kế ký hiệu
+NOI0516,cứng,Đặc điểm và cảm nhận,2,,cứng,Chưa thiết kế ký hiệu
+NOI0517,mềm,Đặc điểm và cảm nhận,2,,mềm,Chưa thiết kế ký hiệu
+NOI0518,ướt,Đặc điểm và cảm nhận,2,,ướt,Chưa thiết kế ký hiệu
+NOI0519,khô,Đặc điểm và cảm nhận,2,,khô,Chưa thiết kế ký hiệu
+NOI0520,sáng rõ,Đặc điểm và cảm nhận,2,,sáng rõ,Chưa thiết kế ký hiệu
+NOI0521,tối mờ,Đặc điểm và cảm nhận,2,,tối mờ,Chưa thiết kế ký hiệu
+NOI0522,ồn,Đặc điểm và cảm nhận,2,,ồn,Chưa thiết kế ký hiệu
+NOI0523,yên tĩnh,Đặc điểm và cảm nhận,2,,yên tĩnh,Chưa thiết kế ký hiệu
+NOI0524,đầy,Đặc điểm và cảm nhận,2,,đầy,Chưa thiết kế ký hiệu
+NOI0525,rỗng,Đặc điểm và cảm nhận,2,,rỗng,Chưa thiết kế ký hiệu
+NOI0526,hỏng,Đặc điểm và cảm nhận,2,,hỏng,Chưa thiết kế ký hiệu
+NOI0527,bình thường,Đặc điểm và cảm nhận,2,,bình thường,Chưa thiết kế ký hiệu
+NOI0528,quan trọng,Đặc điểm và cảm nhận,2,,quan trọng,Chưa thiết kế ký hiệu
+NOI0529,cần thiết,Đặc điểm và cảm nhận,2,,cần thiết,Chưa thiết kế ký hiệu
+NOI0530,một,Lượng và mức độ,2,,một,Chưa thiết kế ký hiệu
+NOI0531,hai,Lượng và mức độ,2,,hai,Chưa thiết kế ký hiệu
+NOI0532,ba,Lượng và mức độ,2,,ba,Chưa thiết kế ký hiệu
+NOI0533,bốn,Lượng và mức độ,2,,bốn,Chưa thiết kế ký hiệu
+NOI0534,sáu,Lượng và mức độ,2,,sáu,Chưa thiết kế ký hiệu
+NOI0535,bảy,Lượng và mức độ,2,,bảy,Chưa thiết kế ký hiệu
+NOI0536,tám,Lượng và mức độ,2,,tám,Chưa thiết kế ký hiệu
+NOI0537,chín,Lượng và mức độ,2,,chín,Chưa thiết kế ký hiệu
+NOI0538,mười,Lượng và mức độ,2,,mười,Chưa thiết kế ký hiệu
+NOI0539,không có gì,Lượng và mức độ,2,,không có gì,Chưa thiết kế ký hiệu
+NOI0540,mỗi,Lượng và mức độ,2,,mỗi,Chưa thiết kế ký hiệu
+NOI0541,bất kỳ,Lượng và mức độ,2,,bất kỳ,Chưa thiết kế ký hiệu
+NOI0542,cả hai,Lượng và mức độ,2,,cả hai,Chưa thiết kế ký hiệu
+NOI0543,một nửa,Lượng và mức độ,2,,một nửa,Chưa thiết kế ký hiệu
+NOI0544,gấp đôi,Lượng và mức độ,2,,gấp đôi,Chưa thiết kế ký hiệu
+NOI0545,đủ,Lượng và mức độ,2,,đủ,Chưa thiết kế ký hiệu
+NOI0546,thiếu,Lượng và mức độ,2,,thiếu,Chưa thiết kế ký hiệu
+NOI0547,thừa,Lượng và mức độ,2,,thừa,Chưa thiết kế ký hiệu
+NOI0548,rất,Lượng và mức độ,2,,rất,Chưa thiết kế ký hiệu
+NOI0549,hơi,Lượng và mức độ,2,,hơi,Chưa thiết kế ký hiệu
+NOI0550,quá mức,Lượng và mức độ,2,,quá mức,Chưa thiết kế ký hiệu
+NOI0551,gần như,Lượng và mức độ,2,,gần như,Chưa thiết kế ký hiệu
+NOI0552,chính xác,Lượng và mức độ,2,,chính xác,Chưa thiết kế ký hiệu
+NOI0553,khoảng,Lượng và mức độ,2,,khoảng,Chưa thiết kế ký hiệu
+NOI0554,ít nhất,Lượng và mức độ,2,,ít nhất,Chưa thiết kế ký hiệu
+NOI0555,nhiều nhất,Lượng và mức độ,2,,nhiều nhất,Chưa thiết kế ký hiệu
+NOI0556,bằng nhau,Lượng và mức độ,2,,bằng nhau,Chưa thiết kế ký hiệu
+NOI0557,không bằng,Lượng và mức độ,2,,không bằng,Chưa thiết kế ký hiệu
+NOI0558,giới hạn,Lượng và mức độ,2,,giới hạn,Chưa thiết kế ký hiệu
+NOI0559,về việc,Nối ý và cấu trúc,2,,về việc,Chưa thiết kế ký hiệu
+NOI0560,đối với,Nối ý và cấu trúc,2,,đối với,Chưa thiết kế ký hiệu
+NOI0561,bằng cách,Nối ý và cấu trúc,2,,bằng cách,Chưa thiết kế ký hiệu
+NOI0562,theo,Nối ý và cấu trúc,2,,theo,Chưa thiết kế ký hiệu
+NOI0563,từ,Nối ý và cấu trúc,2,,Chỉ nguồn gốc hoặc điểm bắt đầu trong từ…đến; đơn vị ngôn ngữ có mục riêng.,Chưa thiết kế ký hiệu
+NOI0564,đến thời điểm,Nối ý và cấu trúc,2,,đến thời điểm,Chưa thiết kế ký hiệu
+NOI0565,cho đến khi,Nối ý và cấu trúc,2,,cho đến khi,Chưa thiết kế ký hiệu
+NOI0566,trong khi,Nối ý và cấu trúc,2,,trong khi,Chưa thiết kế ký hiệu
+NOI0567,sau khi,Nối ý và cấu trúc,2,,sau khi,Chưa thiết kế ký hiệu
+NOI0568,trước khi,Nối ý và cấu trúc,2,,trước khi,Chưa thiết kế ký hiệu
+NOI0569,mặc dù,Nối ý và cấu trúc,2,,mặc dù,Chưa thiết kế ký hiệu
+NOI0570,tuy nhiên,Nối ý và cấu trúc,2,,tuy nhiên,Chưa thiết kế ký hiệu
+NOI0571,vì vậy,Nối ý và cấu trúc,2,,vì vậy,Chưa thiết kế ký hiệu
+NOI0572,để,Nối ý và cấu trúc,2,,để,Chưa thiết kế ký hiệu
+NOI0573,chỉ,Nối ý và cấu trúc,2,,Giới hạn phạm vi với nghĩa chỉ có/chỉ làm; không phải ngón tay chỉ hướng.,Chưa thiết kế ký hiệu
+NOI0574,ngoại trừ,Nối ý và cấu trúc,2,,ngoại trừ,Chưa thiết kế ký hiệu
+NOI0575,bao gồm,Nối ý và cấu trúc,2,,bao gồm,Chưa thiết kế ký hiệu
+NOI0576,thay vì,Nối ý và cấu trúc,2,,thay vì,Chưa thiết kế ký hiệu
+NOI0577,đồng thời,Nối ý và cấu trúc,2,,đồng thời,Chưa thiết kế ký hiệu
+NOI0578,lần lượt,Nối ý và cấu trúc,2,,lần lượt,Chưa thiết kế ký hiệu
+NOI0579,đầu tiên,Nối ý và cấu trúc,2,,đầu tiên,Chưa thiết kế ký hiệu
+NOI0580,tiếp theo,Nối ý và cấu trúc,2,,tiếp theo,Chưa thiết kế ký hiệu
+NOI0581,cuối cùng,Nối ý và cấu trúc,2,,cuối cùng,Chưa thiết kế ký hiệu
+NOI0582,ví dụ,Nối ý và cấu trúc,2,,ví dụ,Chưa thiết kế ký hiệu
+NOI0583,ngược lại,Nối ý và cấu trúc,2,,ngược lại,Chưa thiết kế ký hiệu
+NOI0584,dù thế nào,Nối ý và cấu trúc,2,,dù thế nào,Chưa thiết kế ký hiệu
+NOI0585,bài học,Học tập,2,,bài học,Chưa thiết kế ký hiệu
+NOI0586,bài tập,Học tập,2,,bài tập,Chưa thiết kế ký hiệu
+NOI0587,câu hỏi,Học tập,2,,câu hỏi,Chưa thiết kế ký hiệu
+NOI0588,câu trả lời,Học tập,2,,câu trả lời,Chưa thiết kế ký hiệu
+NOI0589,thi,Học tập,2,,thi,Chưa thiết kế ký hiệu
+NOI0590,điểm,Học tập,2,,điểm,Chưa thiết kế ký hiệu
+NOI0591,lớp học,Học tập,2,,lớp học,Chưa thiết kế ký hiệu
+NOI0592,giáo viên,Học tập,2,,giáo viên,Chưa thiết kế ký hiệu
+NOI0593,học sinh,Học tập,2,,học sinh,Chưa thiết kế ký hiệu
+NOI0594,sinh viên,Học tập,2,,sinh viên,Chưa thiết kế ký hiệu
+NOI0595,trường đại học,Học tập,2,,trường đại học,Chưa thiết kế ký hiệu
+NOI0596,kiến thức,Học tập,2,,kiến thức,Chưa thiết kế ký hiệu
+NOI0597,kỹ năng,Học tập,2,,kỹ năng,Chưa thiết kế ký hiệu
+NOI0598,luyện tập,Học tập,2,,luyện tập,Chưa thiết kế ký hiệu
+NOI0599,giải thích,Học tập,2,,giải thích,Chưa thiết kế ký hiệu
+NOI0600,hướng dẫn,Học tập,2,,hướng dẫn,Chưa thiết kế ký hiệu
+NOI0601,ghi chú,Học tập,2,,ghi chú,Chưa thiết kế ký hiệu
+NOI0602,tra cứu,Học tập,2,,tra cứu,Chưa thiết kế ký hiệu
+NOI0603,ôn lại,Học tập,2,,ôn lại,Chưa thiết kế ký hiệu
+NOI0604,tiến bộ,Học tập,2,,tiến bộ,Chưa thiết kế ký hiệu
+NOI0605,việc,Công việc,2,,việc,Chưa thiết kế ký hiệu
+NOI0606,công ty,Công việc,2,,công ty,Chưa thiết kế ký hiệu
+NOI0607,văn phòng,Công việc,2,,văn phòng,Chưa thiết kế ký hiệu
+NOI0608,nhóm,Công việc,2,,nhóm,Chưa thiết kế ký hiệu
+NOI0609,dự án,Công việc,2,,dự án,Chưa thiết kế ký hiệu
+NOI0610,nhiệm vụ,Công việc,2,,nhiệm vụ,Chưa thiết kế ký hiệu
+NOI0611,kế hoạch,Công việc,2,,kế hoạch,Chưa thiết kế ký hiệu
+NOI0612,lịch hẹn,Công việc,2,,lịch hẹn,Chưa thiết kế ký hiệu
+NOI0613,cuộc họp,Công việc,2,,cuộc họp,Chưa thiết kế ký hiệu
+NOI0614,báo cáo,Công việc,2,,báo cáo,Chưa thiết kế ký hiệu
+NOI0615,thời hạn,Công việc,2,,thời hạn,Chưa thiết kế ký hiệu
+NOI0616,nghỉ phép,Công việc,2,,nghỉ phép,Chưa thiết kế ký hiệu
+NOI0617,lương,Công việc,2,,lương,Chưa thiết kế ký hiệu
+NOI0618,hợp đồng,Công việc,2,,hợp đồng,Chưa thiết kế ký hiệu
+NOI0619,phân công,Công việc,2,,phân công,Chưa thiết kế ký hiệu
+NOI0620,hợp tác,Công việc,2,,hợp tác,Chưa thiết kế ký hiệu
+NOI0621,hoàn thành,Công việc,2,,hoàn thành,Chưa thiết kế ký hiệu
+NOI0622,tiến độ,Công việc,2,,tiến độ,Chưa thiết kế ký hiệu
+NOI0623,vấn đề,Công việc,2,,vấn đề,Chưa thiết kế ký hiệu
+NOI0624,giải pháp,Công việc,2,,giải pháp,Chưa thiết kế ký hiệu
+NOI0625,máy tính,Thiết bị và giao tiếp số,2,,máy tính,Chưa thiết kế ký hiệu
+NOI0626,bàn phím,Thiết bị và giao tiếp số,2,,bàn phím,Chưa thiết kế ký hiệu
+NOI0627,chuột máy tính,Thiết bị và giao tiếp số,2,,chuột máy tính,Chưa thiết kế ký hiệu
+NOI0628,màn hình,Thiết bị và giao tiếp số,2,,màn hình,Chưa thiết kế ký hiệu
+NOI0629,camera,Thiết bị và giao tiếp số,2,,camera,Chưa thiết kế ký hiệu
+NOI0630,tai nghe,Thiết bị và giao tiếp số,2,,tai nghe,Chưa thiết kế ký hiệu
+NOI0631,mạng,Thiết bị và giao tiếp số,2,,mạng,Chưa thiết kế ký hiệu
+NOI0632,internet,Thiết bị và giao tiếp số,2,,internet,Chưa thiết kế ký hiệu
+NOI0633,wifi,Thiết bị và giao tiếp số,2,,wifi,Chưa thiết kế ký hiệu
+NOI0634,mật khẩu,Thiết bị và giao tiếp số,2,,mật khẩu,Chưa thiết kế ký hiệu
+NOI0635,tài khoản,Thiết bị và giao tiếp số,2,,tài khoản,Chưa thiết kế ký hiệu
+NOI0636,đăng nhập,Thiết bị và giao tiếp số,2,,đăng nhập,Chưa thiết kế ký hiệu
+NOI0637,đăng xuất,Thiết bị và giao tiếp số,2,,đăng xuất,Chưa thiết kế ký hiệu
+NOI0638,tin nhắn,Thiết bị và giao tiếp số,2,,tin nhắn,Chưa thiết kế ký hiệu
+NOI0639,email,Thiết bị và giao tiếp số,2,,email,Chưa thiết kế ký hiệu
+NOI0640,cuộc gọi,Thiết bị và giao tiếp số,2,,cuộc gọi,Chưa thiết kế ký hiệu
+NOI0641,gọi video,Thiết bị và giao tiếp số,2,,gọi video,Chưa thiết kế ký hiệu
+NOI0642,ảnh,Thiết bị và giao tiếp số,2,,ảnh,Chưa thiết kế ký hiệu
+NOI0643,âm thanh,Thiết bị và giao tiếp số,2,,âm thanh,Chưa thiết kế ký hiệu
+NOI0644,video,Thiết bị và giao tiếp số,2,,video,Chưa thiết kế ký hiệu
+NOI0645,tệp,Thiết bị và giao tiếp số,2,,tệp,Chưa thiết kế ký hiệu
+NOI0646,thư mục,Thiết bị và giao tiếp số,2,,thư mục,Chưa thiết kế ký hiệu
+NOI0647,liên kết,Thiết bị và giao tiếp số,2,,liên kết,Chưa thiết kế ký hiệu
+NOI0648,trang web,Thiết bị và giao tiếp số,2,,trang web,Chưa thiết kế ký hiệu
+NOI0649,ứng dụng,Thiết bị và giao tiếp số,2,,ứng dụng,Chưa thiết kế ký hiệu
+NOI0650,tạo,Thao tác thông tin,2,,tạo,Chưa thiết kế ký hiệu
+NOI0651,tìm,Thao tác thông tin,2,,tìm,Chưa thiết kế ký hiệu
+NOI0652,gửi,Thao tác thông tin,2,,gửi,Chưa thiết kế ký hiệu
+NOI0653,nhận,Thao tác thông tin,2,,nhận,Chưa thiết kế ký hiệu
+NOI0654,lưu,Thao tác thông tin,2,,lưu,Chưa thiết kế ký hiệu
+NOI0655,xóa,Thao tác thông tin,2,,xóa,Chưa thiết kế ký hiệu
+NOI0656,sao chép,Thao tác thông tin,2,,sao chép,Chưa thiết kế ký hiệu
+NOI0657,dán,Thao tác thông tin,2,,dán,Chưa thiết kế ký hiệu
+NOI0658,di chuyển mục,Thao tác thông tin,2,,di chuyển mục,Chưa thiết kế ký hiệu
+NOI0659,đổi tên,Thao tác thông tin,2,,đổi tên,Chưa thiết kế ký hiệu
+NOI0660,tải xuống,Thao tác thông tin,2,,tải xuống,Chưa thiết kế ký hiệu
+NOI0661,tải lên,Thao tác thông tin,2,,tải lên,Chưa thiết kế ký hiệu
+NOI0662,chia sẻ,Thao tác thông tin,2,,chia sẻ,Chưa thiết kế ký hiệu
+NOI0663,đính kèm,Thao tác thông tin,2,,đính kèm,Chưa thiết kế ký hiệu
+NOI0664,chọn tất cả,Thao tác thông tin,2,,chọn tất cả,Chưa thiết kế ký hiệu
+NOI0665,bỏ chọn,Thao tác thông tin,2,,bỏ chọn,Chưa thiết kế ký hiệu
+NOI0666,hoàn tác,Thao tác thông tin,2,,hoàn tác,Chưa thiết kế ký hiệu
+NOI0667,làm lại,Thao tác thông tin,2,,làm lại,Chưa thiết kế ký hiệu
+NOI0668,phóng to,Thao tác thông tin,2,,phóng to,Chưa thiết kế ký hiệu
+NOI0669,thu nhỏ,Thao tác thông tin,2,,thu nhỏ,Chưa thiết kế ký hiệu
+NOI0670,cuộn lên,Thao tác thông tin,2,,cuộn lên,Chưa thiết kế ký hiệu
+NOI0671,cuộn xuống,Thao tác thông tin,2,,cuộn xuống,Chưa thiết kế ký hiệu
+NOI0672,tiếp tục,Thao tác thông tin,2,,tiếp tục,Chưa thiết kế ký hiệu
+NOI0673,hủy,Thao tác thông tin,2,,hủy,Chưa thiết kế ký hiệu
+NOI0674,xác nhận,Thao tác thông tin,2,,xác nhận,Chưa thiết kế ký hiệu
+NOI0675,prompt,AI và soạn nội dung,3,,prompt,Chưa thiết kế ký hiệu
+NOI0676,nội dung,AI và soạn nội dung,3,,nội dung,Chưa thiết kế ký hiệu
+NOI0677,văn bản,AI và soạn nội dung,3,,văn bản,Chưa thiết kế ký hiệu
+NOI0678,tóm tắt,AI và soạn nội dung,3,,tóm tắt,Chưa thiết kế ký hiệu
+NOI0679,dịch,AI và soạn nội dung,3,,dịch,Chưa thiết kế ký hiệu
+NOI0680,so sánh,AI và soạn nội dung,3,,so sánh,Chưa thiết kế ký hiệu
+NOI0681,kiểm tra,AI và soạn nội dung,3,,kiểm tra,Chưa thiết kế ký hiệu
+NOI0682,giữ nguyên,AI và soạn nội dung,3,,giữ nguyên,Chưa thiết kế ký hiệu
+NOI0683,thay thế,AI và soạn nội dung,3,,thay thế,Chưa thiết kế ký hiệu
+NOI0684,liệt kê,AI và soạn nội dung,3,,liệt kê,Chưa thiết kế ký hiệu
+NOI0685,phân loại,AI và soạn nội dung,3,,phân loại,Chưa thiết kế ký hiệu
+NOI0686,phân tích,AI và soạn nội dung,3,,phân tích,Chưa thiết kế ký hiệu
+NOI0687,đánh giá,AI và soạn nội dung,3,,đánh giá,Chưa thiết kế ký hiệu
+NOI0688,định dạng,AI và soạn nội dung,3,,định dạng,Chưa thiết kế ký hiệu
+NOI0689,tiêu đề,AI và soạn nội dung,3,,tiêu đề,Chưa thiết kế ký hiệu
+NOI0690,đoạn văn,AI và soạn nội dung,3,,đoạn văn,Chưa thiết kế ký hiệu
+NOI0691,câu,AI và soạn nội dung,3,,câu,Chưa thiết kế ký hiệu
+NOI0692,bảng,AI và soạn nội dung,3,,bảng,Chưa thiết kế ký hiệu
+NOI0693,danh sách,AI và soạn nội dung,3,,danh sách,Chưa thiết kế ký hiệu
+NOI0694,nguồn,AI và soạn nội dung,3,,nguồn,Chưa thiết kế ký hiệu
+NOI0695,trích dẫn,AI và soạn nội dung,3,,trích dẫn,Chưa thiết kế ký hiệu
+NOI0696,dữ liệu,AI và soạn nội dung,3,,dữ liệu,Chưa thiết kế ký hiệu
+NOI0697,đầu vào,AI và soạn nội dung,3,,đầu vào,Chưa thiết kế ký hiệu
+NOI0698,đầu ra,AI và soạn nội dung,3,,đầu ra,Chưa thiết kế ký hiệu
+NOI0699,ngữ cảnh,AI và soạn nội dung,3,,ngữ cảnh,Chưa thiết kế ký hiệu
+NOI0700,ràng buộc,AI và soạn nội dung,3,,ràng buộc,Chưa thiết kế ký hiệu
+NOI0701,giọng văn,AI và soạn nội dung,3,,giọng văn,Chưa thiết kế ký hiệu
+NOI0702,đối tượng đọc,AI và soạn nội dung,3,,đối tượng đọc,Chưa thiết kế ký hiệu
+NOI0703,chỉ làm việc này,AI và kiểm soát yêu cầu,3,,chỉ làm việc này,Chưa thiết kế ký hiệu
+NOI0704,không tự suy đoán,AI và kiểm soát yêu cầu,3,,không tự suy đoán,Chưa thiết kế ký hiệu
+NOI0705,hỏi trước,AI và kiểm soát yêu cầu,3,,hỏi trước,Chưa thiết kế ký hiệu
+NOI0706,chờ xác nhận,AI và kiểm soát yêu cầu,3,,chờ xác nhận,Chưa thiết kế ký hiệu
+NOI0707,nêu giả định,AI và kiểm soát yêu cầu,3,,nêu giả định,Chưa thiết kế ký hiệu
+NOI0708,nêu điều chưa biết,AI và kiểm soát yêu cầu,3,,nêu điều chưa biết,Chưa thiết kế ký hiệu
+NOI0709,giải thích lý do,AI và kiểm soát yêu cầu,3,,giải thích lý do,Chưa thiết kế ký hiệu
+NOI0710,kiểm chứng,AI và kiểm soát yêu cầu,3,,kiểm chứng,Chưa thiết kế ký hiệu
+NOI0711,giữ cấu trúc,AI và kiểm soát yêu cầu,3,,giữ cấu trúc,Chưa thiết kế ký hiệu
+NOI0712,giữ ý chính,AI và kiểm soát yêu cầu,3,,giữ ý chính,Chưa thiết kế ký hiệu
+NOI0713,bổ sung chi tiết,AI và kiểm soát yêu cầu,3,,bổ sung chi tiết,Chưa thiết kế ký hiệu
+NOI0714,rút gọn,AI và kiểm soát yêu cầu,3,,rút gọn,Chưa thiết kế ký hiệu
+NOI0715,viết lại,AI và kiểm soát yêu cầu,3,,viết lại,Chưa thiết kế ký hiệu
+NOI0716,tiếp tục phần trước,AI và kiểm soát yêu cầu,3,,tiếp tục phần trước,Chưa thiết kế ký hiệu
+NOI0717,quay lại bản trước,AI và kiểm soát yêu cầu,3,,quay lại bản trước,Chưa thiết kế ký hiệu
+NOI0718,đưa phương án khác,AI và kiểm soát yêu cầu,3,,đưa phương án khác,Chưa thiết kế ký hiệu
+NOI0719,chọn phương án,AI và kiểm soát yêu cầu,3,,chọn phương án,Chưa thiết kế ký hiệu
+NOI0720,ưu tiên độ chính xác,AI và kiểm soát yêu cầu,3,,ưu tiên độ chính xác,Chưa thiết kế ký hiệu
+NOI0721,ưu tiên tốc độ,AI và kiểm soát yêu cầu,3,,ưu tiên tốc độ,Chưa thiết kế ký hiệu
+NOI0722,không gửi ra ngoài,AI và kiểm soát yêu cầu,3,,không gửi ra ngoài,Chưa thiết kế ký hiệu
+NOI0723,mã nguồn,Lập trình và công cụ,3,,mã nguồn,Chưa thiết kế ký hiệu
+NOI0724,hàm,Lập trình và công cụ,3,,hàm,Chưa thiết kế ký hiệu
+NOI0725,biến,Lập trình và công cụ,3,,biến,Chưa thiết kế ký hiệu
+NOI0726,tệp mã,Lập trình và công cụ,3,,tệp mã,Chưa thiết kế ký hiệu
+NOI0727,giao diện,Lập trình và công cụ,3,,giao diện,Chưa thiết kế ký hiệu
+NOI0728,nút bấm,Lập trình và công cụ,3,,nút bấm,Chưa thiết kế ký hiệu
+NOI0729,biểu mẫu,Lập trình và công cụ,3,,biểu mẫu,Chưa thiết kế ký hiệu
+NOI0730,trang,Lập trình và công cụ,3,,trang,Chưa thiết kế ký hiệu
+NOI0731,thành phần,Lập trình và công cụ,3,,thành phần,Chưa thiết kế ký hiệu
+NOI0732,API,Lập trình và công cụ,3,,API,Chưa thiết kế ký hiệu
+NOI0733,cơ sở dữ liệu,Lập trình và công cụ,3,,cơ sở dữ liệu,Chưa thiết kế ký hiệu
+NOI0734,máy chủ,Lập trình và công cụ,3,,máy chủ,Chưa thiết kế ký hiệu
+NOI0735,trình duyệt,Lập trình và công cụ,3,,trình duyệt,Chưa thiết kế ký hiệu
+NOI0736,lỗi,Lập trình và công cụ,3,,lỗi,Chưa thiết kế ký hiệu
+NOI0737,sửa lỗi,Lập trình và công cụ,3,,sửa lỗi,Chưa thiết kế ký hiệu
+NOI0738,chạy thử,Lập trình và công cụ,3,,chạy thử,Chưa thiết kế ký hiệu
+NOI0739,kiểm thử,Lập trình và công cụ,3,,kiểm thử,Chưa thiết kế ký hiệu
+NOI0740,kết quả kiểm thử,Lập trình và công cụ,3,,kết quả kiểm thử,Chưa thiết kế ký hiệu
+NOI0741,cài đặt,Lập trình và công cụ,3,,cài đặt,Chưa thiết kế ký hiệu
+NOI0742,thư viện phần mềm,Lập trình và công cụ,3,,thư viện phần mềm,Chưa thiết kế ký hiệu
+NOI0743,phiên bản,Lập trình và công cụ,3,,phiên bản,Chưa thiết kế ký hiệu
+NOI0744,triển khai,Lập trình và công cụ,3,,triển khai,Chưa thiết kế ký hiệu
+NOI0745,bản nháp,Lập trình và công cụ,3,,bản nháp,Chưa thiết kế ký hiệu
+NOI0746,bản chính,Lập trình và công cụ,3,,bản chính,Chưa thiết kế ký hiệu
+NOI0747,nhánh mã,Lập trình và công cụ,3,,nhánh mã,Chưa thiết kế ký hiệu
+NOI0748,thay đổi,Lập trình và công cụ,3,,thay đổi,Chưa thiết kế ký hiệu
+NOI0749,đọc mã,Lập trình và công cụ,3,,đọc mã,Chưa thiết kế ký hiệu
+NOI0750,viết mã,Lập trình và công cụ,3,,viết mã,Chưa thiết kế ký hiệu
+NOI0751,tối ưu,Lập trình và công cụ,3,,tối ưu,Chưa thiết kế ký hiệu
+NOI0752,bảo mật,Lập trình và công cụ,3,,bảo mật,Chưa thiết kế ký hiệu
+NOI0753,hết câu,Điều khiển hội thoại,2,,hết câu,Chưa thiết kế ký hiệu
+NOI0754,câu mới,Điều khiển hội thoại,2,,câu mới,Chưa thiết kế ký hiệu
+NOI0755,lặp lại,Điều khiển hội thoại,2,,lặp lại,Chưa thiết kế ký hiệu
+NOI0756,chậm lại,Điều khiển hội thoại,2,,chậm lại,Chưa thiết kế ký hiệu
+NOI0757,sửa ý vừa nói,Điều khiển hội thoại,2,,sửa ý vừa nói,Chưa thiết kế ký hiệu
+NOI0758,hủy ý vừa nói,Điều khiển hội thoại,2,,hủy ý vừa nói,Chưa thiết kế ký hiệu
+NOI0759,đánh vần / tên riêng,Điều khiển hội thoại,2,,đánh vần / tên riêng,Chưa thiết kế ký hiệu
+NOI0760,trích nguyên văn,Điều khiển hội thoại,2,,trích nguyên văn,Chưa thiết kế ký hiệu
+NOI0761,kết thúc trích dẫn,Điều khiển hội thoại,2,,kết thúc trích dẫn,Chưa thiết kế ký hiệu
+NOI0762,tạm dừng hội thoại,Điều khiển hội thoại,2,,tạm dừng hội thoại,Chưa thiết kế ký hiệu
+NOI0763,0,Chữ số,1,,0,Chưa thiết kế ký hiệu
+NOI0764,1,Chữ số,1,,1,Chưa thiết kế ký hiệu
+NOI0765,2,Chữ số,1,,2,Chưa thiết kế ký hiệu
+NOI0766,3,Chữ số,1,,3,Chưa thiết kế ký hiệu
+NOI0767,4,Chữ số,1,,4,Chưa thiết kế ký hiệu
+NOI0768,5,Chữ số,1,,5,Chưa thiết kế ký hiệu
+NOI0769,6,Chữ số,1,,6,Chưa thiết kế ký hiệu
+NOI0770,7,Chữ số,1,,7,Chưa thiết kế ký hiệu
+NOI0771,8,Chữ số,1,,8,Chưa thiết kế ký hiệu
+NOI0772,9,Chữ số,1,,9,Chưa thiết kế ký hiệu
+NOI0773,năm (số 5),Lượng và mức độ,2,năm,"Số lượng bằng 5; không phải năm lịch. Chữ số 5 là cách viết liên quan, chưa khẳng định dùng ký hiệu khác.",Chưa thiết kế ký hiệu
+NOI0774,AI (trí tuệ nhân tạo),AI và soạn nội dung,3,AI; trí tuệ nhân tạo,Lĩnh vực hoặc hệ thống trí tuệ nhân tạo; không phải đại từ nghi vấn ai.,Chưa thiết kế ký hiệu
+NOI0775,từ (đơn vị ngôn ngữ),AI và soạn nội dung,3,từ,Một đơn vị từ vựng trong ngôn ngữ; không phải từ chỉ nguồn gốc.,Chưa thiết kế ký hiệu

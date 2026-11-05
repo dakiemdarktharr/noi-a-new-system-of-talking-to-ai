@@ -1,0 +1,7783 @@
+{
+  "name": "Nối",
+  "version": "semantic-inventory-3",
+  "date": "2026-11-05",
+  "count": 775,
+  "note": "Danh mục nghĩa đề xuất để thu mẫu. Chưa phải bộ ký hiệu vùng miền, nhãn đã huấn luyện hoặc ngôn ngữ hoàn chỉnh.",
+  "entries": [
+    {
+      "id": "NOI0001",
+      "label": "tôi",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "tôi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N001"
+    },
+    {
+      "id": "NOI0002",
+      "label": "bạn",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "Người đang được nói chuyện trực tiếp; quan hệ bạn bè có mục riêng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N002"
+    },
+    {
+      "id": "NOI0003",
+      "label": "chúng ta",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "Nhóm gồm người nói và người đang được nói chuyện trực tiếp.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N003"
+    },
+    {
+      "id": "NOI0004",
+      "label": "họ",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "họ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N004"
+    },
+    {
+      "id": "NOI0005",
+      "label": "người",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "người",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N005"
+    },
+    {
+      "id": "NOI0006",
+      "label": "gia đình",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "gia đình",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N006"
+    },
+    {
+      "id": "NOI0007",
+      "label": "bố",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [
+        "ba",
+        "cha"
+      ],
+      "definition": "bố",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N007"
+    },
+    {
+      "id": "NOI0008",
+      "label": "mẹ",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [
+        "má",
+        "mạ"
+      ],
+      "definition": "mẹ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N008"
+    },
+    {
+      "id": "NOI0009",
+      "label": "con",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "Quan hệ con với cha mẹ; không dùng làm loại từ động vật.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N009"
+    },
+    {
+      "id": "NOI0010",
+      "label": "bạn bè",
+      "group": "Người và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "bạn bè",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N010"
+    },
+    {
+      "id": "NOI0011",
+      "label": "này",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "này",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N011"
+    },
+    {
+      "id": "NOI0012",
+      "label": "kia",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "kia",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N012"
+    },
+    {
+      "id": "NOI0013",
+      "label": "ở đây",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "ở đây",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N013"
+    },
+    {
+      "id": "NOI0014",
+      "label": "ở đó",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "ở đó",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N014"
+    },
+    {
+      "id": "NOI0015",
+      "label": "trong",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "trong",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N015"
+    },
+    {
+      "id": "NOI0016",
+      "label": "ngoài",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "ngoài",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N016"
+    },
+    {
+      "id": "NOI0017",
+      "label": "trên",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "trên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N017"
+    },
+    {
+      "id": "NOI0018",
+      "label": "dưới",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "dưới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N018"
+    },
+    {
+      "id": "NOI0019",
+      "label": "gần",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "gần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N019"
+    },
+    {
+      "id": "NOI0020",
+      "label": "xa",
+      "group": "Chỉ định và vị trí",
+      "level": 1,
+      "aliases": [],
+      "definition": "xa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N020"
+    },
+    {
+      "id": "NOI0021",
+      "label": "ai",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "Hỏi danh tính một người; không phải AI (trí tuệ nhân tạo).",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N021"
+    },
+    {
+      "id": "NOI0022",
+      "label": "gì",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "gì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N022"
+    },
+    {
+      "id": "NOI0023",
+      "label": "ở đâu",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "ở đâu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N023"
+    },
+    {
+      "id": "NOI0024",
+      "label": "khi nào",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "khi nào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N024"
+    },
+    {
+      "id": "NOI0025",
+      "label": "vì sao",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "vì sao",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N025"
+    },
+    {
+      "id": "NOI0026",
+      "label": "như thế nào",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "như thế nào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N026"
+    },
+    {
+      "id": "NOI0027",
+      "label": "bao nhiêu",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "bao nhiêu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N027"
+    },
+    {
+      "id": "NOI0028",
+      "label": "cái nào",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "cái nào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N028"
+    },
+    {
+      "id": "NOI0029",
+      "label": "có…không?",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "Ý định hỏi có/không. Đề xuất của giao thức Nối là một ký hiệu tay riêng; chưa được thiết kế hoặc xác nhận. Đây không phải mô tả ngữ pháp hay vai trò nét mặt trong ngôn ngữ ký hiệu Việt Nam.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N029"
+    },
+    {
+      "id": "NOI0030",
+      "label": "có đúng không?",
+      "group": "Câu hỏi và xác nhận",
+      "level": 1,
+      "aliases": [],
+      "definition": "có đúng không?",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N030"
+    },
+    {
+      "id": "NOI0031",
+      "label": "muốn",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "muốn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N031"
+    },
+    {
+      "id": "NOI0032",
+      "label": "cần",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "cần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N032"
+    },
+    {
+      "id": "NOI0033",
+      "label": "thích",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "thích",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N033"
+    },
+    {
+      "id": "NOI0034",
+      "label": "biết",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "biết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N034"
+    },
+    {
+      "id": "NOI0035",
+      "label": "hiểu",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "hiểu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N035"
+    },
+    {
+      "id": "NOI0036",
+      "label": "có thể",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "có thể",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N036"
+    },
+    {
+      "id": "NOI0037",
+      "label": "đề nghị",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "đề nghị",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N037"
+    },
+    {
+      "id": "NOI0038",
+      "label": "giúp",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "giúp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N038"
+    },
+    {
+      "id": "NOI0039",
+      "label": "đồng ý",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "Chấp thuận một đề nghị; không đồng nghĩa thông tin đúng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N039"
+    },
+    {
+      "id": "NOI0040",
+      "label": "từ chối",
+      "group": "Nhu cầu và ý định",
+      "level": 1,
+      "aliases": [],
+      "definition": "từ chối",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N040"
+    },
+    {
+      "id": "NOI0041",
+      "label": "có",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "Tồn tại hoặc sở hữu; tách khỏi xác nhận đúng và đồng ý.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N041"
+    },
+    {
+      "id": "NOI0042",
+      "label": "không",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "Phủ định nội dung; cần đánh dấu phạm vi phủ định.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N042"
+    },
+    {
+      "id": "NOI0043",
+      "label": "chưa",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "Sự việc chưa xảy ra tính đến thời điểm nói.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N043"
+    },
+    {
+      "id": "NOI0044",
+      "label": "đã",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "đã",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N044"
+    },
+    {
+      "id": "NOI0045",
+      "label": "đang",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "đang",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N045"
+    },
+    {
+      "id": "NOI0046",
+      "label": "sẽ",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "sẽ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N046"
+    },
+    {
+      "id": "NOI0047",
+      "label": "vẫn",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "vẫn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N047"
+    },
+    {
+      "id": "NOI0048",
+      "label": "hết",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "Không còn một lượng hoặc trạng thái trước đó.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N048"
+    },
+    {
+      "id": "NOI0049",
+      "label": "xong",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "xong",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N049"
+    },
+    {
+      "id": "NOI0050",
+      "label": "lại",
+      "group": "Phủ định và trạng thái",
+      "level": 1,
+      "aliases": [],
+      "definition": "Lặp một hành động; khác với hoàn tác hoặc sửa câu.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N050"
+    },
+    {
+      "id": "NOI0051",
+      "label": "bây giờ",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "bây giờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N051"
+    },
+    {
+      "id": "NOI0052",
+      "label": "hôm nay",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "hôm nay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N052"
+    },
+    {
+      "id": "NOI0053",
+      "label": "hôm qua",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "hôm qua",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N053"
+    },
+    {
+      "id": "NOI0054",
+      "label": "ngày mai",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "ngày mai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N054"
+    },
+    {
+      "id": "NOI0055",
+      "label": "trước",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "Thứ tự thời gian; vị trí dùng phía trước.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N055"
+    },
+    {
+      "id": "NOI0056",
+      "label": "sau",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "Thứ tự thời gian; vị trí dùng phía sau.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N056"
+    },
+    {
+      "id": "NOI0057",
+      "label": "sáng",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "Buổi sáng trong ngày; độ sáng dùng mục sáng rõ.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N057"
+    },
+    {
+      "id": "NOI0058",
+      "label": "trưa",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "trưa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N058"
+    },
+    {
+      "id": "NOI0059",
+      "label": "chiều",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "chiều",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N059"
+    },
+    {
+      "id": "NOI0060",
+      "label": "tối",
+      "group": "Thời gian",
+      "level": 1,
+      "aliases": [],
+      "definition": "Buổi tối trong ngày; độ tối dùng mục tối mờ.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N060"
+    },
+    {
+      "id": "NOI0061",
+      "label": "đi",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "đi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N061"
+    },
+    {
+      "id": "NOI0062",
+      "label": "đến",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "đến",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N062"
+    },
+    {
+      "id": "NOI0063",
+      "label": "về",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "Di chuyển trở lại nơi gắn với người nói; chủ đề dùng mục về việc.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N063"
+    },
+    {
+      "id": "NOI0064",
+      "label": "ở",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "Lưu trú hoặc hiện diện tại một nơi; nghĩa quan hệ vị trí cần ngữ cảnh khi thu mẫu.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N064"
+    },
+    {
+      "id": "NOI0065",
+      "label": "ăn",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "ăn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N065"
+    },
+    {
+      "id": "NOI0066",
+      "label": "uống",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "uống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N066"
+    },
+    {
+      "id": "NOI0067",
+      "label": "ngủ",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "ngủ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N067"
+    },
+    {
+      "id": "NOI0068",
+      "label": "nghỉ",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "nghỉ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N068"
+    },
+    {
+      "id": "NOI0069",
+      "label": "làm",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "Thực hiện một hoạt động hoặc công việc; cần ghi rõ hoạt động trong câu thu mẫu.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N069"
+    },
+    {
+      "id": "NOI0070",
+      "label": "học",
+      "group": "Sinh hoạt",
+      "level": 1,
+      "aliases": [],
+      "definition": "học",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N070"
+    },
+    {
+      "id": "NOI0071",
+      "label": "nói",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "nói",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N071"
+    },
+    {
+      "id": "NOI0072",
+      "label": "nghe",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "nghe",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N072"
+    },
+    {
+      "id": "NOI0073",
+      "label": "nhìn",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhìn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N073"
+    },
+    {
+      "id": "NOI0074",
+      "label": "đọc",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "đọc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N074"
+    },
+    {
+      "id": "NOI0075",
+      "label": "viết",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "viết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N075"
+    },
+    {
+      "id": "NOI0076",
+      "label": "hỏi",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "Hành động đặt câu hỏi.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N076"
+    },
+    {
+      "id": "NOI0077",
+      "label": "trả lời",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "trả lời",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N077"
+    },
+    {
+      "id": "NOI0078",
+      "label": "chào",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "chào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N078"
+    },
+    {
+      "id": "NOI0079",
+      "label": "cảm ơn",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "cảm ơn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N079"
+    },
+    {
+      "id": "NOI0080",
+      "label": "xin lỗi",
+      "group": "Giao tiếp",
+      "level": 1,
+      "aliases": [],
+      "definition": "xin lỗi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N080"
+    },
+    {
+      "id": "NOI0081",
+      "label": "lấy",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "lấy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N081"
+    },
+    {
+      "id": "NOI0082",
+      "label": "đưa",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "đưa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N082"
+    },
+    {
+      "id": "NOI0083",
+      "label": "mở",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "Chuyển vật từ trạng thái đóng sang mở; mở ứng dụng và bật điện cần mô tả riêng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N083"
+    },
+    {
+      "id": "NOI0084",
+      "label": "đóng",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "Chuyển vật đang mở về trạng thái khép; không phải đóng tiền hoặc đóng vai.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N084"
+    },
+    {
+      "id": "NOI0085",
+      "label": "bắt đầu",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "bắt đầu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N085"
+    },
+    {
+      "id": "NOI0086",
+      "label": "dừng",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "dừng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N086"
+    },
+    {
+      "id": "NOI0087",
+      "label": "chờ",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "chờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N087"
+    },
+    {
+      "id": "NOI0088",
+      "label": "chọn",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "chọn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N088"
+    },
+    {
+      "id": "NOI0089",
+      "label": "đổi",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "đổi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N089"
+    },
+    {
+      "id": "NOI0090",
+      "label": "sửa",
+      "group": "Thao tác cơ bản",
+      "level": 1,
+      "aliases": [],
+      "definition": "sửa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N090"
+    },
+    {
+      "id": "NOI0091",
+      "label": "nhà",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhà",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N091"
+    },
+    {
+      "id": "NOI0092",
+      "label": "trường",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "trường",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N092"
+    },
+    {
+      "id": "NOI0093",
+      "label": "bệnh viện",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "bệnh viện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N093"
+    },
+    {
+      "id": "NOI0094",
+      "label": "nhà vệ sinh",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [
+        "toilet",
+        "WC"
+      ],
+      "definition": "nhà vệ sinh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N094"
+    },
+    {
+      "id": "NOI0095",
+      "label": "chợ",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "chợ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N095"
+    },
+    {
+      "id": "NOI0096",
+      "label": "đồ ăn",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "đồ ăn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N096"
+    },
+    {
+      "id": "NOI0097",
+      "label": "nước",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "nước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N097"
+    },
+    {
+      "id": "NOI0098",
+      "label": "thuốc",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "thuốc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N098"
+    },
+    {
+      "id": "NOI0099",
+      "label": "tiền",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "tiền",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N099"
+    },
+    {
+      "id": "NOI0100",
+      "label": "điện thoại",
+      "group": "Nơi chốn và vật thiết yếu",
+      "level": 1,
+      "aliases": [],
+      "definition": "điện thoại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N100"
+    },
+    {
+      "id": "NOI0101",
+      "label": "vui",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "vui",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N101"
+    },
+    {
+      "id": "NOI0102",
+      "label": "buồn",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "buồn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N102"
+    },
+    {
+      "id": "NOI0103",
+      "label": "mệt",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "mệt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N103"
+    },
+    {
+      "id": "NOI0104",
+      "label": "đau",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "đau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N104"
+    },
+    {
+      "id": "NOI0105",
+      "label": "đói",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "đói",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N105"
+    },
+    {
+      "id": "NOI0106",
+      "label": "khát",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "khát",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N106"
+    },
+    {
+      "id": "NOI0107",
+      "label": "tốt",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "tốt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N107"
+    },
+    {
+      "id": "NOI0108",
+      "label": "xấu",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "Đánh giá không tốt; hình thức dùng xấu về hình thức.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N108"
+    },
+    {
+      "id": "NOI0109",
+      "label": "đúng",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "Thông tin hoặc kết quả đúng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N109"
+    },
+    {
+      "id": "NOI0110",
+      "label": "sai",
+      "group": "Cảm giác và đánh giá",
+      "level": 1,
+      "aliases": [],
+      "definition": "sai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N110"
+    },
+    {
+      "id": "NOI0111",
+      "label": "và",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "và",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N111"
+    },
+    {
+      "id": "NOI0112",
+      "label": "hoặc",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "hoặc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N112"
+    },
+    {
+      "id": "NOI0113",
+      "label": "nhưng",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhưng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N113"
+    },
+    {
+      "id": "NOI0114",
+      "label": "vì",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "vì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N114"
+    },
+    {
+      "id": "NOI0115",
+      "label": "nên",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "Kết quả/suy ra trong vì…nên; lời khuyên dùng khuyên.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N115"
+    },
+    {
+      "id": "NOI0116",
+      "label": "nếu",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "nếu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N116"
+    },
+    {
+      "id": "NOI0117",
+      "label": "thì",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "thì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N117"
+    },
+    {
+      "id": "NOI0118",
+      "label": "của",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "của",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N118"
+    },
+    {
+      "id": "NOI0119",
+      "label": "cho",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "Quan hệ hướng tới người nhận hoặc người hưởng lợi; cho phép có mục riêng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N119"
+    },
+    {
+      "id": "NOI0120",
+      "label": "cùng",
+      "group": "Nối ý và quan hệ",
+      "level": 1,
+      "aliases": [],
+      "definition": "cùng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N120"
+    },
+    {
+      "id": "NOI0121",
+      "label": "tất cả",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "tất cả",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N121"
+    },
+    {
+      "id": "NOI0122",
+      "label": "một phần",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "một phần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N122"
+    },
+    {
+      "id": "NOI0123",
+      "label": "nhiều",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhiều",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N123"
+    },
+    {
+      "id": "NOI0124",
+      "label": "ít",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "ít",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N124"
+    },
+    {
+      "id": "NOI0125",
+      "label": "thêm",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "thêm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N125"
+    },
+    {
+      "id": "NOI0126",
+      "label": "bớt",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "bớt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N126"
+    },
+    {
+      "id": "NOI0127",
+      "label": "giống",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "giống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N127"
+    },
+    {
+      "id": "NOI0128",
+      "label": "khác",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "khác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N128"
+    },
+    {
+      "id": "NOI0129",
+      "label": "hơn",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "hơn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N129"
+    },
+    {
+      "id": "NOI0130",
+      "label": "kém",
+      "group": "Lượng và so sánh",
+      "level": 1,
+      "aliases": [],
+      "definition": "kém",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N130"
+    },
+    {
+      "id": "NOI0131",
+      "label": "lớn",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "lớn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N131"
+    },
+    {
+      "id": "NOI0132",
+      "label": "nhỏ",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhỏ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N132"
+    },
+    {
+      "id": "NOI0133",
+      "label": "dài",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "dài",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N133"
+    },
+    {
+      "id": "NOI0134",
+      "label": "ngắn",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "ngắn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N134"
+    },
+    {
+      "id": "NOI0135",
+      "label": "nhanh",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "nhanh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N135"
+    },
+    {
+      "id": "NOI0136",
+      "label": "chậm",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "chậm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N136"
+    },
+    {
+      "id": "NOI0137",
+      "label": "nóng",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "nóng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N137"
+    },
+    {
+      "id": "NOI0138",
+      "label": "lạnh",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "lạnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N138"
+    },
+    {
+      "id": "NOI0139",
+      "label": "rõ",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "rõ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N139"
+    },
+    {
+      "id": "NOI0140",
+      "label": "khẩn cấp",
+      "group": "Đặc điểm và mức độ",
+      "level": 1,
+      "aliases": [],
+      "definition": "khẩn cấp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": "N140"
+    },
+    {
+      "id": "NOI0141",
+      "label": "mình",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "Cách người nói tự chỉ bản thân; nghĩa người đối thoại hoặc cơ thể chưa thuộc mục này.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0142",
+      "label": "chúng tôi",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "Nhóm có người nói và không gồm người đang được nói chuyện trực tiếp.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0143",
+      "label": "chúng ta cùng nhau",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chúng ta cùng nhau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0144",
+      "label": "anh",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "anh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0145",
+      "label": "chị",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chị",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0146",
+      "label": "em",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "em",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0147",
+      "label": "ông",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ông",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0148",
+      "label": "bà",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bà",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0149",
+      "label": "vợ",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "vợ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0150",
+      "label": "chồng",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chồng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0151",
+      "label": "cha mẹ",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cha mẹ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0152",
+      "label": "anh chị em",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "anh chị em",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0153",
+      "label": "người yêu",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người yêu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0154",
+      "label": "đồng nghiệp",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đồng nghiệp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0155",
+      "label": "hàng xóm",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hàng xóm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0156",
+      "label": "khách",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "khách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0157",
+      "label": "chủ nhà",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chủ nhà",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0158",
+      "label": "trẻ em",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "trẻ em",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0159",
+      "label": "người lớn",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người lớn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0160",
+      "label": "người lạ",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người lạ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0161",
+      "label": "thầy cô",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thầy cô",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0162",
+      "label": "bác sĩ",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bác sĩ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0163",
+      "label": "nhân viên",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhân viên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0164",
+      "label": "người phiên dịch",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người phiên dịch",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0165",
+      "label": "người Điếc",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người Điếc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0166",
+      "label": "người nghe",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "người nghe",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0167",
+      "label": "người không nói được",
+      "group": "Người và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "Người không thể phát lời nói bằng giọng ở tình huống được đề cập; không suy ra khả năng nghe hoặc khả năng dùng ngôn ngữ ký hiệu.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0168",
+      "label": "tên",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0169",
+      "label": "tuổi",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuổi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0170",
+      "label": "địa chỉ",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "địa chỉ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0171",
+      "label": "số điện thoại",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "số điện thoại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0172",
+      "label": "ngày sinh",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngày sinh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0173",
+      "label": "quê quán",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "quê quán",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0174",
+      "label": "quốc tịch",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "quốc tịch",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0175",
+      "label": "nghề nghiệp",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "nghề nghiệp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0176",
+      "label": "sở thích",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "sở thích",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0177",
+      "label": "thói quen",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "thói quen",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0178",
+      "label": "kinh nghiệm",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "kinh nghiệm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0179",
+      "label": "khả năng",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "khả năng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0180",
+      "label": "giới thiệu",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "giới thiệu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0181",
+      "label": "liên hệ",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "liên hệ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0182",
+      "label": "riêng tư",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "riêng tư",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0183",
+      "label": "bí mật",
+      "group": "Bản thân và thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "bí mật",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0184",
+      "label": "nhờ",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0185",
+      "label": "xin phép",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "xin phép",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0186",
+      "label": "cho phép",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "cho phép",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0187",
+      "label": "không cho phép",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "không cho phép",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0188",
+      "label": "hứa",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "hứa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0189",
+      "label": "quyết định",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "quyết định",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0190",
+      "label": "dự định",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "dự định",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0191",
+      "label": "hy vọng",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "hy vọng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0192",
+      "label": "lo ngại",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "lo ngại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0193",
+      "label": "ưu tiên",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "ưu tiên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0194",
+      "label": "chấp nhận",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "chấp nhận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0195",
+      "label": "phản đối",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "phản đối",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0196",
+      "label": "yêu cầu",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "yêu cầu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0197",
+      "label": "mời",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "mời",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0198",
+      "label": "khuyên",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "khuyên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0199",
+      "label": "cảnh báo",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "cảnh báo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0200",
+      "label": "nhắc",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhắc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0201",
+      "label": "đề xuất",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "đề xuất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0202",
+      "label": "thử",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "thử",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0203",
+      "label": "cố gắng",
+      "group": "Nhu cầu và ý định",
+      "level": 2,
+      "aliases": [],
+      "definition": "cố gắng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0204",
+      "label": "nghĩ",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nghĩ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0205",
+      "label": "nhớ",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhớ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0206",
+      "label": "quên",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "quên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0207",
+      "label": "đoán",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đoán",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0208",
+      "label": "chắc chắn",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chắc chắn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0209",
+      "label": "chưa chắc",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chưa chắc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0210",
+      "label": "tin",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "Cho rằng thông tin là đúng; bản tin hoặc tin nhắn không thuộc nghĩa này.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0211",
+      "label": "nghi ngờ",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nghi ngờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0212",
+      "label": "nhận ra",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhận ra",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0213",
+      "label": "tập trung",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tập trung",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0214",
+      "label": "chú ý",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chú ý",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0215",
+      "label": "tưởng tượng",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tưởng tượng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0216",
+      "label": "hiểu nhầm",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hiểu nhầm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0217",
+      "label": "không biết",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "không biết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0218",
+      "label": "không hiểu",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "không hiểu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0219",
+      "label": "ý tưởng",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ý tưởng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0220",
+      "label": "ý nghĩa",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ý nghĩa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0221",
+      "label": "lý do",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "lý do",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0222",
+      "label": "kết quả",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "kết quả",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0223",
+      "label": "mục đích",
+      "group": "Hiểu và suy nghĩ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mục đích",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0224",
+      "label": "của ai",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "của ai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0225",
+      "label": "với ai",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "với ai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0226",
+      "label": "từ đâu",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "từ đâu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0227",
+      "label": "đi đâu",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đi đâu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0228",
+      "label": "bao lâu",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bao lâu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0229",
+      "label": "mấy giờ",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mấy giờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0230",
+      "label": "bao xa",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bao xa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0231",
+      "label": "bao giờ xong",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bao giờ xong",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0232",
+      "label": "ý bạn là gì",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ý bạn là gì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0233",
+      "label": "xin nói rõ",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "xin nói rõ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0234",
+      "label": "xin cho ví dụ",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "xin cho ví dụ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0235",
+      "label": "bạn hiểu không",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bạn hiểu không",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0236",
+      "label": "tôi hiểu rồi",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tôi hiểu rồi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0237",
+      "label": "tôi chưa hiểu",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tôi chưa hiểu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0238",
+      "label": "xin nhắc lại",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "xin nhắc lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0239",
+      "label": "xin đánh vần",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "xin đánh vần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0240",
+      "label": "tên riêng",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tên riêng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0241",
+      "label": "từ mới",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "từ mới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0242",
+      "label": "đến lượt bạn",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đến lượt bạn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0243",
+      "label": "đến lượt tôi",
+      "group": "Hỏi và làm rõ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đến lượt tôi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0244",
+      "label": "ngày",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngày",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0245",
+      "label": "tuần",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0246",
+      "label": "tháng",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tháng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0247",
+      "label": "năm",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "Đơn vị thời gian năm hoặc năm lịch; số lượng 5 có mục riêng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0248",
+      "label": "giờ",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "giờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0249",
+      "label": "phút",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phút",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0250",
+      "label": "giây",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "giây",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0251",
+      "label": "hôm kia",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hôm kia",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0252",
+      "label": "ngày kia",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngày kia",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0253",
+      "label": "tuần này",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuần này",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0254",
+      "label": "tuần sau",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuần sau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0255",
+      "label": "tuần trước",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuần trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0256",
+      "label": "cuối tuần",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuối tuần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0257",
+      "label": "buổi đêm",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "buổi đêm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0258",
+      "label": "sớm",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "sớm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0259",
+      "label": "muộn",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "muộn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0260",
+      "label": "đúng giờ",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đúng giờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0261",
+      "label": "trễ",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "trễ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0262",
+      "label": "lúc nãy",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "lúc nãy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0263",
+      "label": "lát nữa",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "lát nữa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0264",
+      "label": "vừa mới",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "vừa mới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0265",
+      "label": "sắp",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "sắp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0266",
+      "label": "ngay lập tức",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngay lập tức",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0267",
+      "label": "tạm thời",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tạm thời",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0268",
+      "label": "lâu dài",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "lâu dài",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0269",
+      "label": "thường xuyên",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "thường xuyên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0270",
+      "label": "đôi khi",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đôi khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0271",
+      "label": "hiếm khi",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hiếm khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0272",
+      "label": "luôn luôn",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "luôn luôn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0273",
+      "label": "không bao giờ",
+      "group": "Thời gian mở rộng",
+      "level": 2,
+      "aliases": [],
+      "definition": "không bao giờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0274",
+      "label": "bên trái",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên trái",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0275",
+      "label": "bên phải",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên phải",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0276",
+      "label": "phía trước",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phía trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0277",
+      "label": "phía sau",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phía sau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0278",
+      "label": "ở giữa",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ở giữa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0279",
+      "label": "bên cạnh",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên cạnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0280",
+      "label": "đối diện",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đối diện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0281",
+      "label": "xung quanh",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "xung quanh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0282",
+      "label": "bên trong",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên trong",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0283",
+      "label": "bên ngoài",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên ngoài",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0284",
+      "label": "bên trên",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên trên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0285",
+      "label": "bên dưới",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bên dưới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0286",
+      "label": "hướng lên",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hướng lên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0287",
+      "label": "hướng xuống",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hướng xuống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0288",
+      "label": "hướng vào",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hướng vào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0289",
+      "label": "hướng ra",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "hướng ra",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0290",
+      "label": "thẳng",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "thẳng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0291",
+      "label": "quay lại",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "quay lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0292",
+      "label": "góc",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "góc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0293",
+      "label": "chỗ",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "chỗ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0294",
+      "label": "vị trí",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "vị trí",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0295",
+      "label": "khoảng cách",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "khoảng cách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0296",
+      "label": "đường",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "Đường đi hoặc tuyến đường; chất tạo vị ngọt dùng mục đường ăn.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0297",
+      "label": "ngã rẽ",
+      "group": "Vị trí và phương hướng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngã rẽ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0298",
+      "label": "đứng",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đứng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0299",
+      "label": "ngồi",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngồi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0300",
+      "label": "nằm",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "nằm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0301",
+      "label": "chạy",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "chạy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0302",
+      "label": "đi bộ",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đi bộ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0303",
+      "label": "lên",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "lên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0304",
+      "label": "xuống",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "xuống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0305",
+      "label": "ra",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "ra",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0306",
+      "label": "vào",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "vào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0307",
+      "label": "rời đi",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "rời đi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0308",
+      "label": "trở lại",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "trở lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0309",
+      "label": "dừng lại",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "dừng lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0310",
+      "label": "đón",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đón",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0311",
+      "label": "tiễn",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiễn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0312",
+      "label": "chở",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "chở",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0313",
+      "label": "đi cùng",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đi cùng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0314",
+      "label": "đi trước",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đi trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0315",
+      "label": "theo sau",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "theo sau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0316",
+      "label": "xe máy",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "xe máy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0317",
+      "label": "ô tô",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [
+        "xe hơi"
+      ],
+      "definition": "ô tô",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0318",
+      "label": "xe buýt",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "xe buýt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0319",
+      "label": "tàu",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "tàu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0320",
+      "label": "máy bay",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "máy bay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0321",
+      "label": "vé",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "vé",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0322",
+      "label": "bến xe",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "bến xe",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0323",
+      "label": "sân bay",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "sân bay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0324",
+      "label": "kẹt xe",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "kẹt xe",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0325",
+      "label": "bản đồ",
+      "group": "Di chuyển và đi lại",
+      "level": 2,
+      "aliases": [],
+      "definition": "bản đồ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0326",
+      "label": "cơm",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "cơm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0327",
+      "label": "bánh",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "bánh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0328",
+      "label": "rau",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "rau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0329",
+      "label": "thịt",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "thịt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0330",
+      "label": "cá",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "cá",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0331",
+      "label": "trứng",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "trứng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0332",
+      "label": "sữa",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "sữa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0333",
+      "label": "trái cây",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "trái cây",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0334",
+      "label": "trà",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "trà",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0335",
+      "label": "cà phê",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "cà phê",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0336",
+      "label": "đường ăn",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "Chất tạo vị ngọt dùng trong thực phẩm; không phải đường đi.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0337",
+      "label": "muối",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "muối",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0338",
+      "label": "bữa ăn",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "bữa ăn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0339",
+      "label": "ăn sáng",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "ăn sáng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0340",
+      "label": "ăn trưa",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "ăn trưa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0341",
+      "label": "ăn tối",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "ăn tối",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0342",
+      "label": "nấu",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "nấu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0343",
+      "label": "rửa",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "rửa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0344",
+      "label": "cắt",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "cắt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0345",
+      "label": "trộn",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "trộn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0346",
+      "label": "đun",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "đun",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0347",
+      "label": "chiên",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "chiên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0348",
+      "label": "luộc",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "luộc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0349",
+      "label": "ngon",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngon",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0350",
+      "label": "no",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "no",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0351",
+      "label": "cay",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "cay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0352",
+      "label": "ngọt",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngọt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0353",
+      "label": "chua",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "chua",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0354",
+      "label": "mặn",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "mặn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0355",
+      "label": "dị ứng thức ăn",
+      "group": "Ăn uống",
+      "level": 2,
+      "aliases": [],
+      "definition": "dị ứng thức ăn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0356",
+      "label": "phòng",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phòng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0357",
+      "label": "bếp",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bếp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0358",
+      "label": "phòng ngủ",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phòng ngủ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0359",
+      "label": "phòng khách",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "phòng khách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0360",
+      "label": "cửa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "cửa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0361",
+      "label": "cửa sổ",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "cửa sổ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0362",
+      "label": "bàn",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bàn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0363",
+      "label": "ghế",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ghế",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0364",
+      "label": "giường",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "giường",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0365",
+      "label": "đèn",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đèn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0366",
+      "label": "quạt",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "quạt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0367",
+      "label": "máy lạnh",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [
+        "điều hòa"
+      ],
+      "definition": "máy lạnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0368",
+      "label": "tủ lạnh",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "tủ lạnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0369",
+      "label": "khóa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "Vật dùng để khóa cửa hoặc đồ chứa; chưa gồm khóa học hay hành động khóa tài khoản.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0370",
+      "label": "chìa khóa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "chìa khóa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0371",
+      "label": "quần áo",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "quần áo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0372",
+      "label": "giày",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "giày",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0373",
+      "label": "túi",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "túi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0374",
+      "label": "cốc",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [
+        "ly"
+      ],
+      "definition": "cốc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0375",
+      "label": "bát",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bát",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0376",
+      "label": "đĩa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đĩa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0377",
+      "label": "đũa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đũa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0378",
+      "label": "thìa",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [
+        "muỗng"
+      ],
+      "definition": "thìa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0379",
+      "label": "giấy",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "giấy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0380",
+      "label": "bút",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "bút",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0381",
+      "label": "sách",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "sách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0382",
+      "label": "ổ điện",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "ổ điện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0383",
+      "label": "sạc",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "Thiết bị dùng để nạp điện cho pin; hành động nạp điện cần được xác định riêng khi thu mẫu.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0384",
+      "label": "pin",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "pin",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0385",
+      "label": "đồ dùng",
+      "group": "Nhà và đồ dùng",
+      "level": 2,
+      "aliases": [],
+      "definition": "đồ dùng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0386",
+      "label": "dọn",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "dọn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0387",
+      "label": "lau",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "lau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0388",
+      "label": "quét",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "quét",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0389",
+      "label": "giặt",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "giặt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0390",
+      "label": "phơi",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "phơi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0391",
+      "label": "gấp",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "Gập một vật, ví dụ gấp quần áo; không phải khẩn cấp hoặc phép nhân gấp đôi.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0392",
+      "label": "cất",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "cất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0393",
+      "label": "sắp xếp",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "sắp xếp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0394",
+      "label": "đổ rác",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đổ rác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0395",
+      "label": "vứt",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "vứt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0396",
+      "label": "sửa chữa",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "sửa chữa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0397",
+      "label": "bật điện",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "bật điện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0398",
+      "label": "tắt điện",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "tắt điện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0399",
+      "label": "tắm",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "tắm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0400",
+      "label": "rửa tay",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "rửa tay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0401",
+      "label": "đánh răng",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đánh răng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0402",
+      "label": "thay đồ",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "thay đồ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0403",
+      "label": "chăm sóc",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "chăm sóc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0404",
+      "label": "trông trẻ",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "trông trẻ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0405",
+      "label": "nghỉ ngơi",
+      "group": "Việc nhà và chăm sóc",
+      "level": 2,
+      "aliases": [],
+      "definition": "nghỉ ngơi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0406",
+      "label": "mua",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mua",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0407",
+      "label": "bán",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bán",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0408",
+      "label": "giá",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "giá",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0409",
+      "label": "trả tiền",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "trả tiền",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0410",
+      "label": "tiền mặt",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiền mặt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0411",
+      "label": "chuyển khoản",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chuyển khoản",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0412",
+      "label": "hóa đơn",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hóa đơn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0413",
+      "label": "giảm giá",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "giảm giá",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0414",
+      "label": "đắt",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đắt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0415",
+      "label": "rẻ",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "rẻ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0416",
+      "label": "đủ tiền",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đủ tiền",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0417",
+      "label": "thiếu tiền",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thiếu tiền",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0418",
+      "label": "đặt hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đặt hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0419",
+      "label": "giao hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "giao hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0420",
+      "label": "nhận hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhận hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0421",
+      "label": "đổi hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đổi hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0422",
+      "label": "trả hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "trả hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0423",
+      "label": "còn hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "còn hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0424",
+      "label": "hết hàng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hết hàng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0425",
+      "label": "kích cỡ",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "kích cỡ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0426",
+      "label": "màu sắc",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "màu sắc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0427",
+      "label": "số lượng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "số lượng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0428",
+      "label": "chất lượng",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chất lượng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0429",
+      "label": "bảo hành",
+      "group": "Mua bán và dịch vụ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bảo hành",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0430",
+      "label": "đầu",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "đầu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0431",
+      "label": "mặt",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "mặt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0432",
+      "label": "mắt",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "mắt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0433",
+      "label": "tai",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "tai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0434",
+      "label": "miệng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "miệng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0435",
+      "label": "răng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "răng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0436",
+      "label": "cổ",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "cổ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0437",
+      "label": "vai",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "vai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0438",
+      "label": "cánh tay",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "cánh tay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0439",
+      "label": "bàn tay",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "bàn tay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0440",
+      "label": "ngón tay",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngón tay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0441",
+      "label": "cổ tay",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "cổ tay",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0442",
+      "label": "ngực",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngực",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0443",
+      "label": "bụng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "bụng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0444",
+      "label": "lưng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "lưng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0445",
+      "label": "chân",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "chân",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0446",
+      "label": "bàn chân",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "bàn chân",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0447",
+      "label": "ốm",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "ốm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0448",
+      "label": "sốt",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "sốt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0449",
+      "label": "ho",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "ho",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0450",
+      "label": "chóng mặt",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "chóng mặt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0451",
+      "label": "buồn nôn",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "buồn nôn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0452",
+      "label": "khó thở",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "khó thở",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0453",
+      "label": "bị thương",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "bị thương",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0454",
+      "label": "chảy máu",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "chảy máu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0455",
+      "label": "đau đầu",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "đau đầu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0456",
+      "label": "đau bụng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "đau bụng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0457",
+      "label": "dị ứng",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "dị ứng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0458",
+      "label": "khám bệnh",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "khám bệnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0459",
+      "label": "uống thuốc",
+      "group": "Cơ thể và sức khỏe",
+      "level": 2,
+      "aliases": [],
+      "definition": "uống thuốc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0460",
+      "label": "cứu",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cứu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0461",
+      "label": "cấp cứu",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cấp cứu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0462",
+      "label": "nguy hiểm",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nguy hiểm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0463",
+      "label": "an toàn",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "an toàn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0464",
+      "label": "cháy",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cháy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0465",
+      "label": "tai nạn",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tai nạn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0466",
+      "label": "mất đồ",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mất đồ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0467",
+      "label": "lạc đường",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "lạc đường",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0468",
+      "label": "bị đe dọa",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bị đe dọa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0469",
+      "label": "gọi giúp",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "gọi giúp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0470",
+      "label": "gọi cấp cứu",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "gọi cấp cứu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0471",
+      "label": "gọi người thân",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "gọi người thân",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0472",
+      "label": "đừng chạm",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đừng chạm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0473",
+      "label": "đừng đi",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đừng đi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0474",
+      "label": "tránh",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tránh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0475",
+      "label": "cẩn thận",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cẩn thận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0476",
+      "label": "bảo vệ",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bảo vệ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0477",
+      "label": "công an",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "công an",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0478",
+      "label": "lối thoát",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "lối thoát",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0479",
+      "label": "số khẩn cấp",
+      "group": "An toàn và hỗ trợ",
+      "level": 2,
+      "aliases": [],
+      "definition": "số khẩn cấp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0480",
+      "label": "sợ",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "sợ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0481",
+      "label": "lo",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "lo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0482",
+      "label": "giận",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "giận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0483",
+      "label": "bình tĩnh",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bình tĩnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0484",
+      "label": "xấu hổ",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "xấu hổ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0485",
+      "label": "ngạc nhiên",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngạc nhiên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0486",
+      "label": "cô đơn",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cô đơn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0487",
+      "label": "thất vọng",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thất vọng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0488",
+      "label": "hài lòng",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hài lòng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0489",
+      "label": "tự hào",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tự hào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0490",
+      "label": "yêu",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "yêu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0491",
+      "label": "ghét",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ghét",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0492",
+      "label": "thương",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thương",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0493",
+      "label": "quan tâm",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "quan tâm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0494",
+      "label": "tôn trọng",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tôn trọng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0495",
+      "label": "tin tưởng",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tin tưởng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0496",
+      "label": "an ủi",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "an ủi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0497",
+      "label": "chúc mừng",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chúc mừng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0498",
+      "label": "tha thứ",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tha thứ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0499",
+      "label": "làm quen",
+      "group": "Cảm xúc và quan hệ",
+      "level": 2,
+      "aliases": [],
+      "definition": "làm quen",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0500",
+      "label": "đẹp",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "đẹp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0501",
+      "label": "xấu về hình thức",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "xấu về hình thức",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0502",
+      "label": "sạch",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "sạch",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0503",
+      "label": "bẩn",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "bẩn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0504",
+      "label": "mới",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "mới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0505",
+      "label": "cũ",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "cũ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0506",
+      "label": "dễ",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "dễ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0507",
+      "label": "khó",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "khó",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0508",
+      "label": "nặng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "nặng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0509",
+      "label": "nhẹ",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhẹ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0510",
+      "label": "cao",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "cao",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0511",
+      "label": "thấp",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "thấp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0512",
+      "label": "rộng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "rộng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0513",
+      "label": "hẹp",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "hẹp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0514",
+      "label": "dày",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "dày",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0515",
+      "label": "mỏng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "mỏng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0516",
+      "label": "cứng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "cứng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0517",
+      "label": "mềm",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "mềm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0518",
+      "label": "ướt",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "ướt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0519",
+      "label": "khô",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "khô",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0520",
+      "label": "sáng rõ",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "sáng rõ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0521",
+      "label": "tối mờ",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "tối mờ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0522",
+      "label": "ồn",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "ồn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0523",
+      "label": "yên tĩnh",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "yên tĩnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0524",
+      "label": "đầy",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "đầy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0525",
+      "label": "rỗng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "rỗng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0526",
+      "label": "hỏng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "hỏng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0527",
+      "label": "bình thường",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "bình thường",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0528",
+      "label": "quan trọng",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "quan trọng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0529",
+      "label": "cần thiết",
+      "group": "Đặc điểm và cảm nhận",
+      "level": 2,
+      "aliases": [],
+      "definition": "cần thiết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0530",
+      "label": "một",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "một",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0531",
+      "label": "hai",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0532",
+      "label": "ba",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ba",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0533",
+      "label": "bốn",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bốn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0534",
+      "label": "sáu",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "sáu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0535",
+      "label": "bảy",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bảy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0536",
+      "label": "tám",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "tám",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0537",
+      "label": "chín",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chín",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0538",
+      "label": "mười",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mười",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0539",
+      "label": "không có gì",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "không có gì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0540",
+      "label": "mỗi",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "mỗi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0541",
+      "label": "bất kỳ",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bất kỳ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0542",
+      "label": "cả hai",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "cả hai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0543",
+      "label": "một nửa",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "một nửa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0544",
+      "label": "gấp đôi",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "gấp đôi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0545",
+      "label": "đủ",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "đủ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0546",
+      "label": "thiếu",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thiếu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0547",
+      "label": "thừa",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "thừa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0548",
+      "label": "rất",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "rất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0549",
+      "label": "hơi",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "hơi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0550",
+      "label": "quá mức",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "quá mức",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0551",
+      "label": "gần như",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "gần như",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0552",
+      "label": "chính xác",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "chính xác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0553",
+      "label": "khoảng",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "khoảng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0554",
+      "label": "ít nhất",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "ít nhất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0555",
+      "label": "nhiều nhất",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhiều nhất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0556",
+      "label": "bằng nhau",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "bằng nhau",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0557",
+      "label": "không bằng",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "không bằng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0558",
+      "label": "giới hạn",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [],
+      "definition": "giới hạn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0559",
+      "label": "về việc",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "về việc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0560",
+      "label": "đối với",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đối với",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0561",
+      "label": "bằng cách",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "bằng cách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0562",
+      "label": "theo",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "theo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0563",
+      "label": "từ",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "Chỉ nguồn gốc hoặc điểm bắt đầu trong từ…đến; đơn vị ngôn ngữ có mục riêng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0564",
+      "label": "đến thời điểm",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đến thời điểm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0565",
+      "label": "cho đến khi",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "cho đến khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0566",
+      "label": "trong khi",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "trong khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0567",
+      "label": "sau khi",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "sau khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0568",
+      "label": "trước khi",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "trước khi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0569",
+      "label": "mặc dù",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "mặc dù",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0570",
+      "label": "tuy nhiên",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "tuy nhiên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0571",
+      "label": "vì vậy",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "vì vậy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0572",
+      "label": "để",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "để",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0573",
+      "label": "chỉ",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "Giới hạn phạm vi với nghĩa chỉ có/chỉ làm; không phải ngón tay chỉ hướng.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0574",
+      "label": "ngoại trừ",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngoại trừ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0575",
+      "label": "bao gồm",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "bao gồm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0576",
+      "label": "thay vì",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "thay vì",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0577",
+      "label": "đồng thời",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đồng thời",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0578",
+      "label": "lần lượt",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "lần lượt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0579",
+      "label": "đầu tiên",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "đầu tiên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0580",
+      "label": "tiếp theo",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiếp theo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0581",
+      "label": "cuối cùng",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuối cùng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0582",
+      "label": "ví dụ",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "ví dụ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0583",
+      "label": "ngược lại",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "ngược lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0584",
+      "label": "dù thế nào",
+      "group": "Nối ý và cấu trúc",
+      "level": 2,
+      "aliases": [],
+      "definition": "dù thế nào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0585",
+      "label": "bài học",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "bài học",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0586",
+      "label": "bài tập",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "bài tập",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0587",
+      "label": "câu hỏi",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "câu hỏi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0588",
+      "label": "câu trả lời",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "câu trả lời",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0589",
+      "label": "thi",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "thi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0590",
+      "label": "điểm",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "điểm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0591",
+      "label": "lớp học",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "lớp học",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0592",
+      "label": "giáo viên",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "giáo viên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0593",
+      "label": "học sinh",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "học sinh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0594",
+      "label": "sinh viên",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "sinh viên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0595",
+      "label": "trường đại học",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "trường đại học",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0596",
+      "label": "kiến thức",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "kiến thức",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0597",
+      "label": "kỹ năng",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "kỹ năng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0598",
+      "label": "luyện tập",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "luyện tập",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0599",
+      "label": "giải thích",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "giải thích",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0600",
+      "label": "hướng dẫn",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "hướng dẫn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0601",
+      "label": "ghi chú",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "ghi chú",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0602",
+      "label": "tra cứu",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "tra cứu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0603",
+      "label": "ôn lại",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "ôn lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0604",
+      "label": "tiến bộ",
+      "group": "Học tập",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiến bộ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0605",
+      "label": "việc",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "việc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0606",
+      "label": "công ty",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "công ty",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0607",
+      "label": "văn phòng",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "văn phòng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0608",
+      "label": "nhóm",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhóm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0609",
+      "label": "dự án",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "dự án",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0610",
+      "label": "nhiệm vụ",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhiệm vụ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0611",
+      "label": "kế hoạch",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "kế hoạch",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0612",
+      "label": "lịch hẹn",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "lịch hẹn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0613",
+      "label": "cuộc họp",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuộc họp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0614",
+      "label": "báo cáo",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "báo cáo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0615",
+      "label": "thời hạn",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "thời hạn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0616",
+      "label": "nghỉ phép",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "nghỉ phép",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0617",
+      "label": "lương",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "lương",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0618",
+      "label": "hợp đồng",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "hợp đồng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0619",
+      "label": "phân công",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "phân công",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0620",
+      "label": "hợp tác",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "hợp tác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0621",
+      "label": "hoàn thành",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "hoàn thành",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0622",
+      "label": "tiến độ",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiến độ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0623",
+      "label": "vấn đề",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "vấn đề",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0624",
+      "label": "giải pháp",
+      "group": "Công việc",
+      "level": 2,
+      "aliases": [],
+      "definition": "giải pháp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0625",
+      "label": "máy tính",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "máy tính",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0626",
+      "label": "bàn phím",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "bàn phím",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0627",
+      "label": "chuột máy tính",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "chuột máy tính",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0628",
+      "label": "màn hình",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "màn hình",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0629",
+      "label": "camera",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "camera",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0630",
+      "label": "tai nghe",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "tai nghe",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0631",
+      "label": "mạng",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "mạng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0632",
+      "label": "internet",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "internet",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0633",
+      "label": "wifi",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "wifi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0634",
+      "label": "mật khẩu",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "mật khẩu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0635",
+      "label": "tài khoản",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "tài khoản",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0636",
+      "label": "đăng nhập",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "đăng nhập",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0637",
+      "label": "đăng xuất",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "đăng xuất",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0638",
+      "label": "tin nhắn",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "tin nhắn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0639",
+      "label": "email",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "email",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0640",
+      "label": "cuộc gọi",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuộc gọi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0641",
+      "label": "gọi video",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "gọi video",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0642",
+      "label": "ảnh",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "ảnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0643",
+      "label": "âm thanh",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "âm thanh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0644",
+      "label": "video",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "video",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0645",
+      "label": "tệp",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "tệp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0646",
+      "label": "thư mục",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "thư mục",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0647",
+      "label": "liên kết",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "liên kết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0648",
+      "label": "trang web",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "trang web",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0649",
+      "label": "ứng dụng",
+      "group": "Thiết bị và giao tiếp số",
+      "level": 2,
+      "aliases": [],
+      "definition": "ứng dụng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0650",
+      "label": "tạo",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tạo",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0651",
+      "label": "tìm",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tìm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0652",
+      "label": "gửi",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "gửi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0653",
+      "label": "nhận",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "nhận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0654",
+      "label": "lưu",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "lưu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0655",
+      "label": "xóa",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "xóa",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0656",
+      "label": "sao chép",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "sao chép",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0657",
+      "label": "dán",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "dán",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0658",
+      "label": "di chuyển mục",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "di chuyển mục",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0659",
+      "label": "đổi tên",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "đổi tên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0660",
+      "label": "tải xuống",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tải xuống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0661",
+      "label": "tải lên",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tải lên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0662",
+      "label": "chia sẻ",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "chia sẻ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0663",
+      "label": "đính kèm",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "đính kèm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0664",
+      "label": "chọn tất cả",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "chọn tất cả",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0665",
+      "label": "bỏ chọn",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "bỏ chọn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0666",
+      "label": "hoàn tác",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "hoàn tác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0667",
+      "label": "làm lại",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "làm lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0668",
+      "label": "phóng to",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "phóng to",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0669",
+      "label": "thu nhỏ",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "thu nhỏ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0670",
+      "label": "cuộn lên",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuộn lên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0671",
+      "label": "cuộn xuống",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "cuộn xuống",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0672",
+      "label": "tiếp tục",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "tiếp tục",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0673",
+      "label": "hủy",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "hủy",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0674",
+      "label": "xác nhận",
+      "group": "Thao tác thông tin",
+      "level": 2,
+      "aliases": [],
+      "definition": "xác nhận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0675",
+      "label": "prompt",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "prompt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0676",
+      "label": "nội dung",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "nội dung",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0677",
+      "label": "văn bản",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "văn bản",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0678",
+      "label": "tóm tắt",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "tóm tắt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0679",
+      "label": "dịch",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "dịch",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0680",
+      "label": "so sánh",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "so sánh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0681",
+      "label": "kiểm tra",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "kiểm tra",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0682",
+      "label": "giữ nguyên",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "giữ nguyên",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0683",
+      "label": "thay thế",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "thay thế",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0684",
+      "label": "liệt kê",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "liệt kê",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0685",
+      "label": "phân loại",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "phân loại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0686",
+      "label": "phân tích",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "phân tích",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0687",
+      "label": "đánh giá",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "đánh giá",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0688",
+      "label": "định dạng",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "định dạng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0689",
+      "label": "tiêu đề",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "tiêu đề",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0690",
+      "label": "đoạn văn",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "đoạn văn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0691",
+      "label": "câu",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "câu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0692",
+      "label": "bảng",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "bảng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0693",
+      "label": "danh sách",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "danh sách",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0694",
+      "label": "nguồn",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "nguồn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0695",
+      "label": "trích dẫn",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "trích dẫn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0696",
+      "label": "dữ liệu",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "dữ liệu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0697",
+      "label": "đầu vào",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "đầu vào",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0698",
+      "label": "đầu ra",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "đầu ra",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0699",
+      "label": "ngữ cảnh",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "ngữ cảnh",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0700",
+      "label": "ràng buộc",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "ràng buộc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0701",
+      "label": "giọng văn",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "giọng văn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0702",
+      "label": "đối tượng đọc",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [],
+      "definition": "đối tượng đọc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0703",
+      "label": "chỉ làm việc này",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "chỉ làm việc này",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0704",
+      "label": "không tự suy đoán",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "không tự suy đoán",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0705",
+      "label": "hỏi trước",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "hỏi trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0706",
+      "label": "chờ xác nhận",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "chờ xác nhận",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0707",
+      "label": "nêu giả định",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "nêu giả định",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0708",
+      "label": "nêu điều chưa biết",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "nêu điều chưa biết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0709",
+      "label": "giải thích lý do",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "giải thích lý do",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0710",
+      "label": "kiểm chứng",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "kiểm chứng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0711",
+      "label": "giữ cấu trúc",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "giữ cấu trúc",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0712",
+      "label": "giữ ý chính",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "giữ ý chính",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0713",
+      "label": "bổ sung chi tiết",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "bổ sung chi tiết",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0714",
+      "label": "rút gọn",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "rút gọn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0715",
+      "label": "viết lại",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "viết lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0716",
+      "label": "tiếp tục phần trước",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "tiếp tục phần trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0717",
+      "label": "quay lại bản trước",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "quay lại bản trước",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0718",
+      "label": "đưa phương án khác",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "đưa phương án khác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0719",
+      "label": "chọn phương án",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "chọn phương án",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0720",
+      "label": "ưu tiên độ chính xác",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "ưu tiên độ chính xác",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0721",
+      "label": "ưu tiên tốc độ",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "ưu tiên tốc độ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0722",
+      "label": "không gửi ra ngoài",
+      "group": "AI và kiểm soát yêu cầu",
+      "level": 3,
+      "aliases": [],
+      "definition": "không gửi ra ngoài",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0723",
+      "label": "mã nguồn",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "mã nguồn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0724",
+      "label": "hàm",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "hàm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0725",
+      "label": "biến",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "biến",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0726",
+      "label": "tệp mã",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "tệp mã",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0727",
+      "label": "giao diện",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "giao diện",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0728",
+      "label": "nút bấm",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "nút bấm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0729",
+      "label": "biểu mẫu",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "biểu mẫu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0730",
+      "label": "trang",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "trang",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0731",
+      "label": "thành phần",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "thành phần",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0732",
+      "label": "API",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "API",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0733",
+      "label": "cơ sở dữ liệu",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "cơ sở dữ liệu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0734",
+      "label": "máy chủ",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "máy chủ",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0735",
+      "label": "trình duyệt",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "trình duyệt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0736",
+      "label": "lỗi",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "lỗi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0737",
+      "label": "sửa lỗi",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "sửa lỗi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0738",
+      "label": "chạy thử",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "chạy thử",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0739",
+      "label": "kiểm thử",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "kiểm thử",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0740",
+      "label": "kết quả kiểm thử",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "kết quả kiểm thử",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0741",
+      "label": "cài đặt",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "cài đặt",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0742",
+      "label": "thư viện phần mềm",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "thư viện phần mềm",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0743",
+      "label": "phiên bản",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "phiên bản",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0744",
+      "label": "triển khai",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "triển khai",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0745",
+      "label": "bản nháp",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "bản nháp",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0746",
+      "label": "bản chính",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "bản chính",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0747",
+      "label": "nhánh mã",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "nhánh mã",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0748",
+      "label": "thay đổi",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "thay đổi",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0749",
+      "label": "đọc mã",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "đọc mã",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0750",
+      "label": "viết mã",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "viết mã",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0751",
+      "label": "tối ưu",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "tối ưu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0752",
+      "label": "bảo mật",
+      "group": "Lập trình và công cụ",
+      "level": 3,
+      "aliases": [],
+      "definition": "bảo mật",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0753",
+      "label": "hết câu",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "hết câu",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0754",
+      "label": "câu mới",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "câu mới",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0755",
+      "label": "lặp lại",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "lặp lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0756",
+      "label": "chậm lại",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "chậm lại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0757",
+      "label": "sửa ý vừa nói",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "sửa ý vừa nói",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0758",
+      "label": "hủy ý vừa nói",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "hủy ý vừa nói",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0759",
+      "label": "đánh vần / tên riêng",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "đánh vần / tên riêng",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0760",
+      "label": "trích nguyên văn",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "trích nguyên văn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0761",
+      "label": "kết thúc trích dẫn",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "kết thúc trích dẫn",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0762",
+      "label": "tạm dừng hội thoại",
+      "group": "Điều khiển hội thoại",
+      "level": 2,
+      "aliases": [],
+      "definition": "tạm dừng hội thoại",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0763",
+      "label": "0",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "0",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0764",
+      "label": "1",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "1",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0765",
+      "label": "2",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "2",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0766",
+      "label": "3",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "3",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0767",
+      "label": "4",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "4",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0768",
+      "label": "5",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "5",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0769",
+      "label": "6",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "6",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0770",
+      "label": "7",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "7",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0771",
+      "label": "8",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "8",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0772",
+      "label": "9",
+      "group": "Chữ số",
+      "level": 1,
+      "aliases": [],
+      "definition": "9",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0773",
+      "label": "năm (số 5)",
+      "group": "Lượng và mức độ",
+      "level": 2,
+      "aliases": [
+        "năm"
+      ],
+      "definition": "Số lượng bằng 5; không phải năm lịch. Chữ số 5 là cách viết liên quan, chưa khẳng định dùng ký hiệu khác.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0774",
+      "label": "AI (trí tuệ nhân tạo)",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [
+        "AI",
+        "trí tuệ nhân tạo"
+      ],
+      "definition": "Lĩnh vực hoặc hệ thống trí tuệ nhân tạo; không phải đại từ nghi vấn ai.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    },
+    {
+      "id": "NOI0775",
+      "label": "từ (đơn vị ngôn ngữ)",
+      "group": "AI và soạn nội dung",
+      "level": 3,
+      "aliases": [
+        "từ"
+      ],
+      "definition": "Một đơn vị từ vựng trong ngôn ngữ; không phải từ chỉ nguồn gốc.",
+      "status": "Chưa thiết kế ký hiệu",
+      "previousId": null
+    }
+  ]
+}

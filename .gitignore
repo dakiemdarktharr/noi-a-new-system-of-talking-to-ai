@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+*.log
+*.err
+.env*
+.vercel/
+qa/*.png
+qa/*.json
+qa/*.zip
+qa/right_hands.jpg
+*.tsbuildinfo
+public/models/hand_landmarker.task
+public/vendor/mediapipe/

@@ -1,0 +1,40 @@
+{
+  "version": "semantic-inventory-3",
+  "count": 775,
+  "previousCount": 772,
+  "uniqueIds": 775,
+  "uniqueVisibleLabels": 775,
+  "preservedPreviousIds": 772,
+  "changedPreviousIds": [],
+  "newEntries": [
+    {
+      "id": "NOI0773",
+      "label": "năm (số 5)"
+    },
+    {
+      "id": "NOI0774",
+      "label": "AI (trí tuệ nhân tạo)"
+    },
+    {
+      "id": "NOI0775",
+      "label": "từ (đơn vị ngôn ngữ)"
+    }
+  ],
+  "restoredSenses": [
+    {
+      "id": "NOI0773",
+      "label": "năm (số 5)"
+    },
+    {
+      "id": "NOI0774",
+      "label": "AI (trí tuệ nhân tạo)"
+    },
+    {
+      "id": "NOI0775",
+      "label": "từ (đơn vị ngôn ngữ)"
+    }
+  ],
+  "definitionsBeyondLabel": 40,
+  "repeatedSourceLabels": [],
+  "note": "Vietnamese aliases aid search only; they do not assert identical signs. Meaning count is not trained-class coverage."
+}
