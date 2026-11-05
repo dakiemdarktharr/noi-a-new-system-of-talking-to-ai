@@ -2,7 +2,7 @@
 
 Web desktop để theo dõi hai bàn tay, thu video có nhãn và huấn luyện mô hình nhận diện ký hiệu cá nhân. Giao diện tiếng Việt, hai khu vực, xử lý tại máy.
 
-[Mở Nối trên Vercel](https://noi-a-new-system-of-talking-to-ai.vercel.app).
+[Mở Nối trên Vercel](https://noi-ai.vercel.app).
 
 ## Mở ứng dụng
 
