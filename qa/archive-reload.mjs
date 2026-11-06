@@ -9,11 +9,13 @@ try {
   const page = await context.newPage();
   const attempts = [];
   let connected = false;
-  let rejectUpload = true;
+  let sessionFailures = 0;
   await context.route("**/api/archive?**", async (route) => {
     const request = route.request();
     const params = new URL(request.url()).searchParams;
     const action = params.get("action");
+    if (action === "session" && sessionFailures-- > 0)
+      return route.fulfill({ status: 503, json: { error: "Kho tạm gián đoạn." } });
     if (action === "connect") connected = true;
     if (action === "disconnect") connected = false;
     if (action) return route.fulfill({ json: { connected } });
@@ -21,8 +23,9 @@ try {
       return route.fulfill({ json: { samples: [], completed: [], goal: 30 } });
     attempts.push(params.get("id"));
     return route.fulfill(
-      rejectUpload
+      attempts.length === 1
         ? { status: 503, json: { error: "Kho tạm gián đoạn." } }
+        : attempts.length === 2 ? { status: 200, json: { id: "wrong-acknowledgement" } }
         : { status: 201, json: { id: params.get("id"), complete: false } },
     );
   });
@@ -59,27 +62,30 @@ try {
     timeout: 60000,
   });
   await page.getByRole("button", { name: "Quay mẫu", exact: true }).click();
-  await expect(page.locator(".backup-state")).toHaveText("Cần thử lại", {
+  await expect(page.locator(".backup-state")).toHaveText("Đang chờ thử lại", {
     timeout: 20000,
   });
   expect(attempts).toHaveLength(1);
   await page.getByRole("button", { name: "Tắt", exact: true }).click();
 
-  rejectUpload = false;
-  await page.reload({ waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Thu mẫu", exact: true }).click();
-  await expect(page.locator(".sample-row")).toHaveCount(1);
+  // Neither a transient failure nor an invalid acknowledgement may strand the
+  // queue or mark a clip saved. Both must recover without reloading the page.
+  await expect.poll(() => attempts.length, { timeout: 10000 }).toBe(2);
+  await expect(page.locator(".backup-state")).toHaveText("Đang chờ thử lại");
   await expect(page.locator(".backup-state")).toHaveText("Đã lên kho", {
-    timeout: 15000,
+    timeout: 20000,
   });
-  expect(attempts).toEqual([attempts[0], attempts[0]]);
+  expect(attempts).toEqual([attempts[0], attempts[0], attempts[0]]);
 
+  sessionFailures = 1;
   await page.reload({ waitUntil: "networkidle" });
   await page.getByRole("button", { name: "Thu mẫu", exact: true }).click();
   await expect(page.locator(".backup-state")).toHaveText("Đã lên kho");
-  expect(attempts).toHaveLength(2);
+  await page.getByRole("button", { name: "Kho video", exact: true }).click();
+  await expect(page.getByText("Tự sao lưu bật", { exact: true })).toBeVisible({ timeout: 10000 });
+  expect(attempts).toHaveLength(3);
   console.log(
-    "ARCHIVE_RELOAD_PASS: real recording, retained on 503, retried same ID on reload, saved status persists",
+    "ARCHIVE_RELOAD_PASS: real recording, automatic retry on 503 and invalid ack without reload, same ID, saved status persists, session failure recovers",
   );
 } finally {
   await browser.close();

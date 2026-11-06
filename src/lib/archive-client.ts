@@ -58,5 +58,8 @@ export async function uploadArchiveSample({
     { label: sample.labelId, id: sample.id },
     form,
   );
-  return response.json() as Promise<{ complete?: boolean }>;
+  const acknowledgement = await response.json();
+  if (acknowledgement?.id !== sample.id)
+    throw new ArchiveError("Kho chưa xác nhận đúng mẫu. Sẽ thử gửi lại.", 502);
+  return acknowledgement as { id: string; complete?: boolean };
 }

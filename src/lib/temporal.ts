@@ -10,7 +10,7 @@ import {
   TIME_STEPS,
 } from "./features";
 
-import { buildMotionProfile, matchesMotion, prepareMotion, trimMotion, type MotionProfile } from "./motion";
+import { buildMotionProfile, matchesMotion, motionExtent, prepareMotion, trimMotion, type MotionProfile } from "./motion";
 
 const MODEL_URL = "indexeddb://noi-temporal-v1";
 const NEGATIVES = new Set(["NO_SIGN", "__no_sign__"]);
@@ -330,7 +330,14 @@ export class TemporalClassifier {
     if (this.importing) throw new Error("Chờ nhập mô hình hoàn tất.");
     const token = ++this.generation;
     const split = splitSamples(unique);
-    const prepared = split.train.map(s => ({ ...s, frames: prepareMotion(s.frames, options.gestureKinds?.[s.labelId]) }));
+    // Resolve automatic kinds from TRAIN clips before preprocessing. Otherwise
+    // selecting Auto and selecting the inferred kind used different pipelines.
+    const gestureKinds = Object.fromEntries(labels.map(label => {
+      const frames = split.train.filter(s => s.labelId === label.labelId).map(s => trimMotion(s.frames));
+      return [label.labelId, options.gestureKinds?.[label.labelId] ??
+        (frames.filter(clip => motionExtent(clip) >= .12).length >= frames.length / 2 ? "dynamic" : "static")];
+    })) as Record<string, "static" | "dynamic">;
+    const prepared = split.train.map(s => ({ ...s, frames: prepareMotion(s.frames, gestureKinds[s.labelId]) }));
     const trainSequences = prepared.map(s => encodeClip(s.frames));
     // Preserve the entire gesture while changing pace. Never label an unfinished
     // prefix as the complete dynamic word. Validation clips are never augmented.
@@ -344,7 +351,7 @@ export class TemporalClassifier {
     const xs = tf.tensor3d(augmented.map(s => encodeClip(s.frames))),
       ys = tf.tensor2d(encodeLabels(augmented));
     const vx = split.validation.length
-      ? tf.tensor3d(split.validation.map((s) => encodeClip(prepareMotion(s.frames, options.gestureKinds?.[s.labelId]))))
+      ? tf.tensor3d(split.validation.map((s) => encodeClip(prepareMotion(s.frames, gestureKinds[s.labelId]))))
       : null;
     const vy = split.validation.length
       ? tf.tensor2d(encodeLabels(split.validation))
@@ -418,7 +425,7 @@ export class TemporalClassifier {
         featureVersion: FEATURE_VERSION,
         summary,
         supports: supportsFor(trainSequences, split.train, labels),
-        motionProfiles: labels.map(label => buildMotionProfile(prepared.filter(s => s.labelId === label.labelId).map(s => s.frames), options.gestureKinds?.[label.labelId])),
+        motionProfiles: labels.map(label => buildMotionProfile(prepared.filter(s => s.labelId === label.labelId).map(s => s.frames), gestureKinds[label.labelId])),
       };
       model.setUserDefinedMetadata(
         metadata as unknown as { [key: string]: object },
@@ -448,7 +455,7 @@ export class TemporalClassifier {
     }
   }
 
-  async predict(frames: Frame[]): Promise<Recognition> {
+  async predict(frames: Frame[], options: { allowStatic?: boolean } = {}): Promise<Recognition> {
     // A concurrent successful import may replace class labels while data() is
     // awaited. Keep this prediction paired with the model's original metadata.
     const model = this.model, metadata = this.metadata;
@@ -487,6 +494,7 @@ export class TemporalClassifier {
         runner = ranked[1];
       let reason = "";
       if (NEGATIVES.has(top.labelId)) reason = "Không có ký hiệu.";
+      else if (options.allowStatic === false && metadata.motionProfiles?.[top.index].kind === "static") reason = "Chờ tay ổn định";
       else if (scores[top.index] < .68) reason = "Độ tin cậy thấp.";
       else if (scores[top.index] - scores[runner.index] < .18) reason = "Hai nhãn còn giống nhau.";
       else if (top.distance > metadata.supports[top.index].radius) reason = "Khác dữ liệu đã học.";

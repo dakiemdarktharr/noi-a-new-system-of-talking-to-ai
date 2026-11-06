@@ -9,6 +9,35 @@ export interface MotionProfile {
   templates: number[][][];
   minTravel: number;
   tolerance: number;
+  endpointTolerance?: number;
+}
+
+/** Associate brief handedness flips with the same nearby physical hand. Side
+ * is anatomical, so wrist rotation must not switch the feature channel. */
+export class HandIdentityTracker {
+  private previous: Frame | null = null;
+  private votes: ("Left" | "Right")[] = [];
+  reset() { this.previous = null; this.votes = []; }
+  push(frame: Frame): Frame {
+    const previous = this.previous;
+    let hands = frame.hands;
+    if (previous && frame.t > previous.t && frame.t - previous.t <= 250 &&
+        hands.length === 1 && previous.hands.length === 1 &&
+        Math.hypot(hands[0].wrist[0] - previous.hands[0].wrist[0], hands[0].wrist[1] - previous.hands[0].wrist[1]) < .18) {
+      this.votes.push(hands[0].side);
+      this.votes = this.votes.slice(-9);
+      const left = this.votes.filter(side => side === "Left").length;
+      hands = [{ ...hands[0], side: left > this.votes.length / 2 ? "Left" : left < this.votes.length / 2 ? "Right" : previous.hands[0].side }];
+    } else if (hands.length) this.votes = hands.length === 1 ? [hands[0].side] : [];
+    const result = { ...frame, hands };
+    if (hands.length) this.previous = result;
+    return result;
+  }
+}
+
+function visibleMotion(frames: Frame[]): Frame[] {
+  const identity = new HandIdentityTracker();
+  return frames.map(frame => identity.push(frame)).filter(frame => frame.hands.length);
 }
 
 /** Denoise boundary and trajectory checks. The CNN still receives measured
@@ -34,6 +63,10 @@ function averagedPose(frames: Frame[], center?: Frame): Frame {
         curls: mean(observations.map(other => other.curls)),
         radial: mean(observations.map(other => other.radial)) as Vec3,
         forward: mean(observations.map(other => other.forward)) as Vec3,
+        landmarks: hand.landmarks.map((point, i) => ({ ...point,
+          x: observations.reduce((sum, other) => sum + other.landmarks[i].x, 0) / observations.length,
+          y: observations.reduce((sum, other) => sum + other.landmarks[i].y, 0) / observations.length,
+        })),
         quaternion: rotation.map(value => value / length) as Quat,
       };
     }),
@@ -41,6 +74,19 @@ function averagedPose(frames: Frame[], center?: Frame): Frame {
 }
 
 export function prepareMotion(frames: Frame[], kind?: "static" | "dynamic"): Frame[] {
+  if (kind === "dynamic") {
+    const decoder = new SignSegmenter();
+    let best: Frame[] | null = null, bestTravel = 0;
+    for (const frame of frames) {
+      decoder.push(frame);
+      const candidate = decoder.candidate();
+      if (candidate && motionExtent(candidate) >= .12) {
+        const travel = motionTravel(motionSequence(trimMotion(candidate)));
+        if (travel > bestTravel) { bestTravel = travel; best = candidate; }
+      }
+    }
+    return trimMotion(best ?? frames);
+  }
   if (kind !== "static") return trimMotion(frames);
   let start = 0, best: Frame[] = [];
   for (let end = 0; end < frames.length; end++) {
@@ -48,6 +94,24 @@ export function prepareMotion(frames: Frame[], kind?: "static" | "dynamic"): Fra
     if (end - start + 1 > best.length) best = frames.slice(start, end + 1);
   }
   return trimMotion(best.length >= 8 ? best : frames);
+}
+
+/** Use observed image motion for boundaries. Estimated 3D joint orientation can
+ * jump when a finger points at the camera. It remains in the classifier input,
+ * but must not indefinitely reset the endpoint timer of a visibly held hand. */
+function boundaryDelta(a: Frame, b: Frame): number {
+  let delta = 0;
+  for (const side of ["Left", "Right"] as const) {
+    const x = a.hands.find(h => h.side === side), y = b.hands.find(h => h.side === side);
+    if (!x && !y) continue;
+    if (!x || !y) return 1;
+    const size = Math.max(.025, Math.hypot(x.landmarks[5].x - x.landmarks[17].x, x.landmarks[5].y - x.landmarks[17].y));
+    const articulation = Math.sqrt(x.landmarks.reduce((sum, point, i) => sum +
+      ((point.x - x.landmarks[0].x) - (y.landmarks[i].x - y.landmarks[0].x)) ** 2 +
+      ((point.y - x.landmarks[0].y) - (y.landmarks[i].y - y.landmarks[0].y)) ** 2, 0) / 42) / size;
+    delta = Math.max(delta, 3 * Math.hypot(x.wrist[0] - y.wrist[0], x.wrist[1] - y.wrist[1]) + .2 * articulation);
+  }
+  return delta;
 }
 
 /** Camera displacement, hand rotation AND finger articulation drive boundaries. */
@@ -64,12 +128,12 @@ export function poseDelta(a: Frame, b: Frame): number {
 
 /** Remove idle lead/tail using the same movement criterion as live decoding. */
 export function trimMotion(frames: Frame[]): Frame[] {
-  const visible = frames.filter(f => f.hands.length);
+  const visible = visibleMotion(frames);
   if (visible.length < 8) return frames;
   let anchor = visible[0], first = -1, last = -1;
   visible.forEach((_frame, i) => {
     const pose = averagedPose(visible.slice(Math.max(0, i - 10), i + 1));
-    if (poseDelta(anchor, pose) > .035) {
+    if (boundaryDelta(anchor, pose) > .06) {
       if (first < 0) first = Math.max(0, i - 2);
       last = i;
       anchor = pose;
@@ -81,16 +145,20 @@ export function trimMotion(frames: Frame[]): Frame[] {
     return hold.length >= 8 ? hold : visible;
   }
   const start = visible[first].t - 100, end = visible[last].t + 180;
-  return frames.filter(f => f.t >= start && f.t <= end);
+  return visible.filter(f => f.t >= start && f.t <= end);
 }
 
 export function motionExtent(frames: Frame[]): number {
-  const first = frames.find(f => f.hands.length);
-  return first ? Math.max(0, ...frames.filter(f => f.hands.length).map(f => poseDelta(first, f))) : 0;
+  const visible = visibleMotion(frames);
+  const poses = visible.map((frame, i) => averagedPose(visible.slice(Math.max(0, i - 2), i + 3), frame));
+  const first = poses[0];
+  return first ? Math.max(0, ...poses.map(f => poseDelta(first, f))) : 0;
 }
 
 /** Compact ordered templates, independently normalized for clip position. */
 export function motionSequence(frames: Frame[]): number[][] {
+  frames = visibleMotion(frames);
+  if (!frames.length) return Array.from({ length: MOTION_STEPS }, () => Array(MOTION_WIDTH).fill(0));
   // Reduce interior jitter before downsampling, while preserving measured
   // endpoints. Averaging endpoints would shift the origin and final pose.
   const poses = frames.map((frame, i) =>
@@ -161,13 +229,25 @@ export function buildMotionProfile(clips: Frame[][], kind?: "static" | "dynamic"
   const dynamic = kind ? kind === "dynamic" : clips.filter(frames => motionExtent(frames) >= .12).length >= clips.length / 2;
   const sequences = clips.map(motionSequence);
   const ranked = sequences.map((sequence, index) => ({ index, cost: sequences.reduce((sum, other) => sum + motionDistance(sequence, other), 0) })).sort((a, b) => a.cost - b.cost);
-  const templates = ranked.slice(0, 2).map(({ index }) => sequences[index]);
+  const templates = [sequences[ranked[0].index]];
+  // Cover different valid executions instead of storing two near-identical
+  // central clips. Bounded farthest-first prototypes keep inference small.
+  while (templates.length < Math.min(6, sequences.length)) {
+    const next = sequences.map(sequence => ({ sequence,
+      distance: Math.min(...templates.map(template => motionDistance(sequence, template))),
+    })).sort((a, b) => b.distance - a.distance)[0];
+    if (next.distance < .025) break;
+    templates.push(next.sequence);
+  }
   const distances = sequences.map(sequence => Math.min(...templates.map(template => motionDistance(sequence, template)))).sort((a, b) => a - b);
   const travels = sequences.map(motionTravel).sort((a, b) => a - b);
+  const endpoints = sequences.map(sequence => Math.min(...templates.map(template =>
+    motionPointDistance(sequence.at(-1)!, template.at(-1)!)))).sort((a, b) => a - b);
   return {
     kind: dynamic ? "dynamic" : "static", templates,
     minTravel: dynamic ? travels[Math.floor((travels.length - 1) * .2)] * .6 : 0,
-    tolerance: Math.max(.09, Math.min(.3, distances[Math.floor((distances.length - 1) * .9)] * 1.6 + .045)),
+    tolerance: Math.max(.09, Math.min(.75, distances[Math.floor((distances.length - 1) * .9)] * 1.6 + .045)),
+    endpointTolerance: Math.max(.12, Math.min(.5, endpoints[Math.floor((endpoints.length - 1) * .9)] * 1.4 + .045)),
   };
 }
 
@@ -179,7 +259,8 @@ export function matchesMotion(frames: Frame[], profile: MotionProfile): boolean 
     Math.max(...template.map(row => motionPointDistance(row, template[0])))));
   const observedExtent = Math.max(...sequence.map(row => motionPointDistance(row, sequence[0])));
   return observedExtent >= Math.max(.025, templateExtent * .45) && motionTravel(sequence) >= profile.minTravel &&
-    profile.templates.some(template => motionDistance(sequence, template) <= profile.tolerance);
+    profile.templates.some(template => motionDistance(sequence, template) <= profile.tolerance &&
+      motionPointDistance(sequence.at(-1)!, template.at(-1)!) <= (profile.endpointTolerance ?? Math.max(.12, Math.min(.3, profile.tolerance))));
 }
 
 /** Streaming endpoint detector. A held prefix and a completed word can be
@@ -192,30 +273,38 @@ export class SignSegmenter {
   private attemptedAt = -Infinity;
   private lastObservation: Frame | null = null;
   private visible = false;
+  private identity = new HandIdentityTracker();
+  private emittedLabel: string | null = null;
+  private emittedPose: Frame | null = null;
+  private released = true;
   revision = 0;
 
   reset() {
     this.frames = []; this.anchor = null; this.consumed = false;
     this.stableSince = 0; this.attemptedAt = -Infinity; this.revision++;
     this.lastObservation = null; this.visible = false;
+    this.identity.reset();
+    this.emittedLabel = null; this.emittedPose = null; this.released = true;
   }
 
   push(frame: Frame) {
     const previous = this.lastObservation;
     if (previous && (frame.t - previous.t > 250 || frame.t <= previous.t)) this.reset();
+    frame = this.identity.push(frame);
     if (!frame.hands.length) {
       if (this.visible) this.revision++;
       this.visible = false;
-      if (previous && frame.t - previous.t > 120) this.reset();
+      if (previous && frame.t - previous.t > 250) this.reset();
       return;
     }
-    if (!this.visible && previous && (frame.t - previous.t > 120 || poseDelta(previous, frame) > .12)) this.reset();
+    if (!this.visible && previous && frame.t - previous.t > 250) this.reset();
     this.visible = true;
     this.lastObservation = frame;
     const last = this.frames.at(-1);
     const pose = averagedPose([...this.frames.slice(-10), frame]);
+    if (this.emittedPose && boundaryDelta(this.emittedPose, pose) > .16) this.released = true;
     if (!this.anchor) { this.anchor = pose; this.stableSince = frame.t; }
-    if (poseDelta(this.anchor, pose) > .035) {
+    if (boundaryDelta(this.anchor, pose) > .06) {
       if (this.consumed) { this.frames = last ? [last] : []; this.consumed = false; }
       this.anchor = pose; this.stableSince = frame.t; this.revision++;
     }
@@ -224,12 +313,12 @@ export class SignSegmenter {
     this.frames = this.frames.filter(item => item.t >= frame.t - 5000);
   }
 
-  candidate(): Frame[] | null {
+  candidate(allowMoving = false): Frame[] | null {
     const last = this.frames.at(-1);
     if (!last || !this.visible || this.consumed || this.frames.length < 8 || last.t - this.attemptedAt < 100) return null;
     const dynamic = motionExtent(this.frames) >= .12;
     const settleMs = dynamic ? 180 : 650;
-    if (last.t - this.stableSince < settleMs || last.t - this.frames[0].t < 240) return null;
+    if ((last.t - this.stableSince < settleMs && !(allowMoving && dynamic)) || last.t - this.frames[0].t < 240) return null;
     this.attemptedAt = last.t;
     // If a movement was rejected, a deliberate 650ms hold can start a static
     // word. This also permits positioning a hand before a static sign.
@@ -241,7 +330,17 @@ export class SignSegmenter {
     return this.frames.slice();
   }
 
-  confirm(revision: number) {
-    if (revision === this.revision) this.consumed = true;
+  get staticReady(): boolean {
+    return this.visible && !!this.frames.length && this.frames.at(-1)!.t - this.stableSince >= 650;
+  }
+
+  confirm(revision: number, labelId?: string): boolean {
+    if (revision !== this.revision) return false;
+    this.consumed = true;
+    if (labelId && this.emittedLabel === labelId && !this.released) return false;
+    this.emittedLabel = labelId ?? null;
+    this.emittedPose = this.frames.length ? averagedPose(this.frames.slice(-10)) : null;
+    this.released = false;
+    return true;
   }
 }

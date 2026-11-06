@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { fixtureHand, fixtureSequence } from "../../src/lib/fixtures";
 import { extractHand } from "../../src/lib/geometry";
-import { buildMotionProfile, matchesMotion, motionSequence, motionTravel, SignSegmenter, trimMotion } from "../../src/lib/motion";
+import { buildMotionProfile, HandIdentityTracker, matchesMotion, motionSequence, motionTravel, SignSegmenter, trimMotion } from "../../src/lib/motion";
 import type { Frame } from "../../src/types";
 
 function loop(reverse = false): Frame[] {
@@ -63,8 +63,8 @@ describe("static/dynamic prefix regressions using synthetic geometry", () => {
       expect(segmenter.candidate()).toBeNull();
     }
     segmenter.push({ t: 1240, hands: [] });
-    segmenter.push({ t: 1400, hands: [] });
-    for (let t = 1440; t <= 2120; t += 40) segmenter.push({ ...pose, t });
+    segmenter.push({ t: 1480, hands: [] });
+    for (let t = 1520; t <= 2200; t += 40) segmenter.push({ ...pose, t });
     expect(segmenter.candidate()).not.toBeNull();
     segmenter.push({ ...pose, t: 2500 });
     expect(segmenter.candidate()).toBeNull();
@@ -142,5 +142,34 @@ describe("static/dynamic prefix regressions using synthetic geometry", () => {
       if (segmenter.candidate()) { candidates++; segmenter.confirm(segmenter.revision); }
     }
     expect(candidates).toBe(1);
+  });
+
+  it("does not let noisy 3D orientation block a visibly stationary hand", () => {
+    const decoder = new SignSegmenter(), pose = fixtureSequence(0)[0];
+    for (let i = 0; i < 35; i++) {
+      const rotation = extractHand(fixtureHand(i % 2 ? 45 : -45))!;
+      decoder.push({ t: i * 33, hands: [{ ...pose.hands[0], quaternion: rotation.quaternion }] });
+    }
+    expect(decoder.candidate()).not.toBeNull();
+    expect(decoder.staticReady).toBe(true);
+  });
+
+  it("keeps brief side flips in the physical hand channel and recovers a wrong first label", () => {
+    const identity = new HandIdentityTracker(), pose = fixtureSequence(0)[0];
+    const seen = Array.from({ length: 20 }, (_, i) => identity.push({ t: i * 33,
+      hands: [{ ...pose.hands[0], side: i === 0 || i === 12 ? "Left" : "Right" }],
+    }).hands[0].side);
+    expect(seen.slice(2).every(side => side === "Right")).toBe(true);
+    identity.push({ t: 2000, hands: [] });
+    expect(identity.push({ t: 2300, hands: [{ ...pose.hands[0], side: "Left" }] }).hands[0].side).toBe("Left");
+  });
+
+  it("can propose a moving candidate without accepting a prefix as a full sign", () => {
+    const frames = loop(), decoder = new SignSegmenter();
+    frames.slice(0, 12).forEach(frame => decoder.push(frame));
+    const candidate = decoder.candidate(true);
+    expect(candidate).not.toBeNull();
+    expect(decoder.staticReady).toBe(false);
+    expect(matchesMotion(candidate!, buildMotionProfile([frames], "dynamic"))).toBe(false);
   });
 });

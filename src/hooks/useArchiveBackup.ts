@@ -24,49 +24,75 @@ export function useArchiveBackup(
   const [connected, setConnected] = useState(false);
   const [uploadingId, setUploadingId] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
+  const [connectionError, setConnectionError] = useState("");
+  const [online, setOnline] = useState(navigator.onLine);
   const connection = useRef(0);
   const inFlight = useRef(false);
-  const attempted = useRef(new Set<string>());
+  const retries = useRef(new Map<string, { count: number; at: number }>());
+  const sessionTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const sessionFailures = useRef(0);
 
   const refreshSession = useCallback(async () => {
     const version = ++connection.current;
-    const active = await archiveSession().catch(() => false);
-    if (version === connection.current) setConnected(active);
+    clearTimeout(sessionTimer.current);
+    try {
+      const active = await archiveSession();
+      if (version !== connection.current) return;
+      sessionFailures.current = 0;
+      setConnectionError("");
+      setConnected(active);
+    } catch (error) {
+      if (version !== connection.current) return;
+      setConnectionError(error instanceof Error ? error.message : "Không kết nối được kho.");
+      const delay = Math.min(60_000, 5000 * 2 ** Math.min(sessionFailures.current++, 4));
+      sessionTimer.current = setTimeout(() => void refreshSession(), delay);
+    }
   }, []);
 
   useEffect(() => {
     void refreshSession();
-    const online = () => {
-      attempted.current.clear();
+    const onOnline = () => {
+      setOnline(true);
+      retries.current.clear();
       setRevision((n) => n + 1);
       void refreshSession();
     };
-    window.addEventListener("online", online);
+    const onOffline = () => setOnline(false);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
     return () => {
       connection.current++;
-      window.removeEventListener("online", online);
+      clearTimeout(sessionTimer.current);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
     };
   }, [refreshSession]);
 
   async function connect(code: string) {
     connection.current++;
+    clearTimeout(sessionTimer.current);
     await archiveRequest("POST", { action: "connect" }, undefined, code);
     if (!(await archiveSession()))
       throw new Error(
         "Trình duyệt không giữ được phiên kho. Mở Nối trong tab thường rồi kết nối lại.",
       );
-    attempted.current.clear();
+    retries.current.clear();
+    setConnectionError("");
     setConnected(true);
     setRevision((n) => n + 1);
   }
 
   async function disconnect() {
     connection.current++;
+    clearTimeout(sessionTimer.current);
     await archiveRequest("POST", { action: "disconnect" });
     setConnected(false);
+    setConnectionError("");
     setCompleted([]);
   }
   const expire = useCallback(() => {
+    connection.current++;
+    clearTimeout(sessionTimer.current);
     setConnected(false);
     setCompleted([]);
   }, [setCompleted]);
@@ -92,6 +118,7 @@ export function useArchiveBackup(
   const markSaved = useCallback(
     async (sample: Sample, complete?: boolean) => {
       await mark(sample, "saved");
+      retries.current.delete(`${sample.labelId}/${sample.id}`);
       if (complete)
         setCompleted((all) =>
           all.includes(sample.labelId) ? all : [...all, sample.labelId],
@@ -111,21 +138,31 @@ export function useArchiveBackup(
     );
     for (const sample of pending) {
       await mark(sample, "pending");
-      attempted.current.delete(`${sample.labelId}/${sample.id}`);
+      retries.current.delete(`${sample.labelId}/${sample.id}`);
     }
     setRevision((n) => n + 1);
   }
 
+  async function queue(labelId: string, existing = new Set<string>(), limit = Infinity) {
+    for (const sample of samples.filter(s => s.labelId === labelId && s.videoBlob?.size && s.backupStatus !== "saved" && !existing.has(s.id)).slice(0, limit)) {
+      await mark(sample, "pending");
+      retries.current.delete(`${sample.labelId}/${sample.id}`);
+    }
+    setRevision(n => n + 1);
+  }
+
   useEffect(() => {
-    if (!connected || !navigator.onLine || inFlight.current) return;
-    const sample = samples.find(
-      (s) =>
-        s.backupStatus === "pending" &&
-        s.videoBlob?.size &&
-        !attempted.current.has(`${s.labelId}/${s.id}`),
-    );
+    if (!connected || !online || inFlight.current) return;
+    const nextAttempt = (sample: Sample) => retries.current.get(`${sample.labelId}/${sample.id}`)?.at ?? 0;
+    const sample = samples
+      .filter(s => s.backupStatus === "pending" && s.videoBlob?.size)
+      .sort((a, b) => nextAttempt(a) - nextAttempt(b))[0];
     if (!sample) return;
-    attempted.current.add(`${sample.labelId}/${sample.id}`);
+    const wait = nextAttempt(sample) - Date.now();
+    if (wait > 0) {
+      const timer = setTimeout(() => setRevision(n => n + 1), wait);
+      return () => clearTimeout(timer);
+    }
     inFlight.current = true;
     setUploadingId(sample.id);
     void (async () => {
@@ -141,6 +178,11 @@ export function useArchiveBackup(
             ? error.message
             : "Chưa gửi được kho. Mẫu vẫn nằm trên máy.";
         const blocked = code === 400 || code === 409 || code === 413;
+        if (!blocked) {
+          const key = `${sample.labelId}/${sample.id}`;
+          const count = (retries.current.get(key)?.count ?? 0) + 1;
+          retries.current.set(key, { count, at: Date.now() + Math.min(60_000, 5000 * 2 ** Math.min(count - 1, 4)) });
+        }
         await mark(sample, blocked ? "blocked" : "pending", message);
         notify(message);
       } finally {
@@ -150,6 +192,7 @@ export function useArchiveBackup(
     })();
   }, [
     connected,
+    online,
     samples,
     uploadingId,
     revision,
@@ -161,6 +204,8 @@ export function useArchiveBackup(
 
   return {
     connected,
+    connectionError,
+    online,
     connect,
     disconnect,
     expire,
@@ -169,5 +214,6 @@ export function useArchiveBackup(
     markSaved,
     markLocal,
     retry,
+    queue,
   };
 }

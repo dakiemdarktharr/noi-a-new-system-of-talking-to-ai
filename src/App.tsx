@@ -45,6 +45,7 @@ import {
   extractHand,
 } from "./lib/geometry";
 import { SignSegmenter } from "./lib/motion";
+import { diagnoseSamples } from "./lib/diagnostics";
 import { quality } from "./lib/recognizer";
 import { fixtureHand } from "./lib/fixtures";
 import {
@@ -111,6 +112,8 @@ export default function App() {
   const [savingClip, setSavingClip] = useState(false);
   const [unsavedClips, setUnsavedClips] = useState<string[]>([]);
   const [busyModelFile, setBusyModelFile] = useState(false);
+  const [diagnosticProgress, setDiagnosticProgress] = useState("");
+  const [diagnosticReport, setDiagnosticReport] = useState<Awaited<ReturnType<typeof diagnoseSamples>> | null>(null);
   const [recognitionReason, setRecognitionReason] = useState("Chờ ký hiệu");
   const [result, setResult] = useState<Recognition>(empty),
     [mirrored, setMirrored] = useState(true),
@@ -193,13 +196,13 @@ export default function App() {
         predictBusy.current ||
         frame.t - lastPredict.current < 100
       ) return;
-      const input = segmenter.current.candidate();
+      const input = segmenter.current.candidate(true);
       if (!input) return;
       lastPredict.current = frame.t;
       predictBusy.current = true;
       const version = predictionVersion.current;
       const revision = segmenter.current.revision;
-      model.current.predict(input)
+      model.current.predict(input, { allowStatic: segmenter.current.staticReady })
         .then((prediction) => {
           if (
             !alive.current ||
@@ -210,7 +213,7 @@ export default function App() {
             return;
           setRecognitionReason(prediction.reason);
           if (!prediction.accepted) return;
-          segmenter.current.confirm(revision);
+          if (!segmenter.current.confirm(revision, prediction.matches[0]?.labelId)) return;
           setResult(prediction);
           clearTimeout(predictionExpiry.current);
           predictionExpiry.current = window.setTimeout(
@@ -490,6 +493,7 @@ export default function App() {
     setTraining(true);
     setProgress(null);
     setResult(empty);
+    setDiagnosticReport(null);
     try {
       const trained = await model.current.train(samples, setProgress, { gestureKinds });
       setSummary(trained);
@@ -502,6 +506,21 @@ export default function App() {
       notify(e instanceof Error ? e.message : String(e));
     } finally {
       setTraining(false);
+    }
+  }
+  async function checkSamples() {
+    stopCamera();
+    setBusyModelFile(true);
+    setDiagnosticReport(null);
+    try {
+      const report = await diagnoseSamples(model.current, samples, (done, total) => setDiagnosticProgress(`${done}/${total}`));
+      setDiagnosticReport(report);
+      notify(`Phát lại: ${report.correct}/${report.total} mẫu khớp đúng một lần.`);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : "Không kiểm tra được mẫu.");
+    } finally {
+      setBusyModelFile(false);
+      setDiagnosticProgress("");
     }
   }
   async function exportModel() {
@@ -720,12 +739,13 @@ export default function App() {
                 : "Chưa huấn luyện"}
             </span>
             <button
-              className="icon-button"
+              className="secondary"
               aria-label="Thông số theo dõi"
               aria-pressed={details}
               onClick={() => setDetails(!details)}
             >
               <SlidersHorizontal size={18} />
+              Thông số
             </button>
           </div>
         </div>
@@ -1174,7 +1194,23 @@ export default function App() {
                 <Upload size={16} />
                 Nhập model
               </button>
+              <button
+                disabled={!summary || !samples.length || busyModelFile || training || recording || savingClip}
+                onClick={() => void checkSamples()}
+              >
+                <ScanLine size={16} />
+                {diagnosticProgress || "Kiểm tra mẫu"}
+              </button>
             </div>
+            {diagnosticReport && (
+              <div className="model-transfer" aria-label="Kết quả phát lại mẫu đã lưu">
+                <strong>Phát lại mẫu: {diagnosticReport.correct}/{diagnosticReport.total}</strong>
+                <span>Sai: {diagnosticReport.wrong} · Lặp: {diagnosticReport.duplicate} · Bỏ sót: {diagnosticReport.unrecognized}</span>
+                <button onClick={() => saveBlob(new Blob([JSON.stringify(diagnosticReport, null, 2)], { type: "application/json" }), "noi-diagnostics.json")}>
+                  <Download size={16} /> Báo cáo lỗi
+                </button>
+              </div>
+            )}
           </aside>
         </div>
         {view === "collect" && showCloud && (
@@ -1301,10 +1337,13 @@ export default function App() {
                           ? "Đang gửi"
                           : s.backupStatus === "saved"
                             ? "Đã lên kho"
-                            : s.backupStatus === "blocked" || s.backupError
+                            : s.backupStatus === "blocked"
                               ? "Cần thử lại"
                               : s.backupStatus === "pending"
-                                ? "Chờ gửi"
+                                ? !archive.online ? "Chờ mạng"
+                                  : archive.connectionError ? "Kho gián đoạn"
+                                  : !archive.connected ? "Chờ kết nối kho"
+                                  : s.backupError ? "Đang chờ thử lại" : "Chờ gửi"
                                 : "Trên máy"}
                       </span>
                       <button

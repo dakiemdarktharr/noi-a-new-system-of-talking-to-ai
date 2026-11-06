@@ -23,6 +23,7 @@ Bản deploy trên Vercel đọc `vercel.json` từ repo. Vercel cài thư việ
 7. **Thêm từ** tạo nhãn riêng trên máy. Danh mục đánh dấu ✓ khi một nhãn có 30 video trên máy hoặc đã đủ trong kho kết nối. Mẫu JSON thiếu video vẫn dùng được để train nếu hợp lệ, nhưng không tính vào chỉ tiêu video.
 8. Mở **Kho video**, nhập mã kho và bấm **Kết nối**. Video hợp lệ mới quay được lưu trên máy rồi tự gửi lên kho. Phiên kết nối và hàng chờ được giữ khi tải lại trang. **Sao lưu nhãn** gửi các mẫu đã thu từ trước. **Tải về máy** nhập mẫu từ kho.
 9. Sau khi train, dùng **Xuất model** để tải `noi-model.zip`. Mở Nối ở `http://127.0.0.1:5173` và bấm **Nhập model** để chạy webcam tại máy. Tệp ZIP chứa trọng số và thông tin nhận diện. Tệp hai nhãn trong kiểm thử nặng khoảng 191 KiB. Tài sản MediaPipe được cài riêng cùng app. Chọn cùng chế độ Lite hoặc Full như lúc thu mẫu.
+10. **Kiểm tra mẫu** phát lại các frame đã lưu qua toàn bộ bộ nhận diện và xuất báo cáo lỗi. Nút **Thông số** hiển thị nguyên nhân đang chờ hoặc từ chối. Kết quả phát lại bao gồm mẫu đã dùng train, không thay thế đánh giá trên phiên quay mới.
 
 Danh mục **6.000 mục nghĩa** dùng để chọn nhãn giao tiếp và prompt. Model cá nhân học các ký hiệu từ mẫu bạn thu. Xem [nguồn từ vựng](public/vocabulary/SOURCES.md) và [kiểm tra tính toàn vẹn](docs/vocabulary-audit.json).
 
@@ -31,6 +32,8 @@ Danh mục **6.000 mục nghĩa** dùng để chọn nhãn giao tiếp và promp
 Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệt của địa chỉ hiện tại. Khi kết nối kho, Nối tự sao lưu video mới và điểm tay tới bucket Hugging Face riêng tư. Mã kho cấp quyền quản lý dữ liệu trong bucket. Token Hugging Face chỉ dùng ở máy chủ. Dùng Xuất ZIP hoặc xác nhận **Đã lên kho** trước khi xóa dữ liệu trình duyệt.
 
 [Thiết kế kho video miễn phí](docs/CLOUD-ARCHIVE.md) · [Theo dõi tay nhanh](docs/FAST-TRACKING.md)
+
+**Chờ gửi** chưa xác nhận lưu cloud. App phân biệt **Chờ kết nối kho**, **Chờ mạng**, **Đang chờ thử lại**, **Cần thử lại** và **Đã lên kho**. Lỗi tạm thời tự thử lại sau 5–60 giây khi trang còn mở. Mã kho là mã riêng của Nối, khác token Hugging Face.
 
 ## Tài liệu
 
@@ -41,6 +44,7 @@ Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệ
 - [Dữ liệu tiếng Việt, nhãn, chia tập và phép đo](docs/DATASET-RESEARCH.md).
 - [Model card của bản thử nghiệm](docs/MODEL-CARD.md).
 - [Kết quả kiểm tra phần mềm](docs/QA.md).
+- [Chẩn đoán và sửa lỗi trên 90 clip thực tế](docs/RECOGNITION-REPAIR.md).
 
 ## Lệnh phát triển
 

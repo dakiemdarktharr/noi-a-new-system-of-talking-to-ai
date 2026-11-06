@@ -56,8 +56,9 @@ export function validateModelMetadata(value: unknown): ModelMetadata {
     motionProfiles = source.motionProfiles.map(raw => {
       const profile = object(raw);
       assert(profile.kind === "static" || profile.kind === "dynamic");
-      assert(finite(profile.minTravel, 0, 100) && finite(profile.tolerance, .09, .3));
-      assert(Array.isArray(profile.templates) && profile.templates.length >= 1 && profile.templates.length <= 2);
+      assert(finite(profile.minTravel, 0, 100) && finite(profile.tolerance, .09, .75));
+      assert(profile.endpointTolerance === undefined || finite(profile.endpointTolerance, .12, .5));
+      assert(Array.isArray(profile.templates) && profile.templates.length >= 1 && profile.templates.length <= 6);
       const templates = profile.templates.map(rawTemplate => {
         assert(Array.isArray(rawTemplate) && rawTemplate.length === MOTION_STEPS);
         return rawTemplate.map(row => {
@@ -66,7 +67,8 @@ export function validateModelMetadata(value: unknown): ModelMetadata {
           return row.slice() as number[];
         });
       });
-      return { kind: profile.kind, minTravel: profile.minTravel, tolerance: profile.tolerance, templates };
+      return { kind: profile.kind, minTravel: profile.minTravel, tolerance: profile.tolerance, templates,
+        ...(profile.endpointTolerance === undefined ? {} : { endpointTolerance: profile.endpointTolerance as number }) };
     });
   }
   return { featureVersion: FEATURE_VERSION, summary: {

@@ -5,7 +5,6 @@ import { VIDEO_GOAL } from "../lib/words";
 import {
   archiveRequest,
   ArchiveError,
-  uploadArchiveSample,
 } from "../lib/archive-client";
 import type { Sample, VocabularyEntry } from "../types";
 
@@ -92,25 +91,10 @@ export function CloudArchive({
 
   async function backup() {
     const rows = await refresh();
-    const batch = local
-      .filter((s) => !rows.some((r) => r.id === s.id))
-      .slice(0, Math.max(0, VIDEO_GOAL - rows.length));
-    let saved = 0;
-    try {
-      for (const sample of batch) {
-        setProgress(`${saved + 1}/${batch.length}`);
-        const { complete } = await uploadArchiveSample(sample);
-        await connection.markSaved(sample, complete);
-        saved++;
-      }
-      notify(
-        saved
-          ? `Đã sao lưu ${saved} video.`
-          : "Các mẫu đã được lưu hoặc nhãn đã đủ 30 video.",
-      );
-    } finally {
-      await refresh();
-    }
+    for (const sample of local.filter(s => rows.some(r => r.id === s.id)))
+      await connection.markSaved(sample, rows.length >= VIDEO_GOAL);
+    await connection.queue(entry.id, new Set(rows.map(r => r.id)), Math.max(0, VIDEO_GOAL - rows.length));
+    notify("Đã cập nhật hàng chờ sao lưu.");
   }
 
   async function restore() {
@@ -120,12 +104,13 @@ export function CloudArchive({
       const zip = await (
         await archiveRequest("GET", { label: entry.id, id: row.id })
       ).blob();
-      restored.push(
-        ...(await readDataset(
+      const decoded = await readDataset(
           new File([zip], "noi-clip.zip"),
           new Set([entry.id]),
-        )),
-      );
+        );
+      if (decoded.length !== 1 || decoded[0].id !== row.id || decoded[0].labelId !== entry.id)
+        throw new Error("Mẫu tải về không khớp danh sách kho.");
+      restored.push({ ...decoded[0], backupStatus: "saved" });
     }
     await onRestore(restored);
     notify(`Đã tải ${restored.length} video về máy.`);
