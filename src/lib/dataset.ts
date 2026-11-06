@@ -17,14 +17,24 @@ export async function packDataset(samples: Sample[], compact = false) {
   if (samples.length > 1000) throw new Error(sizeError);
   const zip = new JSZip();
   const records = await Promise.all(
-    samples.map(async ({ videoBlob, ...sample }, index) => {
-      const filename = videoBlob
-        ? `videos/${index}-${sample.id.replace(/[^a-z0-9_-]/gi, "_")}.${videoBlob.type.includes("mp4") ? "mp4" : "webm"}`
-        : null;
-      if (videoBlob && filename)
-        zip.file(filename, await videoBlob.arrayBuffer());
-      return { ...sample, videoFile: filename };
-    }),
+    samples.map(
+      async (
+        {
+          videoBlob,
+          backupStatus: _backupStatus,
+          backupError: _backupError,
+          ...sample
+        },
+        index,
+      ) => {
+        const filename = videoBlob
+          ? `videos/${index}-${sample.id.replace(/[^a-z0-9_-]/gi, "_")}.${videoBlob.type.includes("mp4") ? "mp4" : "webm"}`
+          : null;
+        if (videoBlob && filename)
+          zip.file(filename, await videoBlob.arrayBuffer());
+        return { ...sample, videoFile: filename };
+      },
+    ),
   );
   const manifest = JSON.stringify(
     {

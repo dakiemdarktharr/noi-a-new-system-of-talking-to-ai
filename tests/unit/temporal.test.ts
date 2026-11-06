@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import * as tf from "@tensorflow/tfjs";
+import JSZip from "jszip";
 import type { Frame, Sample } from "../../src/types";
 import { extractHand } from "../../src/lib/geometry";
 import { fixtureHand, fixtureSequence } from "../../src/lib/fixtures";
@@ -189,6 +190,54 @@ describe("real TensorFlow.js execution — synthetic software regression, NOT hu
     expect(negative.matches[0].labelId).toBe("NO_SIGN");
     expect(negative.accepted).toBe(false);
     expect((await classifier.predict([])).accepted).toBe(false);
+    // A real trained model survives an inference-only portable ZIP round trip.
+    // These fixtures establish serialization fidelity, not human sign accuracy.
+    const archive = await classifier.exportModel();
+    const zip = await JSZip.loadAsync(await archive.arrayBuffer());
+    expect(Object.keys(zip.files).sort()).toEqual(["model.json", "weights.bin"]);
+    const manifest = JSON.parse(await zip.file("model.json")!.async("string"));
+    expect(manifest.weightSpecs).toHaveLength(10);
+    expect(manifest.weightBytes).toBe(summary.parameters * 4);
+    expect(manifest.trainingConfig).toBeUndefined();
+    expect(manifest.metadata.summary.labels.map((label: { labelId: string }) => label.labelId)).toEqual(["A", "NO_SIGN"]);
+    expect(archive.size).toBeLessThan(250_000);
+    console.info(`PORTABLE_MODEL two-class: ${archive.size} ZIP bytes, ${manifest.weightBytes} float32 weight bytes, ${summary.parameters} parameters; no optimizer or videos`);
+    const imported = new TemporalClassifier();
+    try {
+      const importedSummary = await imported.importModel(archive);
+      expect(importedSummary.labels).toEqual(summary.labels);
+      expect(importedSummary.persisted).toBe(false); // Node has no browser IndexedDB.
+      expect(await imported.predict(fixtureSequence(0, "still", 30))).toEqual(result);
+      expect(await imported.predict(fixtureSequence(90, "still", 30))).toEqual(negative);
+      // A re-exported inference-only model is also a valid portable model.
+      await imported.importModel(await imported.exportModel());
+      expect(await imported.predict(fixtureSequence(0, "still", 30))).toEqual(result);
+
+      const corrupt = async (mutate: (data: typeof manifest, z: JSZip) => void) => {
+        const z = await JSZip.loadAsync(await archive.arrayBuffer());
+        const data = JSON.parse(await z.file("model.json")!.async("string"));
+        mutate(data, z); z.file("model.json", JSON.stringify(data));
+        return z.generateAsync({ type: "blob", compression: "DEFLATE" });
+      };
+      const beforeBadImports = tf.memory().numTensors;
+      for (const bad of [
+        await corrupt(data => { data.version = 99; }),
+        await corrupt(data => { data.metadata.supports[0].center = [0]; }),
+        await corrupt(data => { data.metadata.summary.labels[1].labelId = "A"; }),
+        await corrupt(data => { data.modelTopology.config.layers[0].config.batch_input_shape = [null, 1e9, 172]; }),
+        await corrupt(data => { data.weightSpecs[0].shape = [5, 172, 9999999]; }),
+        await corrupt((_data, z) => { z.file("videos/raw.webm", new Uint8Array([1, 2, 3])); }),
+        await corrupt((_data, z) => { z.file("weights.bin", new Uint8Array(600_000)); }),
+      ]) {
+        await expect(imported.importModel(bad)).rejects.toThrow();
+        expect(await imported.predict(fixtureSequence(0, "still", 30))).toEqual(result);
+        expect(tf.memory().numTensors).toBe(beforeBadImports);
+      }
+      const changedWeights = new Uint8Array(await zip.file("weights.bin")!.async("arraybuffer"));
+      changedWeights[0] ^= 1;
+      await expect(imported.importModel(await corrupt((_data, z) => { z.file("weights.bin", changedWeights); }))).rejects.toThrow(/mã kiểm tra/);
+      expect(await imported.predict(fixtureSequence(0, "still", 30))).toEqual(result);
+    } finally { imported.dispose(); }
     const count = tf.memory().numTensors;
     for (let i = 0; i < 3; i++)
       await classifier.predict(fixtureSequence(0, "still", 30));

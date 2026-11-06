@@ -26,6 +26,7 @@ import {
 import vocabulary from "./data/vocabulary.json";
 import type { Frame, Sample, Recognition, VocabularyEntry } from "./types";
 import { useCamera, type TrackingVariant } from "./hooks/useCamera";
+import { useArchiveBackup } from "./hooks/useArchiveBackup";
 import { Overlay } from "./components/Overlay";
 import { Modal } from "./components/Modal";
 import { CloudArchive } from "./components/CloudArchive";
@@ -106,6 +107,9 @@ export default function App() {
   const [training, setTraining] = useState(false),
     [progress, setProgress] = useState<TrainProgress | null>(null),
     [summary, setSummary] = useState<ModelSummary | null>(null);
+  const [savingClip, setSavingClip] = useState(false);
+  const [unsavedClips, setUnsavedClips] = useState<string[]>([]);
+  const [busyModelFile, setBusyModelFile] = useState(false);
   const [result, setResult] = useState<Recognition>(empty),
     [mirrored, setMirrored] = useState(true),
     [details, setDetails] = useState(false),
@@ -120,8 +124,7 @@ export default function App() {
   const [customEntries, setCustomEntries] = useState(loadCustomWords);
   const [newWord, setNewWord] = useState(false),
     [wordText, setWordText] = useState("");
-  const [showCloud, setShowCloud] = useState(false),
-    [cloudCode, setCloudCode] = useState("");
+  const [showCloud, setShowCloud] = useState(false);
   const [cloudCompleted, setCloudCompleted] = useState<string[]>([]);
   const [onlyComplete, setOnlyComplete] = useState(false);
   const [trackingVariant, setTrackingVariant] =
@@ -143,9 +146,17 @@ export default function App() {
     predictionVersion = useRef(0),
     cameraAspect = useRef(16 / 9),
     fileInput = useRef<HTMLInputElement>(null),
+    modelInput = useRef<HTMLInputElement>(null),
+    requestedPersistence = useRef(false),
     dialog = useRef<HTMLDialogElement>(null);
   mode.current = view;
   const notify = useCallback((text: string) => setNotice(text), []);
+  const archive = useArchiveBackup(
+    samples,
+    setSamples,
+    setCloudCompleted,
+    notify,
+  );
   const clearPrediction = useCallback(() => {
     predictionVersion.current++;
     clearTimeout(predictionExpiry.current);
@@ -248,7 +259,12 @@ export default function App() {
   useEffect(() => {
     alive.current = true;
     listSamples()
-      .then(setSamples)
+      .then((stored) =>
+        setSamples((current) => [
+          ...current,
+          ...stored.filter((s) => !current.some((other) => other.id === s.id)),
+        ]),
+      )
       .catch(() => notify("Không mở được bộ nhớ mẫu của trình duyệt."));
     model.current
       .load()
@@ -260,6 +276,18 @@ export default function App() {
       abortRecording();
     };
   }, [abortRecording, notify]);
+  const unprotected = samples.some(
+    (s) => unsavedClips.includes(s.id) && s.backupStatus !== "saved",
+  );
+  useEffect(() => {
+    if (!savingClip && !recording && !unprotected) return;
+    const protect = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", protect);
+    return () => window.removeEventListener("beforeunload", protect);
+  }, [savingClip, recording, unprotected]);
   useEffect(() => {
     if (!notice) return;
     const timer = setTimeout(() => setNotice(""), 6500);
@@ -366,14 +394,18 @@ export default function App() {
         videoMime: blob.type,
         aspect: rec.aspect,
         trackingVariant: rec.trackingVariant,
+        backupStatus: "pending",
       };
       try {
         await saveSample(sample);
-        setSamples((all) => [...all, sample]);
-        notify("Đã lưu mẫu: " + rec.entry.label);
+        notify("Đã lưu trên máy: " + rec.entry.label);
       } catch {
-        notify("Không lưu được mẫu. Kiểm tra dung lượng trình duyệt.");
+        setUnsavedClips((all) => [...all, sample.id]);
+        notify(
+          "Chưa ghi được vào trình duyệt. Hãy giữ tab mở và sao lưu hoặc xuất ZIP.",
+        );
       }
+      setSamples((all) => [...all, sample]);
     },
     [notify],
   );
@@ -395,6 +427,7 @@ export default function App() {
           : -Math.ceil((rec.start - now) / 1000),
       );
       if (rec.started && now >= rec.end) {
+        setSavingClip(true);
         rec.recorder!.stop();
         recordRef.current = null;
         setRecording(false);
@@ -404,7 +437,14 @@ export default function App() {
     return () => clearInterval(interval);
   }, [recording, duration]);
   function startRecording() {
-    if (!camera.streamRef.current || camera.status !== "on" || training) return;
+    if (
+      !camera.streamRef.current ||
+      camera.status !== "on" ||
+      training ||
+      savingClip ||
+      busyModelFile
+    )
+      return;
     if (typeof MediaRecorder === "undefined") {
       notify("Trình duyệt chưa hỗ trợ quay video. Dùng Chrome hoặc Edge.");
       return;
@@ -416,6 +456,10 @@ export default function App() {
       "video/mp4",
     ].find((x) => MediaRecorder.isTypeSupported(x));
     const video = camera.videoRef.current!;
+    if (!requestedPersistence.current) {
+      requestedPersistence.current = true;
+      void navigator.storage?.persist?.().catch(() => false);
+    }
     cameraAspect.current = video.videoWidth / video.videoHeight;
     try {
       const recorder = new MediaRecorder(camera.streamRef.current, {
@@ -438,10 +482,12 @@ export default function App() {
       recorder.ondataavailable = (e) => {
         if (e.data.size) rec.chunks.push(e.data);
       };
-      recorder.onstop = () => void finishRecording(rec);
+      recorder.onstop = () =>
+        void finishRecording(rec).finally(() => setSavingClip(false));
       recorder.onerror = () => {
         rec.aborted = true;
         abortRecording();
+        setSavingClip(false);
         notify("Không quay được video.");
       };
       recordRef.current = rec;
@@ -470,7 +516,38 @@ export default function App() {
       setTraining(false);
     }
   }
+  async function exportModel() {
+    setBusyModelFile(true);
+    try {
+      const blob = await model.current.exportModel();
+      saveBlob(blob, "noi-model.zip");
+      notify(`Đã xuất model · ${Math.ceil(blob.size / 1024)} KB`);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : "Không xuất được model.");
+    } finally {
+      setBusyModelFile(false);
+    }
+  }
+  async function importModel(file: File) {
+    stopCamera();
+    setBusyModelFile(true);
+    try {
+      const loaded = await model.current.importModel(file);
+      setSummary(loaded);
+      setView("recognize");
+      notify(
+        loaded.persisted
+          ? "Đã nhập và lưu model."
+          : "Đã nhập model cho phiên này.",
+      );
+    } catch (e) {
+      notify(e instanceof Error ? e.message : "Không nhập được model.");
+    } finally {
+      setBusyModelFile(false);
+    }
+  }
   async function remove(sample: Sample) {
+    if (archive.uploadingId === sample.id) return;
     try {
       await deleteSample(sample.id);
       setSamples((all) => all.filter((s) => s.id !== sample.id));
@@ -484,8 +561,23 @@ export default function App() {
     setDrawer(false);
     setRelabelId(null);
     if (target) {
+      if (target.labelId === entry.id) return;
       try {
-        const updated = { ...target, labelId: entry.id, label: entry.label };
+        if (archive.uploadingId === target.id) {
+          notify("Đợi mẫu gửi xong rồi đổi nhãn.");
+          return;
+        }
+        const updated: Sample = {
+          ...target,
+          labelId: entry.id,
+          label: entry.label,
+          backupStatus:
+            target.backupStatus === "pending" ||
+            target.backupStatus === "blocked"
+              ? "pending"
+              : undefined,
+          backupError: undefined,
+        };
         await saveSample(updated);
         setSamples((all) => all.map((s) => (s.id === target.id ? updated : s)));
         notify("Đã đổi nhãn. Huấn luyện lại để cập nhật model.");
@@ -529,7 +621,10 @@ export default function App() {
       setCustomEntries(next);
     }
     await importSamples(imported);
-    setSamples(await listSamples());
+    setSamples((current) => [
+      ...current.filter((s) => !imported.some((other) => other.id === s.id)),
+      ...imported,
+    ]);
   }
   function addWord() {
     const label = wordText.normalize("NFC").trim().replace(/\s+/g, " ");
@@ -555,6 +650,9 @@ export default function App() {
     setBusyFile(true);
     try {
       await exportDataset(visibleSamples);
+      setUnsavedClips((all) =>
+        all.filter((id) => !visibleSamples.some((s) => s.id === id)),
+      );
     } catch (e) {
       notify(e instanceof Error ? e.message : "Không xuất được dữ liệu.");
     } finally {
@@ -694,7 +792,9 @@ export default function App() {
                   <button
                     className="primary"
                     onClick={() => void camera.start(trackingVariant)}
-                    disabled={camera.status === "starting" || training}
+                    disabled={
+                      camera.status === "starting" || training || busyModelFile
+                    }
                   >
                     {camera.status === "starting" ? "Đang mở…" : "Bật camera"}
                   </button>
@@ -929,9 +1029,15 @@ export default function App() {
                     disabled={recording || training}
                     aria-pressed={showCloud}
                     onClick={() => setShowCloud(!showCloud)}
+                    title={
+                      archive.connected ? "Tự sao lưu bật" : "Kho chưa kết nối"
+                    }
                   >
                     <Cloud size={16} />
                     Kho video
+                    {archive.connected && (
+                      <Check size={13} aria-hidden="true" />
+                    )}
                   </button>
                 </div>
                 <div className="capture-settings">
@@ -949,11 +1055,22 @@ export default function App() {
                 </div>
                 <button
                   className={"record-button " + (recording ? "recording" : "")}
-                  disabled={camera.status !== "on" || training}
+                  disabled={
+                    camera.status !== "on" ||
+                    training ||
+                    savingClip ||
+                    busyModelFile
+                  }
                   onClick={recording ? abortRecording : startRecording}
                 >
-                  {recording ? <Square size={18} /> : <Circle size={18} />}{" "}
-                  {recording ? "Hủy mẫu" : "Quay mẫu"}
+                  {savingClip ? (
+                    <Loader2 size={18} className="spin" />
+                  ) : recording ? (
+                    <Square size={18} />
+                  ) : (
+                    <Circle size={18} />
+                  )}{" "}
+                  {savingClip ? "Đang lưu" : recording ? "Hủy mẫu" : "Quay mẫu"}
                 </button>
                 <div className="divider" />
                 <div className="training-heading">
@@ -983,6 +1100,8 @@ export default function App() {
                   disabled={
                     training ||
                     recording ||
+                    savingClip ||
+                    busyModelFile ||
                     counts.size < 2 ||
                     [...counts.values()].some((n) => n < 3)
                   }
@@ -1017,6 +1136,34 @@ export default function App() {
                 </button>
               </>
             )}
+            <div className="word-actions model-transfer">
+              <input
+                type="file"
+                ref={modelInput}
+                accept=".zip,application/zip"
+                aria-label="Tệp model Nối"
+                hidden
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) void importModel(file);
+                  e.target.value = "";
+                }}
+              />
+              <button
+                disabled={!summary || busyModelFile || training}
+                onClick={() => void exportModel()}
+              >
+                <Download size={16} />
+                Xuất model
+              </button>
+              <button
+                disabled={busyModelFile || training || recording || savingClip}
+                onClick={() => modelInput.current?.click()}
+              >
+                <Upload size={16} />
+                Nhập model
+              </button>
+            </div>
           </aside>
         </div>
         {view === "collect" && showCloud && (
@@ -1024,12 +1171,15 @@ export default function App() {
             key={selected.id}
             entry={selected}
             samples={samples}
-            code={cloudCode}
-            setCode={(code) => {
-              setCloudCode(code);
-              setCloudCompleted([]);
-            }}
-            onRestore={storeImported}
+            connection={archive}
+            onRestore={(restored) =>
+              storeImported(
+                restored.map((sample) => ({
+                  ...sample,
+                  backupStatus: "saved",
+                })),
+              )
+            }
             onCompleted={setCloudCompleted}
             notify={notify}
           />
@@ -1092,6 +1242,7 @@ export default function App() {
                   <span>Thời lượng</span>
                   <span>Frame</span>
                   <span>Video</span>
+                  <span>Kho</span>
                   <span />
                 </div>
                 {visibleSamples
@@ -1102,7 +1253,9 @@ export default function App() {
                       <button
                         className="sample-label"
                         aria-label={"Đổi nhãn " + s.label}
-                        disabled={training || recording}
+                        disabled={
+                          training || recording || archive.uploadingId === s.id
+                        }
                         onClick={() => {
                           setRelabelId(s.id);
                           setDrawer(true);
@@ -1124,9 +1277,28 @@ export default function App() {
                         <Play size={15} />
                         Xem
                       </button>
+                      <span
+                        className="backup-state"
+                        data-backup-status={
+                          archive.uploadingId === s.id
+                            ? "uploading"
+                            : (s.backupStatus ?? "local")
+                        }
+                        title={s.backupError}
+                      >
+                        {archive.uploadingId === s.id
+                          ? "Đang gửi"
+                          : s.backupStatus === "saved"
+                            ? "Đã lên kho"
+                            : s.backupStatus === "blocked" || s.backupError
+                              ? "Cần thử lại"
+                              : s.backupStatus === "pending"
+                                ? "Chờ gửi"
+                                : "Trên máy"}
+                      </span>
                       <button
                         className="icon-button"
-                        disabled={training}
+                        disabled={training || archive.uploadingId === s.id}
                         aria-label={"Xóa mẫu " + s.label}
                         onClick={() => void remove(s)}
                       >

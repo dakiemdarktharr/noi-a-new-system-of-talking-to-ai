@@ -48,7 +48,7 @@ interface Support {
   center: number[];
   radius: number;
 }
-interface ModelMetadata {
+export interface ModelMetadata {
   featureVersion: number;
   summary: ModelSummary;
   supports: Support[];
@@ -208,6 +208,7 @@ export class TemporalClassifier {
   private model: tf.LayersModel | null = null;
   private metadata: ModelMetadata | null = null;
   private training: tf.LayersModel | null = null;
+  private importing = false;
   private generation = 0;
 
   getSummary(): ModelSummary | null {
@@ -215,6 +216,7 @@ export class TemporalClassifier {
   }
 
   async load(): Promise<ModelSummary | null> {
+    const generation = this.generation;
     await ready();
     let loaded: tf.LayersModel | null = null;
     try {
@@ -231,6 +233,10 @@ export class TemporalClassifier {
         loaded.dispose();
         return null;
       }
+      if (generation !== this.generation) {
+        loaded.dispose();
+        return this.getSummary();
+      }
       this.model?.dispose();
       this.model = loaded;
       this.metadata = data;
@@ -243,12 +249,65 @@ export class TemporalClassifier {
     }
   }
 
+  /** A portable inference-only ZIP, separate from hand-tracker assets and samples. */
+  async exportModel(): Promise<Blob> {
+    const model = this.model, metadata = this.metadata;
+    if (!model || !metadata) throw new Error("Chưa có mô hình để xuất.");
+    const { packModelArchive } = await import("./model-archive");
+    let artifacts: tf.io.ModelArtifacts | undefined;
+    await model.save(tf.io.withSaveHandler(async captured => {
+      artifacts = captured;
+      return { modelArtifactsInfo: tf.io.getModelArtifactsInfoForJSON(captured) };
+    }), { includeOptimizer: false });
+    if (!artifacts) throw new Error("Không đọc được trọng số mô hình.");
+    return packModelArchive(artifacts, metadata);
+  }
+
+  /** Validate a candidate completely before replacing the currently working model. */
+  async importModel(file: Blob): Promise<ModelSummary> {
+    if (this.training || this.importing) throw new Error("Chờ thao tác mô hình hiện tại hoàn tất.");
+    this.importing = true;
+    const generation = this.generation;
+    let candidate: tf.LayersModel | null = null;
+    try {
+      const { unpackModelArchive } = await import("./model-archive");
+      const { artifacts, metadata } = await unpackModelArchive(file);
+      await ready();
+      candidate = await tf.loadLayersModel(tf.io.fromMemory(artifacts));
+      if (candidate.inputs.length !== 1 || candidate.outputs.length !== 1 ||
+          candidate.inputs[0].shape.join(",") !== [null, TIME_STEPS, FEATURE_COUNT].join(",") ||
+          candidate.outputs[0].shape.join(",") !== [null, metadata.summary.labels.length].join(",") ||
+          candidate.countParams() !== metadata.summary.parameters) throw new Error("Kích thước mô hình không tương thích.");
+      const probe = tf.zeros([1, TIME_STEPS, FEATURE_COUNT]);
+      let prediction: tf.Tensor | null = null;
+      try {
+        prediction = candidate.predict(probe) as tf.Tensor;
+        const values = Array.from(await prediction.data());
+        if (values.length !== metadata.summary.labels.length || !values.every(value => Number.isFinite(value) && value >= 0 && value <= 1) || Math.abs(values.reduce((sum, value) => sum + value, 0) - 1) > .001)
+          throw new Error("Mô hình không tạo được dự đoán hợp lệ.");
+      } finally { probe.dispose(); prediction?.dispose(); }
+      if (generation !== this.generation) throw new Error("Đã hủy nhập mô hình.");
+      // Invalidate a pending startup load so it cannot overwrite this import.
+      const commitGeneration = ++this.generation;
+      metadata.summary.backend = tf.getBackend();
+      metadata.summary.persisted = true;
+      candidate.setUserDefinedMetadata(metadata as unknown as { [key: string]: object });
+      try { await candidate.save(MODEL_URL, { includeOptimizer: false }); }
+      catch { metadata.summary.persisted = false; }
+      if (commitGeneration !== this.generation) throw new Error("Đã hủy nhập mô hình.");
+      const previous = this.model;
+      this.model = candidate; this.metadata = metadata; candidate = null;
+      previous?.dispose();
+      return metadata.summary;
+    } finally { candidate?.dispose(); this.importing = false; }
+  }
+
   async train(
     samples: Sample[],
     onProgress: (progress: TrainProgress) => void = () => {},
     options: TrainOptions = {},
   ): Promise<ModelSummary> {
-    if (this.training) throw new Error("Mô hình đang huấn luyện.");
+    if (this.training || this.importing) throw new Error("Chờ thao tác mô hình hiện tại hoàn tất.");
     const unique = [
       ...new Map(
         samples.filter((s) => clipUsable(s.frames)).map((s) => [s.id, s]),
@@ -278,6 +337,7 @@ export class TemporalClassifier {
     if (labels.length < 2 || labels.some((label) => label.samples < 3))
       throw new Error("Cần ít nhất 2 nhãn, mỗi nhãn 3 video có bàn tay.");
     await ready();
+    if (this.importing) throw new Error("Chờ nhập mô hình hoàn tất.");
     const token = ++this.generation;
     const split = splitSamples(unique);
     const trainSequences = split.train.map((s) => encodeClip(s.frames));
@@ -391,7 +451,10 @@ export class TemporalClassifier {
   }
 
   async predict(frames: Frame[]): Promise<Recognition> {
-    if (!this.model || !this.metadata)
+    // A concurrent successful import may replace class labels while data() is
+    // awaited. Keep this prediction paired with the model's original metadata.
+    const model = this.model, metadata = this.metadata;
+    if (!model || !metadata)
       return {
         accepted: false,
         reason: "Chưa có mô hình đã huấn luyện.",
@@ -408,15 +471,15 @@ export class TemporalClassifier {
     const input = tf.tensor3d([sequence]);
     let output: tf.Tensor | null = null;
     try {
-      output = this.model.predict(input) as tf.Tensor;
+      output = model.predict(input) as tf.Tensor;
       const scores = Array.from(await output.data());
-      const ranked = this.metadata.summary.labels
+      const ranked = metadata.summary.labels
         .map((label, i) => ({
           ...label,
           index: i,
           distance: featureDistance(
             descriptor,
-            this.metadata!.supports[i].center,
+            metadata.supports[i].center,
           ),
           score: Math.round(scores[i] * 100),
         }))
@@ -427,7 +490,7 @@ export class TemporalClassifier {
         !NEGATIVES.has(top.labelId) &&
         scores[top.index] >= 0.68 &&
         scores[top.index] - scores[runner.index] >= 0.18 &&
-        top.distance <= this.metadata.supports[top.index].radius;
+        top.distance <= metadata.supports[top.index].radius;
       return {
         accepted,
         reason: NEGATIVES.has(top.labelId)

@@ -21,13 +21,14 @@ Bản deploy trên Vercel đọc `vercel.json` từ repo. Vercel cài thư việ
 5. Chuyển **Nhận diện**, bật camera. Từ xuất hiện khi kết quả vượt các ngưỡng chấp nhận. Từ được giữ 1,8 giây sau lần chấp nhận gần nhất. Bấm dấu cộng để đưa từ vào câu. Khi không chắc, màn hình hiện “—”.
 6. **Xuất ZIP** để sao lưu video và landmark. Chọn lọc theo phiên hoặc nhãn nếu bộ dữ liệu lớn. Mỗi tệp nhập hỗ trợ tối đa 1.000 mẫu và 300 MiB giải nén. **Nhập** nhận ZIP hoặc JSON landmark. Train lại sau khi sửa bộ dữ liệu để cập nhật model.
 7. **Thêm từ** tạo nhãn riêng trên máy. Danh mục đánh dấu ✓ khi một nhãn có 30 video trên máy hoặc đã đủ trong kho kết nối. Mẫu JSON thiếu video vẫn dùng được để train nếu hợp lệ, nhưng không tính vào chỉ tiêu video.
-8. Mở **Kho video**, nhập mã kho và bấm **Kết nối**. **Sao lưu nhãn** gửi video của nhãn đang chọn. **Tải về máy** nhập các mẫu còn thiếu trên thiết bị.
+8. Mở **Kho video**, nhập mã kho và bấm **Kết nối**. Video hợp lệ mới quay được lưu trên máy rồi tự gửi lên kho. Phiên kết nối và hàng chờ được giữ khi tải lại trang. **Sao lưu nhãn** gửi các mẫu đã thu từ trước. **Tải về máy** nhập mẫu từ kho.
+9. Sau khi train, dùng **Xuất model** để tải `noi-model.zip`. Mở Nối ở `http://127.0.0.1:5173` và bấm **Nhập model** để chạy webcam tại máy. Tệp ZIP chứa trọng số và thông tin nhận diện. Tệp hai nhãn trong kiểm thử nặng khoảng 191 KiB. Tài sản MediaPipe được cài riêng cùng app. Chọn cùng chế độ Lite hoặc Full như lúc thu mẫu.
 
 Danh mục **6.000 mục nghĩa** dùng để chọn nhãn giao tiếp và prompt. Model cá nhân học các ký hiệu từ mẫu bạn thu. Xem [nguồn từ vựng](public/vocabulary/SOURCES.md) và [kiểm tra tính toàn vẹn](docs/vocabulary-audit.json).
 
 ## Dữ liệu và quyền riêng tư
 
-Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệt của địa chỉ hiện tại. Nút **Sao lưu nhãn** gửi video và điểm tay tới bucket Hugging Face riêng tư. Mã kho cấp quyền quản lý dữ liệu trong bucket. Token Hugging Face chỉ dùng ở máy chủ. Dùng Xuất ZIP hoặc sao lưu nhãn trước khi xóa dữ liệu trình duyệt.
+Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệt của địa chỉ hiện tại. Khi kết nối kho, Nối tự sao lưu video mới và điểm tay tới bucket Hugging Face riêng tư. Mã kho cấp quyền quản lý dữ liệu trong bucket. Token Hugging Face chỉ dùng ở máy chủ. Dùng Xuất ZIP hoặc xác nhận **Đã lên kho** trước khi xóa dữ liệu trình duyệt.
 
 [Thiết kế kho video miễn phí](docs/CLOUD-ARCHIVE.md) · [Theo dõi tay nhanh](docs/FAST-TRACKING.md)
 

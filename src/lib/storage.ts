@@ -18,7 +18,11 @@ async function operation<T>(
 ) {
   const db = await open();
   return new Promise<T>((resolve, reject) => {
-    const tx = db.transaction(STORE, mode);
+    const tx = db.transaction(
+      STORE,
+      mode,
+      mode === "readwrite" ? { durability: "strict" } : undefined,
+    );
     const req = run(tx.objectStore(STORE));
     let result: T;
     req.onsuccess = () => {
@@ -44,10 +48,36 @@ export const saveSample = (sample: Sample) =>
   operation("readwrite", (s) => s.put(sample));
 export const deleteSample = (id: string) =>
   operation("readwrite", (s) => s.delete(id));
+export async function updateBackupStatus(
+  id: string,
+  labelId: string,
+  status: Sample["backupStatus"],
+  error?: string,
+) {
+  const db = await open();
+  return new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(STORE, "readwrite", { durability: "strict" });
+    const store = tx.objectStore(STORE);
+    const lookup = store.get(id);
+    lookup.onsuccess = () => {
+      const sample = lookup.result as Sample | undefined;
+      if (sample?.labelId === labelId)
+        store.put({ ...sample, backupStatus: status, backupError: error });
+    };
+    tx.oncomplete = () => {
+      db.close();
+      resolve();
+    };
+    tx.onabort = () => {
+      db.close();
+      reject(tx.error);
+    };
+  });
+}
 export async function importSamples(samples: Sample[]) {
   const db = await open();
   return new Promise<void>((resolve, reject) => {
-    const tx = db.transaction(STORE, "readwrite");
+    const tx = db.transaction(STORE, "readwrite", { durability: "strict" });
     samples.forEach((sample) => tx.objectStore(STORE).put(sample));
     tx.oncomplete = () => {
       db.close();

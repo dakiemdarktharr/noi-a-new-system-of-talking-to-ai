@@ -45,6 +45,8 @@ export interface Sample {
   videoMime?: string;
   aspect?: number;
   trackingVariant?: "lite" | "full";
+  backupStatus?: "pending" | "saved" | "blocked";
+  backupError?: string;
 }
 export interface VocabularyEntry {
   id: string;

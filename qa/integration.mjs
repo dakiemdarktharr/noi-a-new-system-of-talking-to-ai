@@ -225,7 +225,7 @@ try {
   await download.saveAs("qa/test-dataset.zip");
   await page.getByRole("button", { name: "Xóa mẫu tôi", exact: true }).click();
   await expect(page.locator(".sample-row")).toHaveCount(0);
-  await page.locator("input[type=file]").setInputFiles("qa/test-dataset.zip");
+  await page.locator('input[accept=".json,.zip"]').setInputFiles("qa/test-dataset.zip");
   await expect(page.locator(".sample-row")).toHaveCount(1);
   report.zipRoundTrip = true;
   await page.getByRole("button", { name: "Đổi nhãn tôi", exact: true }).click();

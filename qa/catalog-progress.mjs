@@ -13,9 +13,16 @@ try {
   const page = await context.newPage();
   page.on("pageerror", error => errors.push(String(error)));
   const cloudRequests = [];
+  let connected = false;
   await page.route("**/api/archive?**", async route => {
     const request = route.request();
     cloudRequests.push({ method: request.method(), url: request.url() });
+    const action = new URL(request.url()).searchParams.get("action");
+    if (action === "connect" && request.method() === "POST") connected = true;
+    if (action === "session" || action === "connect") {
+      await route.fulfill({ json: { connected } });
+      return;
+    }
     if (request.method() !== "GET") throw Error("This UI test must not write to a cloud archive");
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ samples: [{ id: "qa-cloud-only-fixture", bytes: 42000 }] }) });
   });
@@ -77,7 +84,7 @@ try {
     return zip.generateAsync({ type: "nodebuffer" });
   };
   const upload = async (buffer, name) => {
-    await page.locator("input[type=file]").setInputFiles({ name, mimeType: "application/zip", buffer });
+    await page.locator('input[accept=".json,.zip"]').setInputFiles({ name, mimeType: "application/zip", buffer });
   };
   await upload(await bundle(30, 29), "qa-29-videos.zip");
   await expect(page.locator(".sample-row")).toHaveCount(30, { timeout: 20000 });
@@ -118,7 +125,7 @@ try {
   await page.locator(".side-panel").getByRole("button", { name: "Kho video", exact: true }).click();
   await page.getByLabel("Mã kho", { exact: true }).fill("noi-qa-only-not-a-real-key");
   await page.locator(".cloud-panel").getByRole("button", { name: "Kết nối", exact: true }).click();
-  await expect(page.locator(".cloud-actions")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Sao lưu nhãn", exact: true })).toBeVisible();
   await expect(page.locator(".cloud-panel")).toContainText("1/30");
   await page.locator(".cloud-files summary").click();
   await expect(page.locator(".cloud-files li")).toHaveCount(1);
@@ -135,7 +142,7 @@ try {
   const a11y = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
   report.mobileA11y = a11y.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.failureSummary) }));
   expect(report.mobileA11y).toEqual([]);
-  expect(cloudRequests.length).toBe(1);
+  expect(cloudRequests.some(r => new URL(r.url).searchParams.has("label"))).toBe(true);
   report.checks.push({ name: "Mobile cloud panel fits; mocked read-only connection renders actions", passed: true });
 
   await page.getByRole("button", { name: `Xóa mẫu ${label}`, exact: true }).first().click();

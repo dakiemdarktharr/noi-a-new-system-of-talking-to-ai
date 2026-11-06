@@ -6,9 +6,11 @@ Ngân sách thiết kế là 6.000 nhãn × 30 clip = 180.000 clip. Máy chủ g
 
 ## Dùng kho
 
-Trong **Thu mẫu**, chọn một nhãn và mở **Kho video**. Nhập mã kho, bấm **Kết nối**, rồi chọn **Sao lưu nhãn**. Nối gửi từng clip có video, điểm tay, mã mẫu, nhãn và mã phiên. Bấm **Tải về máy** trên thiết bị khác để nhập các mẫu còn thiếu của nhãn. Danh mục hiển thị các nhãn đã đủ 30 video trên máy hoặc trong kho sau lần kết nối gần nhất. Bảng kho hiện số video của nhãn đang chọn.
+Trong **Thu mẫu**, mở **Kho video**, nhập mã kho và bấm **Kết nối**. Mỗi clip hợp lệ quay xong được ghi vào trình duyệt trước, sau đó tự gửi video, điểm tay, mã mẫu, nhãn và mã phiên lên kho. Cột **Kho** báo **Đã lên kho** khi máy chủ xác nhận. Nếu mạng lỗi, Nối tiếp tục gửi từ hàng chờ khi tải lại trang hoặc có mạng trở lại. Nút **Thử sao lưu lại** dùng cho mẫu cần xử lý lại. Dùng **Sao lưu nhãn** để gửi clip cũ đã thu trước khi có chức năng tự sao lưu.
 
-Kho chỉ nhận mẫu khi có yêu cầu sao lưu. Ai giữ mã kho có thể đọc, ghi và xóa video trong kho. Chỉ chia sẻ mã với người được phép quản lý mẫu. Xóa trên máy và xóa khỏi kho là hai thao tác riêng. Tệp ZIP giữ nhãn và video để kiểm tra hoặc xử lý lại về sau.
+Bấm **Tải về máy** trên thiết bị khác để nhập các mẫu còn thiếu của nhãn. Danh mục hiển thị các nhãn đã đủ 30 video trên máy hoặc trong kho sau lần kết nối gần nhất. Bảng kho hiện số video của nhãn đang chọn.
+
+Kết nối kho giữ phiên qua tải lại trang bằng cookie HTTPS có chữ ký, thời hạn 30 ngày. Chọn **Ngắt kết nối** để dừng tự sao lưu trên trình duyệt này. Ai giữ mã kho có thể đọc, ghi và xóa video trong kho. Chỉ chia sẻ mã với người được phép quản lý mẫu. Xóa hoặc đổi nhãn trên máy và cập nhật kho là hai thao tác riêng. Tệp ZIP giữ nhãn và video để kiểm tra hoặc xử lý lại về sau.
 
 ## Triển khai
 

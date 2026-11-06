@@ -1,4 +1,9 @@
-import { createHash, timingSafeEqual } from "node:crypto";
+import {
+  createHash,
+  createHmac,
+  randomBytes,
+  timingSafeEqual,
+} from "node:crypto";
 import {
   deleteFiles,
   downloadFile,
@@ -19,6 +24,45 @@ const noCache = {
 const json = (data: unknown, status = 200) =>
   Response.json(data, { status, headers: noCache });
 const validId = (id: string) => /^[a-zA-Z0-9_-]{1,100}$/.test(id);
+const SESSION_COOKIE = "__Secure-noi_archive";
+const SESSION_TTL = 30 * 24 * 60 * 60;
+
+function sessionSignature(payload: string, hash: string) {
+  return createHmac("sha256", Buffer.from(hash, "hex"))
+    .update(`noi-archive:${payload}`)
+    .digest("hex");
+}
+
+function validSession(request: Request, hash: string) {
+  const value = (request.headers.get("cookie") ?? "")
+    .split(/;\s*/)
+    .find((cookie) => cookie.startsWith(`${SESSION_COOKIE}=`))
+    ?.slice(SESSION_COOKIE.length + 1);
+  const parts = /^(\d{10,12})\.([a-f0-9]{32})\.([a-f0-9]{64})$/.exec(
+    value ?? "",
+  );
+  if (!parts || Number(parts[1]) <= Math.floor(Date.now() / 1000)) return false;
+  return timingSafeEqual(
+    Buffer.from(parts[3], "hex"),
+    Buffer.from(sessionSignature(`${parts[1]}.${parts[2]}`, hash), "hex"),
+  );
+}
+
+function sessionResponse(connected: boolean, hash: string) {
+  const payload = `${Math.floor(Date.now() / 1000) + SESSION_TTL}.${randomBytes(16).toString("hex")}`;
+  const value = connected
+    ? `${payload}.${sessionSignature(payload, hash)}`
+    : "";
+  return Response.json(
+    { connected },
+    {
+      headers: {
+        ...noCache,
+        "Set-Cookie": `${SESSION_COOKIE}=${value}; Path=/api/archive; Max-Age=${connected ? SESSION_TTL : 0}; Secure; HttpOnly; SameSite=Strict`,
+      },
+    },
+  );
+}
 
 function validKey(request: Request, hash: string) {
   const auth = request.headers.get("authorization") ?? "";
@@ -56,12 +100,34 @@ export default {
     const hash = process.env.NOI_CLOUD_KEY_SHA256;
     const accessToken = process.env.NOI_HF_ACCESS_TOKEN;
     const name = process.env.NOI_HF_BUCKET;
-    if (!hash || !accessToken || !name)
+    if (!hash || !/^[a-f0-9]{64}$/.test(hash) || !accessToken || !name)
       return json({ error: "Kho mẫu chưa được kết nối." }, 503);
-    if (!validKey(request, hash))
-      return json({ error: "Mã kho không đúng." }, 401);
-
     const url = new URL(request.url);
+    const action = url.searchParams.get("action");
+    const key = validKey(request, hash);
+    const session = validSession(request, hash);
+    const origin = request.headers.get("origin");
+    if (
+      request.method !== "GET" &&
+      ((origin && origin !== url.origin) ||
+        request.headers.get("sec-fetch-site") === "cross-site")
+    )
+      return json({ error: "Yêu cầu kho phải đến từ Nối." }, 403);
+    if (action === "session" && request.method === "GET")
+      return json({ connected: session });
+    if (action === "connect" && request.method === "POST") {
+      return key
+        ? sessionResponse(true, hash)
+        : json({ error: "Mã kho không đúng." }, 401);
+    }
+    if (action === "disconnect" && request.method === "POST")
+      return sessionResponse(false, hash);
+    if (!key && !session)
+      return json(
+        { error: "Kết nối kho đã hết hạn hoặc mã kho không đúng." },
+        401,
+      );
+
     const label = url.searchParams.get("label") ?? "";
     const id = url.searchParams.get("id");
     if (
@@ -180,7 +246,8 @@ export default {
           413,
         );
       const rows = await entries();
-      if (rows.some((row) => row.id === id)) return json({ id, exists: true });
+      if (rows.some((row) => row.id === id))
+        return json({ id, exists: true, complete: rows.length >= VIDEO_GOAL });
       if (rows.length >= VIDEO_GOAL)
         return json({ error: "Nhãn đã đủ 30 video trong kho." }, 409);
       const files = [{ path, content: archive }];
@@ -193,7 +260,10 @@ export default {
           ),
         });
       await uploadFiles({ ...credentials, files });
-      return json({ id, bytes: archive.size }, 201);
+      return json(
+        { id, bytes: archive.size, complete: rows.length + 1 >= VIDEO_GOAL },
+        201,
+      );
     } catch (error) {
       if (missing(error)) return json({ error: "Không tìm thấy mẫu." }, 404);
       return json({ error: "Kho mẫu tạm thời không phản hồi." }, 502);
