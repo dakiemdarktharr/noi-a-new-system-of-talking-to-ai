@@ -47,3 +47,9 @@ Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệ
 `npm run test` chạy kiểm thử hình học, dữ liệu và backpropagation thật trên dữ liệu tổng hợp. `npm run build` kiểm tra TypeScript và tạo `dist`. `npm run preview` mở bản build ở cổng 4173. Dữ liệu cổng 4173 khác cổng 5173.
 
 `node qa/integration.mjs` kiểm thử worker, ảnh tay chính thức, ghi video, đổi nhãn, ZIP, model IndexedDB và từ trên màn hình trong hồ sơ Edge kiểm thử tách biệt. Bật dev server và lưu [ảnh kiểm thử từ MediaPipe](https://storage.googleapis.com/mediapipe-assets/right_hands.jpg) vào `qa/right_hands.jpg` trước khi chạy. Độ chính xác trên người ký cần một bộ kiểm thử riêng.
+
+## Ký hiệu tĩnh và động
+
+Trong Thu mẫu, chọn nhãn rồi đặt **Kiểu ký hiệu → Tĩnh / Động**, sau đó **Huấn luyện model**. Ví dụ cặp do người dùng định nghĩa, “chúng ta” là Tĩnh và “chúng tôi” đi vòng là Động. Ký hiệu động cần được quay đủ đường đi và tư thế cuối. Model đã train ở bản cũ cần train lại để có bộ kiểm tra chuyển động. Thiết lập kiểu dùng khi train được lưu trên trình duyệt, hồ sơ chuyển động đã học đi cùng ZIP model.
+
+[Xem nghiên cứu, kiến trúc và cách đo tốc độ](docs/STATIC-DYNAMIC-RESEARCH.md). Kiểm thử bằng `node qa/motion-recognition.mjs` khi máy chủ dev đang chạy.

@@ -125,7 +125,7 @@ export function featureDistance(a: number[], b: number[]): number {
 }
 
 export function clipUsable(frames: Frame[]): boolean {
-  if (frames.length < 8 || frames.at(-1)!.t - frames[0].t < 500) return false;
+  if (frames.length < 8 || frames.at(-1)!.t - frames[0].t < 240) return false;
   return (
     frames.filter((f) =>
       f.hands.some((h) => h.shape.length === 63 && h.landmarks.length === 21),

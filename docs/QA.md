@@ -19,3 +19,14 @@ Nguồn ảnh là [fixture của MediaPipe](https://storage.googleapis.com/media
 Các kiểm tra chưa thực hiện gồm độ chính xác trên ký hiệu Nối do người thật thực hiện, độ trễ từ đầu động tác đến chữ, đánh giá người ký mới, tốc độ so với đánh máy và mức mỏi. Axe chỉ kiểm tra các lỗi phát hiện tự động trong những trạng thái đã mở.
 
 Chạy lại với `npm run test`, `npm run test:browser` khi dev server đang mở và `npm run test:production` khi bản preview đang mở. Kết quả máy nằm trong `qa/integration-report.json`, `qa/accessibility-report.json` và `qa/production-report.json`.
+
+
+## Hồi quy tĩnh/động ngày 06/11/2026
+
+`tests/unit/motion.test.ts` đã qua 7 ca về chuỗi vòng, tiền tố, tư thế giữ, khoảng mất tracking và hủy kết quả bất đồng bộ. Các ca train/infer, serialization và hình học hiện có cũng đã qua.
+
+`node qa/motion-recognition.mjs` chạy TFJS WebGL trong Edge trên máy phát triển. Ba lớp tổng hợp gồm giữ tĩnh, vòng thuận và vòng ngược. Cả 9 trường hợp của ba mức thời lượng 0,7×/1×/1,3× được chấp nhận đúng lớp. Nửa vòng bị từ chối. Replay tiền tố 280 ms rồi đi vòng chỉ phát một từ, 200 ms sau frame cuối của chuyển động. Đây là hình học tổng hợp và timestamp mô phỏng.
+
+Sau warm-up, 30 lượt classifier có p50 6,8 ms và p95 8,8 ms. Phép đo bao gồm chuẩn bị đặc trưng, CNN và kiểm tra chuyển động, chưa gồm tracker/camera, thời gian giữ tay hoặc render. Model ba lớp có 56.971 tham số, ZIP 214.369 byte. Xuất/nhập giữ nguyên kết quả và hồ sơ chuyển động. Validation đạt 1,0 trên tập tổng hợp rất đơn giản, không đại diện độ chính xác của Nối trên người.
+
+`npm run test:browser` qua kiểm thử worker trên ảnh bàn tay, train/lưu/tải lại model trong IndexedDB, camera canvas + MediaRecorder, dữ liệu ZIP và giao diện. Accessibility không có vi phạm trong bốn trạng thái đã kiểm tra. Cần đo trên video người dùng để xác nhận khả năng phân biệt “chúng ta / chúng tôi”.

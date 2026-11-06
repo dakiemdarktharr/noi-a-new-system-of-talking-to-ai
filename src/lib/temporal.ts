@@ -10,6 +10,8 @@ import {
   TIME_STEPS,
 } from "./features";
 
+import { buildMotionProfile, matchesMotion, prepareMotion, trimMotion, type MotionProfile } from "./motion";
+
 const MODEL_URL = "indexeddb://noi-temporal-v1";
 const NEGATIVES = new Set(["NO_SIGN", "__no_sign__"]);
 export interface ModelLabel {
@@ -19,6 +21,7 @@ export interface ModelLabel {
   windowMs?: number;
 }
 export interface ModelSummary {
+  recognitionVersion?: 2;
   trainedAt: string;
   labels: ModelLabel[];
   sampleCount: number;
@@ -43,6 +46,7 @@ export interface TrainOptions {
   batchSize?: number;
   persist?: boolean;
   seed?: number;
+  gestureKinds?: Record<string, "static" | "dynamic">;
 }
 interface Support {
   center: number[];
@@ -52,6 +56,7 @@ export interface ModelMetadata {
   featureVersion: number;
   summary: ModelSummary;
   supports: Support[];
+  motionProfiles?: MotionProfile[];
 }
 export interface DatasetSplit {
   train: Sample[];
@@ -122,7 +127,7 @@ function buildNetwork(classes: number, seed = 42): tf.Sequential {
   model.add(
     tf.layers.conv1d({
       filters: 32,
-      kernelSize: 3,
+      kernelSize: 5,
       padding: "same",
       activation: "relu",
       kernelInitializer: init(1),
@@ -132,7 +137,7 @@ function buildNetwork(classes: number, seed = 42): tf.Sequential {
   model.add(
     tf.layers.conv1d({
       filters: 48,
-      kernelSize: 3,
+      kernelSize: 5,
       padding: "same",
       activation: "relu",
       kernelInitializer: init(2),
@@ -317,22 +322,7 @@ export class TemporalClassifier {
       .sort()
       .map((labelId) => {
         const rows = unique.filter((s) => s.labelId === labelId);
-        const durations = rows
-          .map((s) => s.frames.at(-1)!.t - s.frames[0].t)
-          .sort((a, b) => a - b);
-        return {
-          labelId,
-          label: rows[0].label,
-          samples: rows.length,
-          windowMs: Math.max(
-            1000,
-            Math.min(
-              4000,
-              Math.round(durations[Math.floor(durations.length / 2)] / 500) *
-                500,
-            ),
-          ),
-        };
+        return { labelId, label: rows[0].label, samples: rows.length };
       });
     if (labels.length < 2 || labels.some((label) => label.samples < 3))
       throw new Error("Cần ít nhất 2 nhãn, mỗi nhãn 3 video có bàn tay.");
@@ -340,15 +330,21 @@ export class TemporalClassifier {
     if (this.importing) throw new Error("Chờ nhập mô hình hoàn tất.");
     const token = ++this.generation;
     const split = splitSamples(unique);
-    const trainSequences = split.train.map((s) => encodeClip(s.frames));
+    const prepared = split.train.map(s => ({ ...s, frames: prepareMotion(s.frames, options.gestureKinds?.[s.labelId]) }));
+    const trainSequences = prepared.map(s => encodeClip(s.frames));
+    // Preserve the entire gesture while changing pace. Never label an unfinished
+    // prefix as the complete dynamic word. Validation clips are never augmented.
+    const augmented = prepared.flatMap(sample => [.75, 1, 1.25].map(pace => ({
+      ...sample, frames: sample.frames.map(frame => ({ ...frame, t: sample.frames[0].t + (frame.t - sample.frames[0].t) * pace })),
+    })));
     const labelIndex = (sample: Sample) =>
       labels.findIndex((label) => label.labelId === sample.labelId);
     const encodeLabels = (rows: Sample[]) =>
       rows.map((row) => labels.map((_, i) => Number(i === labelIndex(row))));
-    const xs = tf.tensor3d(trainSequences),
-      ys = tf.tensor2d(encodeLabels(split.train));
+    const xs = tf.tensor3d(augmented.map(s => encodeClip(s.frames))),
+      ys = tf.tensor2d(encodeLabels(augmented));
     const vx = split.validation.length
-      ? tf.tensor3d(split.validation.map((s) => encodeClip(s.frames)))
+      ? tf.tensor3d(split.validation.map((s) => encodeClip(prepareMotion(s.frames, options.gestureKinds?.[s.labelId]))))
       : null;
     const vy = split.validation.length
       ? tf.tensor2d(encodeLabels(split.validation))
@@ -405,6 +401,7 @@ export class TemporalClassifier {
         evaluated.forEach((t) => t.dispose());
       }
       const summary: ModelSummary = {
+        recognitionVersion: 2,
         trainedAt: new Date().toISOString(),
         labels,
         sampleCount: unique.length,
@@ -421,6 +418,7 @@ export class TemporalClassifier {
         featureVersion: FEATURE_VERSION,
         summary,
         supports: supportsFor(trainSequences, split.train, labels),
+        motionProfiles: labels.map(label => buildMotionProfile(prepared.filter(s => s.labelId === label.labelId).map(s => s.frames), options.gestureKinds?.[label.labelId])),
       };
       model.setUserDefinedMetadata(
         metadata as unknown as { [key: string]: object },
@@ -466,7 +464,8 @@ export class TemporalClassifier {
         reason: "Chưa đủ chuyển động có bàn tay.",
         matches: [],
       };
-    const sequence = encodeClip(frames),
+    const prepared = metadata.motionProfiles ? trimMotion(frames) : frames;
+    const sequence = encodeClip(prepared),
       descriptor = describeClip(sequence);
     const input = tf.tensor3d([sequence]);
     let output: tf.Tensor | null = null;
@@ -490,7 +489,8 @@ export class TemporalClassifier {
         !NEGATIVES.has(top.labelId) &&
         scores[top.index] >= 0.68 &&
         scores[top.index] - scores[runner.index] >= 0.18 &&
-        top.distance <= metadata.supports[top.index].radius;
+        top.distance <= metadata.supports[top.index].radius &&
+        (!metadata.motionProfiles || matchesMotion(prepared, metadata.motionProfiles[top.index]));
       return {
         accepted,
         reason: NEGATIVES.has(top.labelId)

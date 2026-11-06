@@ -44,6 +44,7 @@ import {
   quaternionDistance,
   extractHand,
 } from "./lib/geometry";
+import { SignSegmenter } from "./lib/motion";
 import { quality } from "./lib/recognizer";
 import { fixtureHand } from "./lib/fixtures";
 import {
@@ -124,6 +125,12 @@ export default function App() {
   const [customEntries, setCustomEntries] = useState(loadCustomWords);
   const [newWord, setNewWord] = useState(false),
     [wordText, setWordText] = useState("");
+  const [gestureKinds, setGestureKinds] = useState<Record<string, "static" | "dynamic">>(() => {
+    try {
+      const value = JSON.parse(localStorage.getItem("noi-gesture-kinds-v1") || "{}");
+      return Object.fromEntries(Object.entries(value).filter(([, kind]) => kind === "static" || kind === "dynamic")) as Record<string, "static" | "dynamic">;
+    } catch { return {}; }
+  });
   const [showCloud, setShowCloud] = useState(false);
   const [cloudCompleted, setCloudCompleted] = useState<string[]>([]);
   const [onlyComplete, setOnlyComplete] = useState(false);
@@ -135,7 +142,7 @@ export default function App() {
   );
   const wordCount = entries.length - 1;
   const model = useRef(new TemporalClassifier()),
-    rolling = useRef<Frame[]>([]),
+    segmenter = useRef(new SignSegmenter()),
     lastPredict = useRef(0),
     predictBusy = useRef(false),
     mode = useRef(view),
@@ -160,7 +167,7 @@ export default function App() {
   const clearPrediction = useCallback(() => {
     predictionVersion.current++;
     clearTimeout(predictionExpiry.current);
-    rolling.current = [];
+    segmenter.current.reset();
     setResult(empty);
   }, []);
   const onFrame = useCallback(
@@ -174,58 +181,30 @@ export default function App() {
         !rec.aborted
       )
         rec.frames.push({ ...frame, t: frame.t - rec.start });
-      rolling.current.push(frame);
-      rolling.current = rolling.current.filter((f) => f.t >= frame.t - 4200);
-      if (!frame.hands.length) predictionVersion.current++;
+      segmenter.current.push(frame);
       if (
         mode.current !== "recognize" ||
         !model.current.getSummary() ||
         predictBusy.current ||
-        frame.t - lastPredict.current < 250 ||
-        !frame.hands.length
-      )
-        return;
+        frame.t - lastPredict.current < 100
+      ) return;
+      const input = segmenter.current.candidate();
+      if (!input) return;
       lastPredict.current = frame.t;
       predictBusy.current = true;
-      const input = rolling.current.slice(),
-        version = predictionVersion.current;
-      const windows = [
-        ...new Set(
-          model.current.getSummary()!.labels.map((l) => l.windowMs || 3000),
-        ),
-      ];
-      (async () => {
-        const predictions: Recognition[] = [];
-        for (const ms of windows) {
-          const clip = input.filter((f) => f.t >= frame.t - ms);
-          if (clip.length < 2 || clip.at(-1)!.t - clip[0].t < ms * 0.9)
-            continue;
-          const prediction = await model.current.predict(clip);
-          const targetWindow =
-            model.current
-              .getSummary()
-              ?.labels.find((l) => l.labelId === prediction.matches[0]?.labelId)
-              ?.windowMs || 3000;
-          if (targetWindow === ms) predictions.push(prediction);
-        }
-        return (
-          predictions.sort(
-            (a, b) =>
-              Number(b.accepted) - Number(a.accepted) ||
-              (b.matches[0]?.score || 0) - (a.matches[0]?.score || 0),
-          )[0] || empty
-        );
-      })()
+      const version = predictionVersion.current;
+      const revision = segmenter.current.revision;
+      model.current.predict(input)
         .then((prediction) => {
           if (
             !alive.current ||
             mode.current !== "recognize" ||
-            version !== predictionVersion.current
+            version !== predictionVersion.current ||
+            revision !== segmenter.current.revision
           )
             return;
           if (!prediction.accepted) return;
-          // A motion can fit one window only. Keep that result briefly so it
-          // remains readable as the user's hands move away or come to rest.
+          segmenter.current.confirm(revision);
           setResult(prediction);
           clearTimeout(predictionExpiry.current);
           predictionExpiry.current = window.setTimeout(
@@ -268,7 +247,10 @@ export default function App() {
       .catch(() => notify("Không mở được bộ nhớ mẫu của trình duyệt."));
     model.current
       .load()
-      .then(setSummary)
+      .then(loaded => {
+        setSummary(loaded);
+        if (loaded && !loaded.recognitionVersion) notify("Model cũ. Huấn luyện lại để học ký hiệu tĩnh và động.");
+      })
       .catch(() => notify("Không tải được model đã lưu."));
     return () => {
       alive.current = false;
@@ -503,7 +485,7 @@ export default function App() {
     setProgress(null);
     setResult(empty);
     try {
-      const trained = await model.current.train(samples, setProgress);
+      const trained = await model.current.train(samples, setProgress, { gestureKinds });
       setSummary(trained);
       notify(
         trained.persisted
@@ -536,9 +518,9 @@ export default function App() {
       setSummary(loaded);
       setView("recognize");
       notify(
-        loaded.persisted
-          ? "Đã nhập và lưu model."
-          : "Đã nhập model cho phiên này.",
+        !loaded.recognitionVersion
+          ? "Đã nhập model cũ. Huấn luyện lại để học ký hiệu tĩnh và động."
+          : loaded.persisted ? "Đã nhập và lưu model." : "Đã nhập model cho phiên này.",
       );
     } catch (e) {
       notify(e instanceof Error ? e.message : "Không nhập được model.");
@@ -1014,6 +996,28 @@ export default function App() {
                   value={Math.min(selectedVideos, VIDEO_GOAL)}
                   aria-label={`Video của ${selected.label}`}
                 />
+                <div className="capture-settings">
+                  <label htmlFor="gesture-kind">Kiểu ký hiệu</label>
+                  <select
+                    id="gesture-kind"
+                    aria-label="Kiểu ký hiệu"
+                    value={gestureKinds[selected.id] || "auto"}
+                    disabled={recording || training}
+                    onChange={event => {
+                      const next = { ...gestureKinds };
+                      const kind = event.target.value;
+                      if (kind === "static" || kind === "dynamic") next[selected.id] = kind;
+                      else delete next[selected.id];
+                      setGestureKinds(next);
+                      try { localStorage.setItem("noi-gesture-kinds-v1", JSON.stringify(next)); }
+                      catch { notify("Không lưu được kiểu ký hiệu. Xuất model sau khi train để giữ thiết lập."); }
+                    }}
+                  >
+                    <option value="auto">Tự xác định</option>
+                    <option value="static">Tĩnh</option>
+                    <option value="dynamic">Động</option>
+                  </select>
+                </div>
                 <div className="word-actions">
                   <button
                     disabled={recording || training}

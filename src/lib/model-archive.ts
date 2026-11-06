@@ -1,10 +1,11 @@
 import JSZip from "jszip";
 import type * as tf from "@tensorflow/tfjs";
 import type { ModelMetadata, ModelSummary } from "./temporal";
+import { MOTION_STEPS, MOTION_WIDTH, type MotionProfile } from "./motion";
 import { FEATURE_COUNT, FEATURE_VERSION, TIME_STEPS } from "./features";
 
 export const MODEL_ARCHIVE_LIMIT = 16 * 1024 * 1024;
-const JSON_LIMIT = 12 * 1024 * 1024;
+const JSON_LIMIT = 32 * 1024 * 1024;
 const WEIGHTS_LIMIT = 512 * 1024;
 const FORMAT = "noi-temporal-model";
 const VERSION = 1;
@@ -39,7 +40,7 @@ export function validateModelMetadata(value: unknown): ModelMetadata {
   assert(["session", "clip", "none"].includes(summary.validationMode as string));
   assert((summary.validationCount === 0) === (summary.validationMode === "none"));
   assert(summary.validationAccuracy === null || finite(summary.validationAccuracy, 0, 1));
-  assert(integer(summary.epochs, 1, 150) && summary.parameters === 52264 + 33 * labels.length);
+  assert(integer(summary.epochs, 1, 150) && summary.parameters === (summary.recognitionVersion === 2 ? 56872 : 52264) + 33 * labels.length);
   assert(text(summary.backend, 64) && typeof summary.persisted === "boolean");
   assert(Array.isArray(source.supports) && source.supports.length === labels.length, "Thiếu dữ liệu hỗ trợ nhận diện.");
   const supports = source.supports.map(raw => {
@@ -48,16 +49,37 @@ export function validateModelMetadata(value: unknown): ModelMetadata {
     assert(finite(support.radius, .065, .25), "Ngưỡng hỗ trợ nhận diện không hợp lệ.");
     return { center: support.center.slice() as number[], radius: support.radius };
   });
+  assert(summary.recognitionVersion === undefined || summary.recognitionVersion === 2);
+  let motionProfiles: MotionProfile[] | undefined;
+  if (summary.recognitionVersion === 2) {
+    assert(Array.isArray(source.motionProfiles) && source.motionProfiles.length === labels.length, "Thiếu hồ sơ chuyển động.");
+    motionProfiles = source.motionProfiles.map(raw => {
+      const profile = object(raw);
+      assert(profile.kind === "static" || profile.kind === "dynamic");
+      assert(finite(profile.minTravel, 0, 100) && finite(profile.tolerance, .09, .3));
+      assert(Array.isArray(profile.templates) && profile.templates.length >= 1 && profile.templates.length <= 2);
+      const templates = profile.templates.map(rawTemplate => {
+        assert(Array.isArray(rawTemplate) && rawTemplate.length === MOTION_STEPS);
+        return rawTemplate.map(row => {
+          assert(Array.isArray(row) && row.length === MOTION_WIDTH && row.every(value => finite(value, -1, 1)));
+          assert([0, 1].includes(row[0]) && [0, 1].includes(row[14]));
+          return row.slice() as number[];
+        });
+      });
+      return { kind: profile.kind, minTravel: profile.minTravel, tolerance: profile.tolerance, templates };
+    });
+  }
   return { featureVersion: FEATURE_VERSION, summary: {
+    ...(summary.recognitionVersion === 2 ? { recognitionVersion: 2 as const } : {}),
     trainedAt: summary.trainedAt, labels, sampleCount: summary.sampleCount, trainCount: summary.trainCount,
     validationCount: summary.validationCount, validationMode: summary.validationMode as ModelSummary["validationMode"],
     validationAccuracy: summary.validationAccuracy as number | null, epochs: summary.epochs, parameters: summary.parameters as number,
     backend: summary.backend, persisted: summary.persisted,
-  }, supports };
+  }, supports, ...(motionProfiles ? { motionProfiles } : {}) };
 }
 
 /** Only the versioned Nối CNN is accepted; arbitrary graphs are never allocated. */
-function validateTopology(value: unknown, classes: number): { topology: ObjectMap; names: string[]; shapes: number[][] } {
+function validateTopology(value: unknown, classes: number, recognitionVersion?: 2): { topology: ObjectMap; names: string[]; shapes: number[][] } {
   const topology = object(value), config = object(topology.config);
   assert(topology.class_name === "Sequential" && Array.isArray(config.layers) && config.layers.length === 8, "Kiến trúc mô hình không tương thích với Nối.");
   const kinds = ["Conv1D", "Conv1D", "AveragePooling1D", "Conv1D", "Flatten", "Dense", "Dropout", "Dense"];
@@ -69,9 +91,10 @@ function validateTopology(value: unknown, classes: number): { topology: ObjectMa
     assert(c.dtype === undefined || c.dtype === "float32");
     const clean: ObjectMap = { name: c.name, trainable: false };
     if (kinds[i] === "Conv1D") {
-      const filters = i === 0 ? 24 : i === 1 ? 32 : 48, kernel = i === 0 ? 5 : 3;
-      assert(c.filters === filters && equalShape(c.kernel_size, [kernel]) && equalShape(c.strides, [1]) && equalShape(c.dilation_rate, [1]) && c.padding === "same" && c.activation === "relu" && c.use_bias === true);
-      Object.assign(clean, { filters, kernel_size: [kernel], strides: [1], dilation_rate: [1], padding: "same", activation: "relu", use_bias: true,
+      const filters = i === 0 ? 24 : i === 1 ? 32 : 48, kernel = i === 0 || recognitionVersion === 2 ? 5 : 3;
+      const dilation = 1;
+      assert(c.filters === filters && equalShape(c.kernel_size, [kernel]) && equalShape(c.strides, [1]) && equalShape(c.dilation_rate, [dilation]) && c.padding === "same" && c.activation === "relu" && c.use_bias === true);
+      Object.assign(clean, { filters, kernel_size: [kernel], strides: [1], dilation_rate: [dilation], padding: "same", activation: "relu", use_bias: true,
         kernel_initializer: { class_name: "Zeros", config: {} }, bias_initializer: { class_name: "Zeros", config: {} } });
       if (i === 0) Object.assign(clean, { batch_input_shape: [null, TIME_STEPS, FEATURE_COUNT], dtype: "float32" });
       names.push(c.name + "/kernel", c.name + "/bias"); shapes.push([kernel, i === 0 ? FEATURE_COUNT : i === 1 ? 24 : 32, filters], [filters]);
@@ -126,7 +149,7 @@ function validateWeights(data: ArrayBuffer, specs: tf.io.WeightsManifestEntry[])
 
 export async function packModelArchive(artifacts: tf.io.ModelArtifacts, rawMetadata: ModelMetadata): Promise<Blob> {
   const metadata = validateModelMetadata(rawMetadata);
-  const architecture = validateTopology(artifacts.modelTopology, metadata.summary.labels.length);
+  const architecture = validateTopology(artifacts.modelTopology, metadata.summary.labels.length, metadata.summary.recognitionVersion);
   const weightSpecs = validateSpecs(artifacts.weightSpecs, architecture.names, architecture.shapes);
   const data = weightBytes(artifacts.weightData); validateWeights(data, weightSpecs);
   const manifest = JSON.stringify({ format: FORMAT, version: VERSION, featureVersion: FEATURE_VERSION, timeSteps: TIME_STEPS,
@@ -176,7 +199,7 @@ export async function unpackModelArchive(file: Blob): Promise<{ artifacts: tf.io
   assert(manifest.format === FORMAT && manifest.version === VERSION, "Định dạng hoặc phiên bản tệp mô hình không được hỗ trợ.");
   assert(manifest.featureVersion === FEATURE_VERSION && manifest.timeSteps === TIME_STEPS && manifest.featureCount === FEATURE_COUNT, "Phiên bản đặc trưng của mô hình không tương thích.");
   const metadata = validateModelMetadata(manifest.metadata);
-  const architecture = validateTopology(manifest.modelTopology, metadata.summary.labels.length);
+  const architecture = validateTopology(manifest.modelTopology, metadata.summary.labels.length, metadata.summary.recognitionVersion);
   const weightSpecs = validateSpecs(manifest.weightSpecs, architecture.names, architecture.shapes);
   const data = await readBounded(weights, WEIGHTS_LIMIT);
   validateWeights(data, weightSpecs);
