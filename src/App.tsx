@@ -111,6 +111,7 @@ export default function App() {
   const [savingClip, setSavingClip] = useState(false);
   const [unsavedClips, setUnsavedClips] = useState<string[]>([]);
   const [busyModelFile, setBusyModelFile] = useState(false);
+  const [recognitionReason, setRecognitionReason] = useState("Chờ ký hiệu");
   const [result, setResult] = useState<Recognition>(empty),
     [mirrored, setMirrored] = useState(true),
     [details, setDetails] = useState(false),
@@ -169,6 +170,7 @@ export default function App() {
     clearTimeout(predictionExpiry.current);
     segmenter.current.reset();
     setResult(empty);
+    setRecognitionReason("Chờ ký hiệu");
   }, []);
   const onFrame = useCallback(
     (frame: Frame) => {
@@ -181,7 +183,10 @@ export default function App() {
         !rec.aborted
       )
         rec.frames.push({ ...frame, t: frame.t - rec.start });
+      const previousRevision = segmenter.current.revision;
       segmenter.current.push(frame);
+      if (mode.current === "recognize" && previousRevision !== segmenter.current.revision)
+        setRecognitionReason(frame.hands.length ? "Chờ tay ổn định" : "Không thấy tay");
       if (
         mode.current !== "recognize" ||
         !model.current.getSummary() ||
@@ -203,6 +208,7 @@ export default function App() {
             revision !== segmenter.current.revision
           )
             return;
+          setRecognitionReason(prediction.reason);
           if (!prediction.accepted) return;
           segmenter.current.confirm(revision);
           setResult(prediction);
@@ -876,6 +882,7 @@ export default function App() {
                 </span>
                 <span>{Math.round(camera.metrics.ms)} ms/frame</span>
                 <span>{camera.metrics.delegate || "—"}</span>
+                {view === "recognize" && <span aria-label="Trạng thái nhận diện">{recognitionReason}</span>}
                 <button onClick={() => setLab(true)} className="text-button">
                   Kiểm tra rotation
                   <ArrowUpRight size={14} />

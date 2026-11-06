@@ -50,6 +50,6 @@ Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệ
 
 ## Ký hiệu tĩnh và động
 
-Trong Thu mẫu, chọn nhãn rồi đặt **Kiểu ký hiệu → Tĩnh / Động**, sau đó **Huấn luyện model**. Ví dụ cặp do người dùng định nghĩa, “chúng ta” là Tĩnh và “chúng tôi” đi vòng là Động. Ký hiệu động cần được quay đủ đường đi và tư thế cuối. Model đã train ở bản cũ cần train lại để có bộ kiểm tra chuyển động. Thiết lập kiểu dùng khi train được lưu trên trình duyệt, hồ sơ chuyển động đã học đi cùng ZIP model.
+Trong Thu mẫu, chọn nhãn rồi đặt **Kiểu ký hiệu → Tĩnh / Động**, sau đó **Huấn luyện model**. Theo định nghĩa cập nhật của người dùng, “chúng ta” là Động. Ký hiệu động cần được quay đủ đường đi và tư thế cuối. Model đã train ở bản cũ cần train lại để có bộ kiểm tra chuyển động. Thiết lập kiểu dùng khi train được lưu trên trình duyệt, hồ sơ chuyển động đã học đi cùng ZIP model.
 
 [Xem nghiên cứu, kiến trúc và cách đo tốc độ](docs/STATIC-DYNAMIC-RESEARCH.md). Kiểm thử bằng `node qa/motion-recognition.mjs` khi máy chủ dev đang chạy.

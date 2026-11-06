@@ -1,4 +1,4 @@
-import type { Frame } from "../types";
+import type { Frame, Quat, Vec3 } from "../types";
 import { encodeClip, HAND_FEATURES } from "./features";
 import { handDistance } from "./recognizer";
 
@@ -9,6 +9,35 @@ export interface MotionProfile {
   templates: number[][][];
   minTravel: number;
   tolerance: number;
+}
+
+/** Denoise boundary and trajectory checks. The CNN still receives measured
+ * landmarks, so fast finger motion and rotation remain in its input. */
+function averagedPose(frames: Frame[], center?: Frame): Frame {
+  const latest = center ?? frames.at(-1)!;
+  const recent = center ? frames : frames.filter(frame => frame.t >= latest.t - 100);
+  return {
+    ...latest,
+    hands: latest.hands.map(hand => {
+      const observations = recent.flatMap(frame => frame.hands.filter(other => other.side === hand.side));
+      const mean = (rows: number[][]) => rows[0].map((_, i) => rows.reduce((sum, row) => sum + row[i], 0) / rows.length);
+      const quaternions = observations.map(other => {
+        const dot = other.quaternion.reduce((sum, value, i) => sum + value * hand.quaternion[i], 0);
+        return other.quaternion.map(value => dot < 0 ? -value : value);
+      });
+      const rotation = mean(quaternions);
+      const length = Math.hypot(...rotation);
+      return {
+        ...hand,
+        wrist: mean(observations.map(other => other.wrist)) as Vec3,
+        shape: mean(observations.map(other => other.shape)),
+        curls: mean(observations.map(other => other.curls)),
+        radial: mean(observations.map(other => other.radial)) as Vec3,
+        forward: mean(observations.map(other => other.forward)) as Vec3,
+        quaternion: rotation.map(value => value / length) as Quat,
+      };
+    }),
+  };
 }
 
 export function prepareMotion(frames: Frame[], kind?: "static" | "dynamic"): Frame[] {
@@ -38,14 +67,15 @@ export function trimMotion(frames: Frame[]): Frame[] {
   const visible = frames.filter(f => f.hands.length);
   if (visible.length < 8) return frames;
   let anchor = visible[0], first = -1, last = -1;
-  visible.forEach((frame, i) => {
-    if (poseDelta(anchor, frame) > .035) {
+  visible.forEach((_frame, i) => {
+    const pose = averagedPose(visible.slice(Math.max(0, i - 10), i + 1));
+    if (poseDelta(anchor, pose) > .035) {
       if (first < 0) first = Math.max(0, i - 2);
       last = i;
-      anchor = frame;
+      anchor = pose;
     }
   });
-  if (first < 0 || motionExtent(visible) < .12) {
+  if (first < 0) {
     const middle = visible[Math.floor(visible.length / 2)].t;
     const hold = visible.filter(f => Math.abs(f.t - middle) <= 300);
     return hold.length >= 8 ? hold : visible;
@@ -61,10 +91,15 @@ export function motionExtent(frames: Frame[]): number {
 
 /** Compact ordered templates, independently normalized for clip position. */
 export function motionSequence(frames: Frame[]): number[][] {
-  return encodeClip(frames, MOTION_STEPS).map(row => [0, HAND_FEATURES].flatMap(offset => [
+  // Reduce interior jitter before downsampling, while preserving measured
+  // endpoints. Averaging endpoints would shift the origin and final pose.
+  const poses = frames.map((frame, i) =>
+    i === 0 || i === frames.length - 1 ? frame : averagedPose(frames.slice(i - 1, i + 2), frame));
+  const points = encodeClip(poses, Math.max(MOTION_STEPS, Math.min(128, poses.length))).map(row => [0, HAND_FEATURES].flatMap(offset => [
     row[offset], ...row.slice(offset + 72, offset + 74),
     ...row.slice(offset + 64, offset + 70), ...row.slice(offset + 76, offset + 81),
-  ]).map(value => Math.round(value * 1000) / 1000));
+  ]));
+  return resamplePath(points).map(row => row.map(value => Math.round(value * 1000) / 1000));
 }
 
 export function motionPointDistance(a: number[], b: number[]): number {
@@ -84,15 +119,42 @@ export function motionTravel(sequence: number[][]): number {
   return sequence.slice(1).reduce((sum, row, i) => sum + motionPointDistance(row, sequence[i]), 0);
 }
 
+/** Parameterize the verifier by progress along the path. Extra held frames at
+ * either end must not consume the few available trajectory points. The CNN
+ * retains timestamps and duration separately. Also supports older templates. */
+function resamplePath(points: number[][]): number[][] {
+  const cumulative = [0];
+  for (let i = 1; i < points.length; i++)
+    cumulative.push(cumulative[i - 1] + motionPointDistance(points[i], points[i - 1]));
+  const total = cumulative.at(-1)!;
+  if (total < 1e-8) return Array.from({ length: MOTION_STEPS }, () => points[0].slice());
+  let cursor = 1;
+  return Array.from({ length: MOTION_STEPS }, (_, i) => {
+    const target = total * i / (MOTION_STEPS - 1);
+    while (cursor < points.length - 1 && cumulative[cursor] < target) cursor++;
+    const fraction = (target - cumulative[cursor - 1]) / Math.max(1e-8, cumulative[cursor] - cumulative[cursor - 1]);
+    return points[cursor - 1].map((value, j) => {
+      if (j === 0 || j === 14) return fraction < .5 ? value : points[cursor][j];
+      return value + fraction * (points[cursor][j] - value);
+    });
+  });
+}
+
 /** Closed DTW endpoints prevent a prefix from matching only part of a template. */
 export function motionDistance(a: number[][], b: number[][]): number {
+  a = resamplePath(a);
+  b = resamplePath(b);
   const n = a.length, m = b.length;
   const costs = Array.from({ length: n + 1 }, () => new Float64Array(m + 1).fill(Infinity));
+  const lengths = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
   costs[0][0] = 0;
   for (let i = 1; i <= n; i++) for (let j = Math.max(1, i - 4); j <= Math.min(m, i + 4); j++) {
-    costs[i][j] = motionPointDistance(a[i - 1], b[j - 1]) + Math.min(costs[i - 1][j], costs[i][j - 1], costs[i - 1][j - 1]);
+    const previous = [[i - 1, j - 1], [i - 1, j], [i, j - 1]].reduce((best, cell) =>
+      costs[cell[0]][cell[1]] < costs[best[0]][best[1]] ? cell : best);
+    costs[i][j] = motionPointDistance(a[i - 1], b[j - 1]) + costs[previous[0]][previous[1]];
+    lengths[i][j] = lengths[previous[0]][previous[1]] + 1;
   }
-  return costs[n][m] / Math.max(n, m) + .4 * motionPointDistance(a[n - 1], b[m - 1]);
+  return costs[n][m] / Math.max(1, lengths[n][m]) + .4 * motionPointDistance(a[n - 1], b[m - 1]);
 }
 
 export function buildMotionProfile(clips: Frame[][], kind?: "static" | "dynamic"): MotionProfile {
@@ -113,7 +175,10 @@ export function matchesMotion(frames: Frame[], profile: MotionProfile): boolean 
   const sequence = motionSequence(frames);
   const extent = motionExtent(frames);
   if (profile.kind === "static") return extent < .12;
-  return extent >= .12 && motionTravel(sequence) >= profile.minTravel &&
+  const templateExtent = Math.min(...profile.templates.map(template =>
+    Math.max(...template.map(row => motionPointDistance(row, template[0])))));
+  const observedExtent = Math.max(...sequence.map(row => motionPointDistance(row, sequence[0])));
+  return observedExtent >= Math.max(.025, templateExtent * .45) && motionTravel(sequence) >= profile.minTravel &&
     profile.templates.some(template => motionDistance(sequence, template) <= profile.tolerance);
 }
 
@@ -125,33 +190,43 @@ export class SignSegmenter {
   private stableSince = 0;
   private consumed = false;
   private attemptedAt = -Infinity;
+  private lastObservation: Frame | null = null;
+  private visible = false;
   revision = 0;
 
   reset() {
     this.frames = []; this.anchor = null; this.consumed = false;
     this.stableSince = 0; this.attemptedAt = -Infinity; this.revision++;
+    this.lastObservation = null; this.visible = false;
   }
 
   push(frame: Frame) {
+    const previous = this.lastObservation;
+    if (previous && (frame.t - previous.t > 250 || frame.t <= previous.t)) this.reset();
+    if (!frame.hands.length) {
+      if (this.visible) this.revision++;
+      this.visible = false;
+      if (previous && frame.t - previous.t > 120) this.reset();
+      return;
+    }
+    if (!this.visible && previous && (frame.t - previous.t > 120 || poseDelta(previous, frame) > .12)) this.reset();
+    this.visible = true;
+    this.lastObservation = frame;
     const last = this.frames.at(-1);
-    if (!frame.hands.length || (last && (frame.t - last.t > 250 || frame.t <= last.t))) this.reset();
-    if (!frame.hands.length) return;
-    if (!this.anchor) { this.anchor = frame; this.stableSince = frame.t; }
-    if (poseDelta(this.anchor, frame) > .035) {
+    const pose = averagedPose([...this.frames.slice(-10), frame]);
+    if (!this.anchor) { this.anchor = pose; this.stableSince = frame.t; }
+    if (poseDelta(this.anchor, pose) > .035) {
       if (this.consumed) { this.frames = last ? [last] : []; this.consumed = false; }
-      this.anchor = frame; this.stableSince = frame.t; this.revision++;
+      this.anchor = pose; this.stableSince = frame.t; this.revision++;
     }
     this.frames.push(frame);
-    // Never silently turn the tail of a long dynamic sign into a static word.
-    if (this.frames.at(-1)!.t - this.frames[0].t > 5000) {
-      this.frames = [frame]; this.anchor = frame; this.stableSince = frame.t;
-      this.consumed = true; this.revision++;
-    }
+    // Bound memory without marking an unrecognized gesture as already emitted.
+    this.frames = this.frames.filter(item => item.t >= frame.t - 5000);
   }
 
   candidate(): Frame[] | null {
     const last = this.frames.at(-1);
-    if (!last || this.consumed || this.frames.length < 8 || last.t - this.attemptedAt < 100) return null;
+    if (!last || !this.visible || this.consumed || this.frames.length < 8 || last.t - this.attemptedAt < 100) return null;
     const dynamic = motionExtent(this.frames) >= .12;
     const settleMs = dynamic ? 180 : 650;
     if (last.t - this.stableSince < settleMs || last.t - this.frames[0].t < 240) return null;
@@ -162,7 +237,8 @@ export class SignSegmenter {
       this.frames = this.frames.filter(f => f.t >= this.stableSince);
       this.revision++;
     }
-    return trimMotion(this.frames);
+    // Preprocessing belongs to the classifier, once, as it does during train.
+    return this.frames.slice();
   }
 
   confirm(revision: number) {

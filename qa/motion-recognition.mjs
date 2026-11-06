@@ -6,7 +6,7 @@ try {
   await page.goto("http://127.0.0.1:5173", { waitUntil: "networkidle" });
   const report = await page.evaluate(async () => {
     const { TemporalClassifier } = await import("/src/lib/temporal.ts");
-    const { SignSegmenter } = await import("/src/lib/motion.ts");
+    const { SignSegmenter, motionSequence, motionTravel, motionDistance, trimMotion } = await import("/src/lib/motion.ts");
     const { fixtureHand } = await import("/src/lib/fixtures.ts");
     const { extractHand } = await import("/src/lib/geometry.ts");
     const clip = (label, variation = 0, pace = 1) => Array.from({ length: 41 }, (_, i) => {
@@ -47,6 +47,39 @@ try {
       if (result.accepted) { events.push({ label: result.matches[0].labelId, t: frame.t }); stream.confirm(stream.revision); }
     }
     if (events.length !== 1 || events[0].label !== "loop" || events[0].t < 1520) throw Error(`Premature/duplicate stream emission: ${JSON.stringify(events)}`);
+    const noisyStreams = [];
+    const heldPose = clip("static")[0];
+    const staticFrames = Array.from({ length: 100 }, (_, i) => ({ ...heldPose, t: i * 40 }));
+    for (const [expected, source] of [["static", staticFrames], ["loop", [...prefix, ...action, ...tail]]]) {
+      const decoder = new SignSegmenter();
+      const recognized = [], rejected = [];
+      let candidateCount = 0;
+      for (const [i, frame] of source.entries()) {
+        const jitter = i % 2 ? .008 : -.008;
+        const noisy = { ...frame, hands: frame.hands.map(hand => ({ ...hand,
+          wrist: [hand.wrist[0] + jitter, hand.wrist[1], hand.wrist[2]],
+        })) };
+        // A brief detector dropout in the hold must not erase all preceding evidence.
+        if (expected === "static" && i % 10 === 9) noisy.hands = [];
+        decoder.push(noisy);
+        const candidate = decoder.candidate();
+        if (!candidate) continue;
+        candidateCount++;
+        const prediction = await model.predict(candidate);
+        if (!prediction.accepted) {
+          const profile = model.metadata.motionProfiles[summary.labels.findIndex(label => label.labelId === prediction.matches[0]?.labelId)];
+          const sequence = motionSequence(trimMotion(candidate));
+          rejected.push({ motion: { travel: motionTravel(sequence), minTravel: profile?.minTravel, tolerance: profile?.tolerance, distance: profile?.templates.map(template => motionDistance(sequence, template)), trimmed: [trimMotion(candidate)[0].t, trimMotion(candidate).at(-1).t] }, reason: prediction.reason, top: prediction.matches[0], duration: candidate.at(-1).t - candidate[0].t });
+        }
+        if (prediction.accepted) {
+          recognized.push({ label: prediction.matches[0].labelId, t: frame.t });
+          decoder.confirm(decoder.revision);
+        }
+      }
+      if (recognized.length !== 1 || recognized[0].label !== expected)
+        throw Error(`Noisy ${expected}: ${JSON.stringify({ candidateCount, recognized, rejected })}`);
+      noisyStreams.push({ expected, candidateCount, recognized });
+    }
     const archive = await model.exportModel();
     const imported = new TemporalClassifier(); await imported.importModel(archive);
     const restored = await imported.predict(clip("loop"));
@@ -54,7 +87,7 @@ try {
     imported.dispose(); model.dispose();
     return { kind: "Synthetic geometry software regression; not human signing accuracy", backend: summary.backend,
       parameters: summary.parameters, archiveBytes: archive.size, validationAccuracy: summary.validationAccuracy,
-      cases, partialRejected: !partial.accepted, events, endpointDelayMs: events[0].t - 1520,
+      cases, partialRejected: !partial.accepted, events, noisyStreams, endpointDelayMs: events[0].t - 1520,
       classifierMs: { p50: latency[15], p95: latency[28], samples: latency.length } };
   });
   await page.getByRole("button", { name: "Thu mẫu", exact: true }).click();

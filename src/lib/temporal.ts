@@ -485,19 +485,16 @@ export class TemporalClassifier {
         .sort((a, b) => b.score - a.score);
       const top = ranked[0],
         runner = ranked[1];
-      const accepted =
-        !NEGATIVES.has(top.labelId) &&
-        scores[top.index] >= 0.68 &&
-        scores[top.index] - scores[runner.index] >= 0.18 &&
-        top.distance <= metadata.supports[top.index].radius &&
-        (!metadata.motionProfiles || matchesMotion(prepared, metadata.motionProfiles[top.index]));
+      let reason = "";
+      if (NEGATIVES.has(top.labelId)) reason = "Không có ký hiệu.";
+      else if (scores[top.index] < .68) reason = "Độ tin cậy thấp.";
+      else if (scores[top.index] - scores[runner.index] < .18) reason = "Hai nhãn còn giống nhau.";
+      else if (top.distance > metadata.supports[top.index].radius) reason = "Khác dữ liệu đã học.";
+      else if (metadata.motionProfiles && !matchesMotion(prepared, metadata.motionProfiles[top.index])) reason = "Chưa khớp chuyển động đầy đủ.";
+      const accepted = reason === "";
       return {
         accepted,
-        reason: NEGATIVES.has(top.labelId)
-          ? "Không có ký hiệu."
-          : accepted
-            ? "Dự đoán từ mô hình cá nhân."
-            : "Chưa đủ chắc chắn.",
+        reason: reason || "Dự đoán từ mô hình cá nhân.",
         matches: ranked.slice(0, 3).map(({ index: _index, ...match }) => match),
       };
     } finally {
