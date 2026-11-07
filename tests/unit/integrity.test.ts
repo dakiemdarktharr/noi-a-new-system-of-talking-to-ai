@@ -6,7 +6,7 @@ import {
   degrees,
 } from "../../src/lib/geometry";
 import { quality, sequenceDistance } from "../../src/lib/recognizer";
-import { validateImport } from "../../src/lib/storage";
+import { validateImport, mergeSamples } from "../../src/lib/storage";
 import type { Sample } from "../../src/types";
 describe("orientation and movement remain distinct", () => {
   it("measures a rigid 90° turn despite identical finger shape, and q/-q equivalence", () => {
@@ -77,5 +77,26 @@ describe("recording and import integrity", () => {
     expect(() =>
       validateImport({ schema: 1, samples: [broken] }, new Set(["A"])),
     ).toThrow();
+  });
+  it("rejects duplicate IDs and ambiguous label names before writing anything", () => {
+    const a = sample();
+    expect(() => validateImport({ schema: 1, samples: [a, a] }, new Set(["A"]))).toThrow(/Trùng/);
+    expect(() => validateImport({ schema: 1, samples: [a, { ...a, id: "two", label: "different" }] }, new Set(["A"]))).toThrow(/nhiều tên/);
+  });
+  it("preserves videos and cloud acknowledgement on JSON reimport and detects conflicting IDs", () => {
+    const original = { ...sample(), videoBlob: new Blob(["original"]), backupStatus: "saved" as const, gestureKind: "dynamic" as const };
+    const [merged] = mergeSamples([original], [sample()]);
+    expect(merged.videoBlob).toBe(original.videoBlob);
+    expect(merged.backupStatus).toBe("saved");
+    expect(merged.gestureKind).toBe("dynamic");
+    expect(() => mergeSamples([original], [{ ...sample(), labelId: "B" }])).toThrow(/nhãn/);
+    const changed = sample(); changed.frames[0].hands[0].curls[0] += .1;
+    expect(() => mergeSamples([original], [changed])).toThrow(/chuyển động/);
+    expect(() => mergeSamples([], [sample(), sample()])).toThrow(/Trùng/);
+  });
+  it("round trips explicit dynamic/static semantics", () => {
+    const [loaded] = validateImport({ schema: 1, samples: [{ ...sample(), gestureKind: "dynamic" }] }, new Set(["A"]));
+    expect(loaded.gestureKind).toBe("dynamic");
+    expect(() => validateImport({ schema: 1, samples: [{ ...sample(), gestureKind: "other" }] }, new Set(["A"]))).toThrow(/Loại/);
   });
 });

@@ -246,6 +246,7 @@ footer a:hover { color: var(--blue); }
 .lab-hand { display: flex; justify-content: center; color: var(--blue); padding: 18px 30px 28px; }
 .lab-hand svg { transition: transform .12s; }
 .lab-modal > label { font-size: 14px; }
+.lab-modal > textarea { display: block; width: 100%; margin: 14px 0; padding: 12px; border: 1px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink); resize: vertical; }
 .lab-modal > input { width: 100%; accent-color: var(--blue); margin: 18px 0; }
 .lab-modal dl { font-size: 12px; margin: 22px 0; }
 .lab-modal dl > div { display: flex; justify-content: space-between; margin: 12px 0; }

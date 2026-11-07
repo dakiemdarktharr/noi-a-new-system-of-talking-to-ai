@@ -56,7 +56,7 @@ try {
     worker.postMessage({ type: "init", base: location.origin });
     const ready = await readyPromise;
     const results = [];
-    for (const angle of [0, 90]) {
+    for (const angle of [0, 90, 180]) {
       const c = new OffscreenCanvas(512, 512),
         ctx = c.getContext("2d");
       ctx.fillStyle = "white";
@@ -105,9 +105,12 @@ try {
       ),
     );
     if (delta < 65 || delta > 115) throw Error("Rotation lost: " + delta);
+    const halfTurn = degrees(quaternionDistance(results[0].feature.quaternion, results[2].feature.quaternion));
+    if (halfTurn < 145) throw Error("180 degree rotation lost: " + halfTurn);
     return {
       delegate: ready.delegate,
       orientationDeltaDegrees: delta,
+      halfTurnDegrees: halfTurn,
       frames: results.map(({ feature, ...r }) => r),
     };
   });

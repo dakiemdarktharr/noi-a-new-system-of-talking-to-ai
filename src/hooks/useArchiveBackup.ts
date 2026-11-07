@@ -28,6 +28,7 @@ export function useArchiveBackup(
   const [online, setOnline] = useState(navigator.onLine);
   const connection = useRef(0);
   const inFlight = useRef(false);
+  const paused = useRef(false);
   const retries = useRef(new Map<string, { count: number; at: number }>());
   const sessionTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const sessionFailures = useRef(0);
@@ -152,7 +153,7 @@ export function useArchiveBackup(
   }
 
   useEffect(() => {
-    if (!connected || !online || inFlight.current) return;
+    if (paused.current || !connected || !online || inFlight.current) return;
     const nextAttempt = (sample: Sample) => retries.current.get(`${sample.labelId}/${sample.id}`)?.at ?? 0;
     const sample = samples
       .filter(s => s.backupStatus === "pending" && s.videoBlob?.size)
@@ -177,7 +178,7 @@ export function useArchiveBackup(
           error instanceof ArchiveError
             ? error.message
             : "Chưa gửi được kho. Mẫu vẫn nằm trên máy.";
-        const blocked = code === 400 || code === 409 || code === 413;
+        const blocked = code === 400 || code === 409 || code === 410 || code === 413;
         if (!blocked) {
           const key = `${sample.labelId}/${sample.id}`;
           const count = (retries.current.get(key)?.count ?? 0) + 1;
@@ -203,6 +204,11 @@ export function useArchiveBackup(
   ]);
 
   return {
+    async pauseAndDrain() {
+      paused.current = true;
+      while (inFlight.current) await new Promise(resolve => setTimeout(resolve, 50));
+    },
+    resume() { paused.current = false; retries.current.clear(); setRevision(n => n + 1); },
     connected,
     connectionError,
     online,

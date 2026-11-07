@@ -100,6 +100,13 @@ describe("temporal features (synthetic geometry only)", () => {
 });
 
 describe("whole-clip evaluation partition", () => {
+  it("does not silently discard bad clips or duplicate IDs or relabel a class", async () => {
+    const classifier = new TemporalClassifier(), a = sample("1", "A", "one");
+    await expect(classifier.train([a, a])).rejects.toThrow(/trùng/);
+    await expect(classifier.train([{ ...a, frames: [] }])).rejects.toThrow(/không tự bỏ mẫu/);
+    await expect(classifier.train([a, { ...a, id: "2", label: "wrong" }])).rejects.toThrow(/nhiều tên/);
+    await expect(classifier.train([{ ...a, gestureKind: "static" }, { ...a, id: "2", gestureKind: "dynamic" }])).rejects.toThrow(/cả tĩnh và động/);
+  });
   it("holds an entire session out without frame or session leakage", () => {
     const samples = ["a", "b"].flatMap((label) =>
       Array.from({ length: 6 }, (_, i) =>

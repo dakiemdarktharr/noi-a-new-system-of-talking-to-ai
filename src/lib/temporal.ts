@@ -313,15 +313,19 @@ export class TemporalClassifier {
     options: TrainOptions = {},
   ): Promise<ModelSummary> {
     if (this.training || this.importing) throw new Error("Chờ thao tác mô hình hiện tại hoàn tất.");
-    const unique = [
-      ...new Map(
-        samples.filter((s) => clipUsable(s.frames)).map((s) => [s.id, s]),
-      ).values(),
-    ];
+    if (new Set(samples.map(s => s.id)).size !== samples.length)
+      throw new Error("Dataset có mã mẫu trùng. Sửa dữ liệu trước khi huấn luyện.");
+    const invalid = samples.filter(s => !clipUsable(s.frames));
+    if (invalid.length) throw new Error(`${invalid.length} mẫu thiếu tracking. Chưa huấn luyện; không tự bỏ mẫu.`);
+    const unique = samples;
     const labels: ModelLabel[] = [...new Set(unique.map((s) => s.labelId))]
       .sort()
       .map((labelId) => {
         const rows = unique.filter((s) => s.labelId === labelId);
+        if (new Set(rows.map(s => s.label)).size > 1)
+          throw new Error(`Nhãn ${labelId} có nhiều tên khác nhau.`);
+        if (!options.gestureKinds?.[labelId] && new Set(rows.map(s => s.gestureKind).filter(Boolean)).size > 1)
+          throw new Error(`Nhãn ${rows[0].label} có cả tĩnh và động. Chọn lại loại ký hiệu.`);
         return { labelId, label: rows[0].label, samples: rows.length };
       });
     if (labels.length < 2 || labels.some((label) => label.samples < 3))
@@ -334,7 +338,7 @@ export class TemporalClassifier {
     // selecting Auto and selecting the inferred kind used different pipelines.
     const gestureKinds = Object.fromEntries(labels.map(label => {
       const frames = split.train.filter(s => s.labelId === label.labelId).map(s => trimMotion(s.frames));
-      return [label.labelId, options.gestureKinds?.[label.labelId] ??
+      return [label.labelId, options.gestureKinds?.[label.labelId] ?? unique.find(s => s.labelId === label.labelId && s.gestureKind)?.gestureKind ??
         (frames.filter(clip => motionExtent(clip) >= .12).length >= frames.length / 2 ? "dynamic" : "static")];
     })) as Record<string, "static" | "dynamic">;
     const prepared = split.train.map(s => ({ ...s, frames: prepareMotion(s.frames, gestureKinds[s.labelId]) }));
@@ -517,5 +521,12 @@ export class TemporalClassifier {
     this.model?.dispose();
     this.model = null;
     this.metadata = null;
+  }
+  async clear(): Promise<void> {
+    if (this.training || this.importing) throw new Error("Chờ thao tác model hoàn tất trước khi xóa.");
+    this.dispose();
+    await ready();
+    const models = await tf.io.listModels();
+    if (models[MODEL_URL]) await tf.io.removeModel(MODEL_URL);
   }
 }

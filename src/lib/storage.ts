@@ -48,6 +48,7 @@ export const saveSample = (sample: Sample) =>
   operation("readwrite", (s) => s.put(sample));
 export const deleteSample = (id: string) =>
   operation("readwrite", (s) => s.delete(id));
+export const clearSamples = () => operation("readwrite", s => s.clear());
 export async function updateBackupStatus(
   id: string,
   labelId: string,
@@ -76,12 +77,21 @@ export async function updateBackupStatus(
 }
 export async function importSamples(samples: Sample[]) {
   const db = await open();
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<Sample[]>((resolve, reject) => {
     const tx = db.transaction(STORE, "readwrite", { durability: "strict" });
-    samples.forEach((sample) => tx.objectStore(STORE).put(sample));
+    const store = tx.objectStore(STORE);
+    const lookup = store.getAll();
+    let merged: Sample[] = [], failure: unknown;
+    lookup.onsuccess = () => {
+      try {
+        merged = mergeSamples(lookup.result as Sample[], samples);
+        const ids = new Set(samples.map(s => s.id));
+        merged.filter(s => ids.has(s.id)).forEach(s => store.put(s));
+      } catch (error) { failure = error; tx.abort(); }
+    };
     tx.oncomplete = () => {
       db.close();
-      resolve();
+      resolve(merged);
     };
     tx.onerror = () => {
       db.close();
@@ -89,9 +99,33 @@ export async function importSamples(samples: Sample[]) {
     };
     tx.onabort = () => {
       db.close();
-      reject(tx.error);
+      reject(failure ?? tx.error);
     };
   });
+}
+const fingerprint = (frames: Frame[]) => JSON.stringify(frames, (_key, value: unknown) =>
+  typeof value === "number" ? Math.round(value * 1e6) / 1e6 : value);
+
+/** Reimport is idempotent. JSON must never erase a matching saved video, and
+ * an ID cannot silently attach new labels/landmarks to somebody else's clip. */
+export function mergeSamples(existing: Sample[], incoming: Sample[]): Sample[] {
+  const merged = new Map(existing.map(s => [s.id, s]));
+  const seen = new Set<string>();
+  for (const sample of incoming) {
+    if (seen.has(sample.id)) throw new Error(`Trùng mã mẫu: ${sample.id}`);
+    seen.add(sample.id);
+    const old = merged.get(sample.id);
+    if (old && (old.labelId !== sample.labelId || (old.frames !== sample.frames && fingerprint(old.frames) !== fingerprint(sample.frames))))
+      throw new Error(`Mã mẫu trùng nhưng nhãn hoặc chuyển động khác: ${sample.id}`);
+    merged.set(sample.id, old ? { ...sample,
+      videoBlob: old.videoBlob ?? sample.videoBlob,
+      videoMime: old.videoMime ?? sample.videoMime,
+      gestureKind: sample.gestureKind ?? old.gestureKind,
+      backupStatus: old.backupStatus === "saved" || sample.backupStatus === "saved" ? "saved" : old.backupStatus ?? sample.backupStatus,
+      backupError: old.backupStatus === "saved" || sample.backupStatus === "saved" ? undefined : old.backupError ?? sample.backupError,
+    } : sample);
+  }
+  return [...merged.values()];
 }
 const numbers = (x: unknown, size: number): x is number[] =>
   Array.isArray(x) &&
@@ -134,6 +168,7 @@ export function validateImport(
     data.samples.length > 1000
   )
     throw new Error("Sai phiên bản hoặc quá 1.000 mẫu mỗi lần nhập.");
+  const ids = new Set<string>(), labels = new Map<string, string>();
   return data.samples.map((s) => {
     if (
       !s ||
@@ -158,6 +193,14 @@ export function validateImport(
       s.durationMs > 10000
     )
       throw new Error("Mẫu có nhãn hoặc cấu trúc không hợp lệ.");
+    if (ids.has(s.id)) throw new Error(`Trùng mã mẫu: ${s.id}`);
+    ids.add(s.id);
+    const label = s.label.normalize("NFC").trim();
+    if (labels.has(s.labelId) && labels.get(s.labelId) !== label)
+      throw new Error(`Một mã nhãn có nhiều tên: ${s.labelId}`);
+    labels.set(s.labelId, label);
+    if (s.gestureKind !== undefined && s.gestureKind !== "static" && s.gestureKind !== "dynamic")
+      throw new Error("Loại ký hiệu không hợp lệ.");
     let previous = -Infinity;
     for (const frame of s.frames) {
       if (
@@ -180,12 +223,13 @@ export function validateImport(
     return {
       id: s.id,
       labelId: s.labelId,
-      label: s.label,
+      label,
       createdAt: s.createdAt,
       sessionId: s.sessionId,
       schema: 1,
       durationMs: s.frames.at(-1)!.t - s.frames[0].t,
       frames: s.frames.map((f: Frame) => ({ t: f.t, hands: f.hands })),
+      ...(s.gestureKind ? { gestureKind: s.gestureKind } : {}),
       ...(s.trackingVariant === "lite" || s.trackingVariant === "full"
         ? { trackingVariant: s.trackingVariant }
         : {}),

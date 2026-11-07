@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Frame, RawHand, HandFeature } from "../types";
 import { extractHand } from "../lib/geometry";
+import { HandIdentityTracker } from "../lib/hand-identity";
 
 export type TrackingVariant = "lite" | "full";
 export function useCamera(onFrame: (frame: Frame) => void) {
@@ -42,6 +43,7 @@ export function useCamera(onFrame: (frame: Frame) => void) {
       let running = false, initialized = false, latestMediaTime = -1, latestCaptureTime = 0, submittedMediaTime = -1;
       let lastFrameTime = -1, dropped = 0, lastMetricsTime = 0, captured = 0;
       const resultTimes: number[] = [];
+      const identity = new HandIdentityTracker();
       const captureRate = stream.getVideoTracks()[0]?.getSettings().frameRate ?? 0;
       const submitLatest = () => {
         if (!running || busy.current || generation !== epoch.current || video.readyState < 2 || latestMediaTime <= submittedMediaTime) return;
@@ -74,11 +76,9 @@ export function useCamera(onFrame: (frame: Frame) => void) {
             const raw = data.hands as RawHand[];
             // Handedness confidence is NOT presence confidence. The model already
             // gates presence. Keep a valid rotating hand when its side score dips.
-            // For duplicate-side detections keep the stronger observation; do not
-            // invent the other anatomical side or discard both measured hands.
-            const unique = [...new Map(raw.slice().sort((a, b) => a.score - b.score).map(hand => [hand.side, hand])).values()];
-            const found = unique.map(hand => extractHand(hand, data.width / data.height)).filter((hand): hand is HandFeature => hand !== null);
-            setHands(found); callbackRef.current({ t: data.t, hands: found });
+            const measured = raw.map(hand => extractHand(hand, data.width / data.height)).filter((hand): hand is HandFeature => hand !== null);
+            const frame = identity.push({ t: data.t, hands: measured });
+            setHands(frame.hands); callbackRef.current(frame);
             const now = performance.now(); resultTimes.push(data.t);
             while (resultTimes.length > 30) resultTimes.shift();
             if (now - lastMetricsTime >= 250) {

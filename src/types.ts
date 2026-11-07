@@ -45,6 +45,7 @@ export interface Sample {
   videoMime?: string;
   aspect?: number;
   trackingVariant?: "lite" | "full";
+  gestureKind?: "static" | "dynamic";
   backupStatus?: "pending" | "saved" | "blocked";
   backupError?: string;
 }

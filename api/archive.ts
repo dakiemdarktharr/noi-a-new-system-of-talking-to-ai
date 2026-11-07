@@ -128,6 +128,19 @@ export default {
         401,
       );
 
+    if (action === "inventory" && request.method === "GET") {
+      const labels: string[] = [];
+      try {
+        for await (const item of listFiles({ repo: { type: "bucket", name }, accessToken, path: "clips", recursive: false })) {
+          const label = item.path.replace(/\/$/, "").split("/").at(-1) ?? "";
+          if (item.type === "directory" && (label === "NO_SIGN" || /^NOI\d{4}$/.test(label) || isCustomWordId(label))) labels.push(label);
+        }
+      } catch (error) {
+        if (!missing(error)) return json({ error: "Không đọc được danh mục kho." }, 502);
+      }
+      return json({ labels });
+    }
+
     const label = url.searchParams.get("label") ?? "";
     const id = url.searchParams.get("id");
     if (
@@ -143,8 +156,13 @@ export default {
     const repo = { type: "bucket" as const, name };
     const folder = `clips/${label}`;
     const path = `${folder}/${id}.zip`;
+    const tombstone = `deleted/${label}/${id}.json`;
     const completion = `completed/${label}.json`;
     const credentials = { repo, accessToken };
+    async function wasDeleted() {
+      try { return !!(await downloadFile({ ...credentials, path: tombstone })); }
+      catch (error) { if (missing(error)) return false; throw error; }
+    }
     async function entries() {
       const rows: { id: string; bytes: number }[] = [];
       try {
@@ -199,6 +217,9 @@ export default {
         const rows = await entries();
         if (!rows.some((row) => row.id === id))
           return json({ error: "Không tìm thấy mẫu." }, 404);
+        // Deletion wins over queued retries from an older/offline browser tab.
+        await uploadFiles({ ...credentials, files: [{ path: tombstone,
+          content: new Blob([JSON.stringify({ deletedAt: new Date().toISOString() })], { type: "application/json" }) }] });
         const paths = rows.length === VIDEO_GOAL ? [path, completion] : [path];
         await deleteFiles({ ...credentials, paths });
         return json({ id });
@@ -245,6 +266,7 @@ export default {
           { error: "Gói mẫu vượt 480 KB. Quay clip 2 giây để lưu kho." },
           413,
         );
+      if (await wasDeleted()) return json({ error: "Mẫu này đã bị xóa khỏi kho. Quay mẫu mới để tiếp tục." }, 410);
       const rows = await entries();
       if (rows.some((row) => row.id === id))
         return json({ id, exists: true, complete: rows.length >= VIDEO_GOAL });
@@ -260,6 +282,10 @@ export default {
           ),
         });
       await uploadFiles({ ...credentials, files });
+      if (await wasDeleted()) {
+        await deleteFiles({ ...credentials, paths: files.map(file => file.path) });
+        return json({ error: "Mẫu đã bị xóa trong lúc gửi." }, 410);
+      }
       return json(
         { id, bytes: archive.size, complete: rows.length + 1 >= VIDEO_GOAL },
         201,

@@ -45,6 +45,7 @@ import {
   extractHand,
 } from "./lib/geometry";
 import { SignSegmenter } from "./lib/motion";
+import { DEFAULT_MEANINGS, MeaningCycleGesture, nextMeaning } from "./lib/meaning-cycle";
 import { diagnoseSamples } from "./lib/diagnostics";
 import { quality } from "./lib/recognizer";
 import { fixtureHand } from "./lib/fixtures";
@@ -53,6 +54,8 @@ import {
   saveSample,
   deleteSample,
   importSamples,
+  clearSamples,
+  mergeSamples,
 } from "./lib/storage";
 import { exportDataset, readDataset, saveBlob } from "./lib/dataset";
 import {
@@ -90,6 +93,7 @@ type Recording = {
   started: boolean;
   aspect: number;
   trackingVariant: TrackingVariant;
+  gestureKind?: "static" | "dynamic";
 };
 
 export default function App() {
@@ -126,6 +130,20 @@ export default function App() {
     [busyFile, setBusyFile] = useState(false),
     [relabelId, setRelabelId] = useState<string | null>(null);
   const [datasetScope, setDatasetScope] = useState("all");
+  const [resetting, setResetting] = useState(false);
+  const [busyCloud, setBusyCloud] = useState(false);
+  const samplesRef = useRef(samples); samplesRef.current = samples;
+  const [showMeanings, setShowMeanings] = useState(false), [meaningText, setMeaningText] = useState("");
+  const [meanings, setMeanings] = useState<Record<string, string[]>>(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("noi-meanings-v1") || "null");
+      if (!stored || typeof stored !== "object" || Array.isArray(stored)) return DEFAULT_MEANINGS;
+      return Object.fromEntries(Object.entries(stored).filter(([, row]) => Array.isArray(row) && row.length >= 2 && row.length <= 12 && row.every(v => typeof v === "string" && v.length > 0 && v.length <= 80))) as Record<string, string[]>;
+    } catch { return DEFAULT_MEANINGS; }
+  });
+  const meaningsRef = useRef(meanings); meaningsRef.current = meanings;
+  const cycle = useRef(new MeaningCycleGesture());
+  const cycleWord = useRef<{ prediction: Recognition; meanings: string[]; index: number } | null>(null);
   const [customEntries, setCustomEntries] = useState(loadCustomWords);
   const [newWord, setNewWord] = useState(false),
     [wordText, setWordText] = useState("");
@@ -144,6 +162,7 @@ export default function App() {
     () => [...builtinEntries, ...customEntries],
     [customEntries],
   );
+  const entriesRef = useRef(entries); entriesRef.current = entries;
   const wordCount = entries.length - 1;
   const model = useRef(new TemporalClassifier()),
     segmenter = useRef(new SignSegmenter()),
@@ -172,6 +191,7 @@ export default function App() {
     predictionVersion.current++;
     clearTimeout(predictionExpiry.current);
     segmenter.current.reset();
+    cycle.current.reset(); cycleWord.current = null;
     setResult(empty);
     setRecognitionReason("Chờ ký hiệu");
   }, []);
@@ -186,6 +206,22 @@ export default function App() {
         !rec.aborted
       )
         rec.frames.push({ ...frame, t: frame.t - rec.start });
+      if (mode.current === "recognize") {
+        const command = cycle.current.push(frame);
+        if (command.consumed) {
+          predictionVersion.current++;
+          segmenter.current.reset();
+          const word = cycleWord.current;
+          if (command.presses && word) {
+            word.index = nextMeaning(word.meanings, word.index, command.presses);
+            setResult({ ...word.prediction, matches: [{ ...word.prediction.matches[0], label: word.meanings[word.index] }] });
+            setRecognitionReason(`Chuyển nghĩa ${word.index + 1}/${word.meanings.length}`);
+            clearTimeout(predictionExpiry.current);
+            predictionExpiry.current = window.setTimeout(() => setResult(empty), 5000);
+          }
+          return;
+        }
+      }
       const previousRevision = segmenter.current.revision;
       segmenter.current.push(frame);
       if (mode.current === "recognize" && previousRevision !== segmenter.current.revision)
@@ -214,11 +250,14 @@ export default function App() {
           setRecognitionReason(prediction.reason);
           if (!prediction.accepted) return;
           if (!segmenter.current.confirm(revision, prediction.matches[0]?.labelId)) return;
+          const options = meaningsRef.current[prediction.matches[0]?.labelId];
+          cycleWord.current = options?.length > 1 ? { prediction, meanings: options, index: 0 } : null;
+          if (cycleWord.current) cycle.current.arm(frame); else cycle.current.reset();
           setResult(prediction);
           clearTimeout(predictionExpiry.current);
           predictionExpiry.current = window.setTimeout(
             () => setResult(empty),
-            1800,
+            options?.length > 1 ? 5000 : 1800,
           );
         })
         .catch((e) => notify(String(e)))
@@ -247,12 +286,13 @@ export default function App() {
   useEffect(() => {
     alive.current = true;
     listSamples()
-      .then((stored) =>
+      .then((stored) => {
         setSamples((current) => [
           ...current,
           ...stored.filter((s) => !current.some((other) => other.id === s.id)),
-        ]),
-      )
+        ]);
+        setCustomEntries(current => [...new Map([...current, ...stored.filter(s => isCustomWordId(s.labelId)).map(s => customWord(s.labelId, s.label))].map(e => [e.id, e])).values()]);
+      })
       .catch(() => notify("Không mở được bộ nhớ mẫu của trình duyệt."));
     model.current
       .load()
@@ -385,6 +425,7 @@ export default function App() {
         videoMime: blob.type,
         aspect: rec.aspect,
         trackingVariant: rec.trackingVariant,
+        gestureKind: rec.gestureKind,
         backupStatus: "pending",
       };
       try {
@@ -469,6 +510,7 @@ export default function App() {
         started: false,
         aspect: cameraAspect.current,
         trackingVariant,
+        gestureKind: gestureKinds[selected.id],
       };
       recorder.ondataavailable = (e) => {
         if (e.data.size) rec.chunks.push(e.data);
@@ -489,6 +531,7 @@ export default function App() {
     }
   }
   async function train() {
+    if (busyFile || busyCloud || resetting) { notify("Đợi nhập dữ liệu hoàn tất."); return; }
     stopCamera();
     setTraining(true);
     setProgress(null);
@@ -564,6 +607,7 @@ export default function App() {
     }
   }
   async function chooseLabel(entry: VocabularyEntry) {
+    if (busyFile || busyCloud || resetting) { notify("Đợi nhập dữ liệu hoàn tất."); return; }
     const target = samples.find((s) => s.id === relabelId);
     setDrawer(false);
     setRelabelId(null);
@@ -612,9 +656,11 @@ export default function App() {
     }
   }
   async function storeImported(imported: Sample[]) {
-    const known = new Map(entries.map((entry) => [entry.id, entry]));
+    const known = new Map(entriesRef.current.map((entry) => [entry.id, entry]));
     const additions: VocabularyEntry[] = [];
     for (const sample of imported) {
+      if (known.has(sample.labelId) && known.get(sample.labelId)!.label !== sample.label)
+        throw new Error(`Mã nhãn đã dùng cho từ khác: ${sample.labelId}`);
       if (!known.has(sample.labelId) && isCustomWordId(sample.labelId)) {
         const entry = customWord(sample.labelId, sample.label);
         known.set(entry.id, entry);
@@ -622,16 +668,15 @@ export default function App() {
       }
       sample.label = known.get(sample.labelId)?.label ?? sample.label;
     }
+    mergeSamples(samplesRef.current, imported);
+    const merged = await importSamples(imported);
+    const importedIds = new Set(imported.map(s => s.id));
+    setSamples(current => mergeSamples(current, merged.filter(s => importedIds.has(s.id))));
     if (additions.length) {
-      const next = [...customEntries, ...additions];
-      saveCustomWords(next);
+      const next = [...new Map([...entriesRef.current.filter(e => isCustomWordId(e.id)), ...merged.filter(s => isCustomWordId(s.labelId)).map(s => customWord(s.labelId, s.label))].map(e => [e.id, e])).values()];
+      try { saveCustomWords(next); } catch { notify("Danh mục sẽ được khôi phục từ mẫu đã lưu."); }
       setCustomEntries(next);
     }
-    await importSamples(imported);
-    setSamples((current) => [
-      ...current.filter((s) => !imported.some((other) => other.id === s.id)),
-      ...imported,
-    ]);
   }
   function addWord() {
     const label = wordText.normalize("NFC").trim().replace(/\s+/g, " ");
@@ -656,7 +701,7 @@ export default function App() {
   async function exporting() {
     setBusyFile(true);
     try {
-      await exportDataset(visibleSamples);
+      await exportDataset(visibleSamples.map(s => ({ ...s, gestureKind: gestureKinds[s.labelId] ?? s.gestureKind })));
       setUnsavedClips((all) =>
         all.filter((id) => !visibleSamples.some((s) => s.id === id)),
       );
@@ -671,6 +716,21 @@ export default function App() {
     setView(target);
     clearPrediction();
   };
+  async function resetLocalDataset() {
+    if (!window.confirm("Xóa toàn bộ mẫu và model trên trình duyệt này?")) return;
+    setResetting(true);
+    stopCamera();
+    try {
+      await archive.pauseAndDrain();
+      await model.current.clear();
+      await clearSamples();
+      setSamples([]); setSummary(null); setProgress(null); setDiagnosticReport(null);
+      setUnsavedClips([]); setCloudCompleted([]); setPreview(null); setPhrase(""); setDatasetScope("all");
+      session.current = crypto.randomUUID();
+      notify("Đã xóa mẫu và model trên máy.");
+    } catch (error) { notify(error instanceof Error ? error.message : "Không xóa được dữ liệu."); }
+    finally { archive.resume(); setResetting(false); }
+  }
   const mathA = extractHand(fixtureHand(0))!,
     mathB = extractHand(fixtureHand(labAngle))!;
   const shapeDelta = Math.sqrt(
@@ -724,7 +784,7 @@ export default function App() {
           <span>{wordCount.toLocaleString("vi-VN")} từ</span>
         </button>
       </header>
-      <main id="workspace" tabIndex={-1}>
+      <main id="workspace" tabIndex={-1} inert={resetting}>
         <div className="page-heading">
           <h1>
             {view === "recognize"
@@ -732,6 +792,9 @@ export default function App() {
               : "Thu mẫu & huấn luyện"}
           </h1>
           <div className="heading-actions">
+            <button className="secondary" onClick={() => {
+              setMeaningText((meanings[selected.id] ?? [selected.label]).join("\n")); setShowMeanings(true);
+            }}>Chuyển nghĩa</button>
             <span className={"model-state " + (summary ? "ready" : "")}>
               <i />
               {summary
@@ -1133,6 +1196,7 @@ export default function App() {
                     recording ||
                     savingClip ||
                     busyModelFile ||
+                    busyFile || busyCloud || resetting ||
                     counts.size < 2 ||
                     [...counts.values()].some((n) => n < 3)
                   }
@@ -1228,6 +1292,7 @@ export default function App() {
               )
             }
             onCompleted={setCloudCompleted}
+            onBusyChange={setBusyCloud}
             notify={notify}
           />
         )}
@@ -1266,7 +1331,7 @@ export default function App() {
                 />
                 <button
                   className="text-button"
-                  disabled={busyFile || training || recording}
+                  disabled={busyFile || busyCloud || training || recording}
                   onClick={() => fileInput.current?.click()}
                 >
                   <Upload size={16} />
@@ -1280,6 +1345,8 @@ export default function App() {
                   <Download size={16} />
                   Xuất ZIP
                 </button>
+                <button className="text-button" disabled={resetting || busyCloud || training || recording || savingClip || busyFile || busyModelFile || !!diagnosticProgress}
+                  onClick={() => void resetLocalDataset()}><Trash2 size={16} />Xóa dataset trên máy</button>
               </div>
             </div>
             {visibleSamples.length ? (
@@ -1528,6 +1595,23 @@ export default function App() {
           </div>
         </div>
       </dialog>
+      {showMeanings && (
+        <Modal className="lab-modal" label="Chuyển nghĩa" onClose={() => setShowMeanings(false)}>
+          <div className="dialog-heading"><h2>{selected.label}</h2><button className="icon-button" aria-label="Đóng chuyển nghĩa" onClick={() => setShowMeanings(false)}><X size={21} /></button></div>
+          <label htmlFor="meaning-list">Chuỗi nghĩa · mỗi dòng một nghĩa</label>
+          <textarea id="meaning-list" rows={5} value={meaningText} onChange={event => setMeaningText(event.target.value)} />
+          <button className="primary" onClick={() => {
+            const row = meaningText.split("\n").map(s => s.normalize("NFC").trim()).filter(Boolean);
+            if (!row.length || row.length > 12 || row.some(s => s.length > 80) || new Set(row).size !== row.length || row[0] !== selected.label) {
+              notify(`Dòng đầu phải là “${selected.label}”; tối đa 12 nghĩa khác nhau.`); return;
+            }
+            const next = { ...meanings }; if (row.length > 1) next[selected.id] = row; else delete next[selected.id];
+            try { localStorage.setItem("noi-meanings-v1", JSON.stringify(next)); }
+            catch { notify("Không lưu được chuỗi nghĩa."); return; }
+            setMeanings(next); clearPrediction(); setShowMeanings(false);
+          }}>Lưu</button>
+        </Modal>
+      )}
       {newWord && (
         <Modal
           className="new-word-modal"

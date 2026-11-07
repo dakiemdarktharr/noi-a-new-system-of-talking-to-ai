@@ -16,6 +16,7 @@ export function CloudArchive({
   connection,
   onRestore,
   onCompleted,
+  onBusyChange,
   notify,
 }: {
   entry: VocabularyEntry;
@@ -25,6 +26,7 @@ export function CloudArchive({
   >;
   onRestore: (samples: Sample[]) => Promise<void>;
   onCompleted: (labels: string[]) => void;
+  onBusyChange: (busy: boolean) => void;
   notify: (message: string) => void;
 }) {
   const [remote, setRemote] = useState<RemoteSample[] | null>(null);
@@ -35,7 +37,7 @@ export function CloudArchive({
     (s) => s.labelId === entry.id && s.videoBlob?.size,
   );
   const missing =
-    remote?.filter((r) => !samples.some((s) => s.id === r.id)) ?? [];
+    remote?.filter((r) => !samples.some((s) => s.id === r.id && s.videoBlob?.size)) ?? [];
 
   const refresh = useCallback(async () => {
     const result = (await (
@@ -68,6 +70,7 @@ export function CloudArchive({
   ]);
 
   async function run(action: () => Promise<void>) {
+    onBusyChange(true);
     setBusy(true);
     try {
       await action();
@@ -78,6 +81,7 @@ export function CloudArchive({
     } finally {
       setProgress("");
       setBusy(false);
+      onBusyChange(false);
     }
   }
 
@@ -116,6 +120,28 @@ export function CloudArchive({
     notify(`Đã tải ${restored.length} video về máy.`);
   }
 
+  async function restoreAll() {
+    const { labels } = await (await archiveRequest("GET", { action: "inventory" })).json() as { labels: string[] };
+    let count = 0;
+    for (const [index, label] of labels.entries()) {
+      setProgress(`${index + 1}/${labels.length} nhãn`);
+      const { samples: rows } = await (await archiveRequest("GET", { label })).json() as { samples: RemoteSample[] };
+      const restored: Sample[] = [];
+      for (const row of rows) {
+        if (samples.some(s => s.id === row.id && s.labelId === label && s.videoBlob?.size)) continue;
+        const zip = await (await archiveRequest("GET", { label, id: row.id })).blob();
+        const decoded = await readDataset(new File([zip], "noi-clip.zip"), new Set([label]));
+        if (decoded.length !== 1 || decoded[0].id !== row.id || decoded[0].labelId !== label)
+          throw new Error("Mẫu tải về không khớp nhãn hoặc mã trong kho.");
+        restored.push({ ...decoded[0], backupStatus: "saved" });
+      }
+      // Commit each label durably so interruption does not lose earlier labels.
+      if (restored.length) await onRestore(restored);
+      count += restored.length;
+    }
+    notify(`Đã nạp ${count} mẫu từ tất cả nhãn trong kho.`);
+  }
+
   return (
     <section className="cloud-panel" aria-label="Kho video riêng tư">
       <h2>Kho video</h2>
@@ -128,6 +154,7 @@ export function CloudArchive({
       {connection.connected ? (
         <div className="cloud-actions">
           <span role="status">Tự sao lưu bật</span>
+          <button className="secondary" disabled={busy} onClick={() => void run(restoreAll)}>Nạp tất cả</button>
           <button
             className="secondary"
             disabled={busy || !!connection.uploadingId}

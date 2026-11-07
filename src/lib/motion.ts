@@ -12,28 +12,8 @@ export interface MotionProfile {
   endpointTolerance?: number;
 }
 
-/** Associate brief handedness flips with the same nearby physical hand. Side
- * is anatomical, so wrist rotation must not switch the feature channel. */
-export class HandIdentityTracker {
-  private previous: Frame | null = null;
-  private votes: ("Left" | "Right")[] = [];
-  reset() { this.previous = null; this.votes = []; }
-  push(frame: Frame): Frame {
-    const previous = this.previous;
-    let hands = frame.hands;
-    if (previous && frame.t > previous.t && frame.t - previous.t <= 250 &&
-        hands.length === 1 && previous.hands.length === 1 &&
-        Math.hypot(hands[0].wrist[0] - previous.hands[0].wrist[0], hands[0].wrist[1] - previous.hands[0].wrist[1]) < .18) {
-      this.votes.push(hands[0].side);
-      this.votes = this.votes.slice(-9);
-      const left = this.votes.filter(side => side === "Left").length;
-      hands = [{ ...hands[0], side: left > this.votes.length / 2 ? "Left" : left < this.votes.length / 2 ? "Right" : previous.hands[0].side }];
-    } else if (hands.length) this.votes = hands.length === 1 ? [hands[0].side] : [];
-    const result = { ...frame, hands };
-    if (hands.length) this.previous = result;
-    return result;
-  }
-}
+import { HandIdentityTracker } from "./hand-identity";
+export { HandIdentityTracker } from "./hand-identity";
 
 function visibleMotion(frames: Frame[]): Frame[] {
   const identity = new HandIdentityTracker();
