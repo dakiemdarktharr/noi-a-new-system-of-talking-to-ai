@@ -12,13 +12,13 @@ export class ArchiveError extends Error {
 export async function archiveRequest(
   method: string,
   params: Record<string, string>,
-  body?: FormData,
+  body?: FormData | string,
   code?: string,
 ) {
   const response = await fetch(`/api/archive?${new URLSearchParams(params)}`, {
     method,
     body,
-    headers: code ? { Authorization: `Bearer ${code.trim()}` } : undefined,
+    headers: { ...(code ? { Authorization: `Bearer ${code.trim()}` } : {}), ...(typeof body === "string" ? { "Content-Type": "application/json" } : {}) },
     credentials: "same-origin",
     signal: AbortSignal.timeout(45_000),
   });

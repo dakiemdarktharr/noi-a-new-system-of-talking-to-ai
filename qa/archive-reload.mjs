@@ -10,10 +10,15 @@ try {
   const attempts = [];
   let connected = false;
   let sessionFailures = 0;
+  let workspace = null;
   await context.route("**/api/archive?**", async (route) => {
     const request = route.request();
     const params = new URL(request.url()).searchParams;
     const action = params.get("action");
+    if (action === "workspace") {
+      if (request.method() === "POST") workspace = { ...request.postDataJSON(), updatedAt: new Date().toISOString() };
+      return route.fulfill({ json: { ...(workspace ? { id: workspace.id } : {}), heads: workspace ? [workspace] : [] } });
+    }
     if (action === "session" && sessionFailures-- > 0)
       return route.fulfill({ status: 503, json: { error: "Kho tạm gián đoạn." } });
     if (action === "connect") connected = true;

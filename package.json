@@ -13,6 +13,8 @@
     "test": "vitest run",
     "test:browser": "node qa/integration.mjs && node qa/accessibility.mjs && node qa/meaning-graph.mjs",
     "test:graph": "node qa/meaning-graph.mjs",
+    "test:sync": "node qa/workspace-sync.mjs && node qa/archive-reload.mjs && node qa/cloud-label-race.mjs",
+    "test:flows": "node qa/meaning-dataset.mjs && node qa/catalog-progress.mjs && node qa/motion-recognition.mjs && node qa/two-hand-tracker.mjs",
     "test:production": "node qa/production-smoke.mjs",
     "assets": "node scripts/prepare-assets.mjs"
   },

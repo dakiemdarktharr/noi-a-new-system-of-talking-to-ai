@@ -27,14 +27,14 @@ import vocabulary from "./data/vocabulary.json";
 import type { Frame, Sample, Recognition, VocabularyEntry } from "./types";
 import { useCamera, type TrackingVariant } from "./hooks/useCamera";
 import { useArchiveBackup } from "./hooks/useArchiveBackup";
+import { useWorkspace } from "./hooks/useWorkspace";
+import { workspaceWords } from "./lib/workspace";
 import { Overlay } from "./components/Overlay";
 import { Modal } from "./components/Modal";
 import { CloudArchive } from "./components/CloudArchive";
 import {
   customWord,
   isCustomWordId,
-  loadCustomWords,
-  saveCustomWords,
   VIDEO_GOAL,
   wordKey,
 } from "./lib/words";
@@ -47,7 +47,7 @@ import {
 import { SignSegmenter } from "./lib/motion";
 import { MeaningCycleGesture, nextMeaning } from "./lib/meaning-cycle";
 import { MeaningGraph } from "./components/MeaningGraph";
-import { GRAPH_KEY, graphWords, graphMeanings, readGraph, placeWord, positionsFor, BLOCK_W, type MeaningGraph as GraphState } from "./lib/meaning-graph";
+import { graphWords, graphMeanings, placeWord, positionsFor, BLOCK_W, type MeaningGraph as GraphState } from "./lib/meaning-graph";
 import { diagnoseSamples } from "./lib/diagnostics";
 import { quality } from "./lib/recognizer";
 import { fixtureHand } from "./lib/fixtures";
@@ -138,7 +138,13 @@ export default function App() {
   const [collectMode, setCollectMode] = useState<"camera" | "graph">("camera");
   const cycle = useRef(new MeaningCycleGesture());
   const cycleWord = useRef<{ prediction: Recognition; meanings: string[]; index: number } | null>(null);
-  const [customEntries, setCustomEntries] = useState(loadCustomWords);
+  const notify = useCallback((text: string) => setNotice(text), []);
+  const [cloudCompleted, setCloudCompleted] = useState<string[]>([]);
+  const archive = useArchiveBackup(samples, setSamples, setCloudCompleted, notify);
+  const workspace = useWorkspace(archive, notify);
+  const customEntries = useMemo(() => workspace.data.words.map(w => customWord(w.id, w.label)), [workspace.data.words]);
+  const setCustomEntries = useCallback((next: VocabularyEntry[] | ((old: VocabularyEntry[]) => VocabularyEntry[])) =>
+    workspace.update(data => workspaceWords(data, typeof next === "function" ? next(data.words.map(w => customWord(w.id, w.label))) : next)), [workspace.update]);
   const [newWord, setNewWord] = useState(false),
     [wordText, setWordText] = useState("");
   const [gestureKinds, setGestureKinds] = useState<Record<string, "static" | "dynamic">>(() => {
@@ -148,7 +154,6 @@ export default function App() {
     } catch { return {}; }
   });
   const [showCloud, setShowCloud] = useState(false);
-  const [cloudCompleted, setCloudCompleted] = useState<string[]>([]);
   const [onlyComplete, setOnlyComplete] = useState(false);
   const [trackingVariant, setTrackingVariant] =
     useState<TrackingVariant>("lite");
@@ -156,15 +161,19 @@ export default function App() {
     () => [...builtinEntries, ...customEntries],
     [customEntries],
   );
-  const [meaningGraph, setMeaningGraph] = useState(() => {
-    try { return readGraph(entries, localStorage.getItem(GRAPH_KEY), localStorage.getItem("noi-meanings-v1")); }
-    catch { return readGraph(entries, null, null); }
-  });
+  const meaningGraph = workspace.data.graph;
   const graphEntries = useMemo(() => graphWords(entries, meaningGraph), [entries, meaningGraph]);
   const meanings = useMemo(() => graphMeanings(meaningGraph, graphEntries), [meaningGraph, graphEntries]);
   const meaningsRef = useRef(meanings); meaningsRef.current = meanings;
   const graphOpen = view === "collect" && collectMode === "graph";
   const entriesRef = useRef(entries); entriesRef.current = entries;
+  useEffect(() => {
+    if (!entries.some(e => e.id === selected.id)) setSelected(builtinEntries.find(e => e.id === "NOI0001")!);
+  }, [entries, selected.id]);
+  useEffect(() => {
+    const missing = samples.filter(s => isCustomWordId(s.labelId) && !customEntries.some(w => w.id === s.labelId));
+    if (missing.length) setCustomEntries(current => [...new Map([...current, ...missing.map(s => customWord(s.labelId, s.label))].map(w => [w.id, w])).values()]);
+  }, [samples, customEntries, setCustomEntries]);
   const wordCount = entries.length - 1;
   const model = useRef(new TemporalClassifier()),
     segmenter = useRef(new SignSegmenter()),
@@ -182,13 +191,6 @@ export default function App() {
     requestedPersistence = useRef(false),
     dialog = useRef<HTMLDialogElement>(null);
   mode.current = view;
-  const notify = useCallback((text: string) => setNotice(text), []);
-  const archive = useArchiveBackup(
-    samples,
-    setSamples,
-    setCloudCompleted,
-    notify,
-  );
   const clearPrediction = useCallback(() => {
     predictionVersion.current++;
     clearTimeout(predictionExpiry.current);
@@ -197,6 +199,7 @@ export default function App() {
     setResult(empty);
     setRecognitionReason("Chờ ký hiệu");
   }, []);
+  useEffect(() => { clearPrediction(); }, [meaningGraph, clearPrediction]);
   const onFrame = useCallback(
     (frame: Frame) => {
       const rec = recordRef.current;
@@ -676,7 +679,6 @@ export default function App() {
     setSamples(current => mergeSamples(current, merged.filter(s => importedIds.has(s.id))));
     if (additions.length) {
       const next = [...new Map([...entriesRef.current.filter(e => isCustomWordId(e.id)), ...merged.filter(s => isCustomWordId(s.labelId)).map(s => customWord(s.labelId, s.label))].map(e => [e.id, e])).values()];
-      try { saveCustomWords(next); } catch { notify("Danh mục sẽ được khôi phục từ mẫu đã lưu."); }
       setCustomEntries(next);
     }
   }
@@ -688,28 +690,15 @@ export default function App() {
       return;
     }
     const entry = customWord(`NOI_USER_${crypto.randomUUID()}`, label);
-    const next = [...customEntries, entry];
-    try {
-      saveCustomWords(next);
-    } catch {
-      notify("Không lưu được từ mới.");
-      return;
-    }
-    setCustomEntries(next);
-    if (graphOpen) {
-      const duplicate = meaningGraph.extraWords.find(w => wordKey(w.label) === wordKey(label));
-      let graph = meaningGraph;
-      if (duplicate) graph = { ...graph,
-        extraWords: graph.extraWords.filter(w => w.id !== duplicate.id),
-        chains: graph.chains.map(row => row.map(id => id === duplicate.id ? entry.id : id)),
-        positions: { ...graph.positions, [entry.id]: graph.positions[duplicate.id] ?? { x: 0, y: 0 } },
-      };
-      else {
-        const anchor = positionsFor(graphEntries, graph).get(selected.id) ?? { x: 0, y: 0 };
-        graph = placeWord(graph, [...graphEntries, entry], entry.id, { x: anchor.x + BLOCK_W + 48, y: anchor.y });
+    if (!workspace.update(data => {
+      const next = workspaceWords(data, [...data.words, entry]);
+      if (graphOpen && !next.graph.positions[entry.id]) {
+        const all = graphWords([...builtinEntries, ...next.words], next.graph);
+        const anchor = positionsFor(all, next.graph).get(selected.id) ?? { x: 0, y: 0 };
+        next.graph = placeWord(next.graph, all, entry.id, { x: anchor.x + BLOCK_W + 48, y: anchor.y });
       }
-      updateMeaningGraph(graph);
-    }
+      return next;
+    })) return;
     setNewWord(false);
     setWordText("");
     void chooseLabel(entry);
@@ -728,9 +717,8 @@ export default function App() {
     }
   }
   function updateMeaningGraph(next: GraphState) {
-    try { localStorage.setItem(GRAPH_KEY, JSON.stringify(next)); }
-    catch { notify("Không lưu được graph. Thay đổi chưa được áp dụng."); return false; }
-    setMeaningGraph(next); clearPrediction(); return true;
+    const saved = workspace.update(data => ({ ...data, graph: next }));
+    if (saved) clearPrediction(); return saved;
   }
   function openGraph() { stopCamera(); setView("collect"); setCollectMode("graph"); }
   const tabs = (target: "recognize" | "collect") => {
@@ -836,7 +824,24 @@ export default function App() {
           <button aria-pressed={collectMode === "camera"} onClick={() => setCollectMode("camera")}>Quay & train</button>
           <button aria-pressed={collectMode === "graph"} onClick={openGraph}>Block</button>
         </div>}
-        {graphOpen ? <MeaningGraph words={graphEntries} graph={meaningGraph} onChange={updateMeaningGraph}
+        {graphOpen && <div className="workspace-sync" aria-label="Đồng bộ graph">
+          <span role="status">{workspace.status}</span>
+          <button className="secondary" onClick={() => { if (archive.connected) workspace.sync(); else { setCollectMode("camera"); setShowCloud(true); } }}>
+            <Cloud size={16} />{archive.connected ? "Đồng bộ" : "Kết nối kho"}
+          </button>
+          {workspace.error && <span className="workspace-error">{workspace.error}</span>}
+          {!!workspace.conflicts.length && <div className="workspace-conflicts">
+            <button className="secondary" onClick={() => workspace.resolve(null)}>Dùng bản trên máy · {meaningGraph.chains.length} chuỗi</button>
+            {workspace.conflicts.map(row => {
+              const labels = new Map([...builtinEntries, ...row.data.words, ...row.data.graph.extraWords].map(w => [w.id, w.label]));
+              return <details key={row.id}><summary>Bản kho · {new Date(row.updatedAt).toLocaleString("vi-VN")} · {row.data.graph.chains.length} chuỗi</summary>
+                <ul>{row.data.graph.chains.slice(0, 12).map(chain => <li key={chain[0]}>{chain.slice(0, 16).map(id => labels.get(id)).join(" → ")}{chain.length > 16 ? " …" : ""}</li>)}</ul>
+                <button className="secondary" onClick={() => workspace.resolve(row.id)}>Dùng bản kho · {row.data.words.length} từ tự thêm</button>
+              </details>;
+            })}
+          </div>}
+        </div>}
+        {graphOpen ? <MeaningGraph key={workspace.generation} words={graphEntries} graph={meaningGraph} onChange={updateMeaningGraph}
           onSelect={id => { const entry = entries.find(e => e.id === id); if (entry) setSelected(entry); }}
           onAddWord={() => { setWordText(""); setNewWord(true); }} /> : <>
         {view === "collect" && (

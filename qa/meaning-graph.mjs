@@ -102,7 +102,7 @@ try {
   const beforeFailure = await saved();
   await page.evaluate(() => {
     window.__setItem = Storage.prototype.setItem;
-    Storage.prototype.setItem = function(key, value) { if (key === "noi-meaning-graph-v1") throw new DOMException("Full", "QuotaExceededError"); return window.__setItem.call(this, key, value); };
+    Storage.prototype.setItem = function(key, value) { if (key === "noi-workspace-v1") throw new DOMException("Full", "QuotaExceededError"); return window.__setItem.call(this, key, value); };
   });
   await page.getByRole("button", { name: "Tách", exact: true }).click();
   await expect(page.getByText("Không lưu được graph. Thay đổi chưa được áp dụng.", { exact: true })).toBeVisible();

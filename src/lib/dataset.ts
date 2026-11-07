@@ -1,6 +1,7 @@
 import JSZip from "jszip";
 import type { Sample } from "../types.js";
 import { validateImport } from "./storage.js";
+import { readZipEntry } from "./zip.js";
 const ARCHIVE_LIMIT = 300 * 1024 * 1024;
 const MANIFEST_LIMIT = 128 * 1024 * 1024;
 export function saveBlob(blob: Blob, name: string) {
@@ -87,7 +88,9 @@ export async function readDataset(file: File, known: Set<string>) {
   if (!manifest) throw new Error("Thiếu dataset.json.");
   if (sizes[entries.indexOf(manifest)] > MANIFEST_LIMIT)
     throw new Error("Manifest quá lớn.");
-  const text = await manifest.async("string");
+  const manifestBuffer = await readZipEntry(manifest, MANIFEST_LIMIT);
+  let remaining = ARCHIVE_LIMIT - manifestBuffer.byteLength;
+  const text = new TextDecoder("utf-8", { fatal: true }).decode(manifestBuffer);
   const data = JSON.parse(text),
     validated = validateImport(data, known);
   for (let i = 0; i < validated.length; i++) {
@@ -100,8 +103,10 @@ export async function readDataset(file: File, known: Set<string>) {
         throw new Error("Đường dẫn video không hợp lệ.");
       const video = zip.file(name);
       if (!video) throw new Error("Thiếu video của mẫu.");
-      validated[i].videoBlob = new Blob([await video.async("arraybuffer")], {
-        type: name.endsWith(".mp4") ? "video/mp4" : "video/webm",
+      const videoBytes = await readZipEntry(video, remaining);
+      remaining -= videoBytes.byteLength;
+      validated[i].videoBlob = new Blob([videoBytes], {
+        type: name.toLowerCase().endsWith(".mp4") ? "video/mp4" : "video/webm",
       });
     }
   }

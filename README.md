@@ -24,6 +24,7 @@ Bản deploy trên Vercel đọc `vercel.json` từ repo. Vercel cài thư việ
 8. Mở **Kho video**, nhập mã kho và bấm **Kết nối**. Video hợp lệ mới quay được lưu trên máy rồi tự gửi lên kho. Phiên kết nối và hàng chờ được giữ khi tải lại trang. **Sao lưu nhãn** gửi các mẫu đã thu từ trước. **Tải về máy** nhập mẫu từ kho.
 9. Sau khi train, dùng **Xuất model** để tải `noi-model.zip`. Mở Nối ở `http://127.0.0.1:5173` và bấm **Nhập model** để chạy webcam tại máy. Tệp ZIP chứa trọng số và thông tin nhận diện. Tệp hai nhãn trong kiểm thử nặng khoảng 191 KiB. Tài sản MediaPipe được cài riêng cùng app. Chọn cùng chế độ Lite hoặc Full như lúc thu mẫu.
 10. **Kiểm tra mẫu** phát lại các frame đã lưu qua toàn bộ bộ nhận diện và xuất báo cáo lỗi. Nút **Thông số** hiển thị nguyên nhân đang chờ hoặc từ chối. Kết quả phát lại bao gồm mẫu đã dùng train, không thay thế đánh giá trên phiên quay mới.
+11. **Thu mẫu → Block** để ghép chuỗi nghĩa. Khi kết nối kho, vị trí block, chuỗi và từ tự thêm tự đồng bộ. Máy khác dùng cùng mã kho sẽ nhận lại graph. **Chờ đồng bộ / Chờ mạng** vẫn chỉ xác nhận bản trên máy; **Đã đồng bộ** là đã được kho xác nhận. Khi hiện **Chọn bản graph**, xem và chọn phiên bản cần giữ.
 
 Danh mục **6.000 mục nghĩa** dùng để chọn nhãn giao tiếp và prompt. Model cá nhân học các ký hiệu từ mẫu bạn thu. Xem [nguồn từ vựng](public/vocabulary/SOURCES.md) và [kiểm tra tính toàn vẹn](docs/vocabulary-audit.json).
 
@@ -44,6 +45,7 @@ Video không có âm thanh. Mẫu và model nằm trong bộ nhớ trình duyệ
 - [Dữ liệu tiếng Việt, nhãn, chia tập và phép đo](docs/DATASET-RESEARCH.md).
 - [Model card của bản thử nghiệm](docs/MODEL-CARD.md).
 - [Kết quả kiểm tra phần mềm](docs/QA.md).
+- [Rà soát và đồng bộ graph ngày 07/11/2026](docs/REVIEW-2026-11-07.md).
 - [Chẩn đoán và sửa lỗi trên 90 clip thực tế](docs/RECOGNITION-REPAIR.md).
 
 ## Lệnh phát triển

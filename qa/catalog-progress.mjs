@@ -14,10 +14,15 @@ try {
   page.on("pageerror", error => errors.push(String(error)));
   const cloudRequests = [];
   let connected = false;
+  let workspace = null;
   await page.route("**/api/archive?**", async route => {
     const request = route.request();
     cloudRequests.push({ method: request.method(), url: request.url() });
     const action = new URL(request.url()).searchParams.get("action");
+    if (action === "workspace") {
+      if (request.method() === "POST") workspace = { ...request.postDataJSON(), updatedAt: new Date().toISOString() };
+      return route.fulfill({ json: { ...(workspace ? { id: workspace.id } : {}), heads: workspace ? [workspace] : [] } });
+    }
     if (action === "connect" && request.method() === "POST") connected = true;
     if (action === "session" || action === "connect") {
       await route.fulfill({ json: { connected } });

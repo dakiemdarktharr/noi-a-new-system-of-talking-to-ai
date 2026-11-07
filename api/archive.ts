@@ -14,6 +14,7 @@ import type { Sample } from "../src/types.js";
 import { packDataset } from "../src/lib/dataset.js";
 import { validateImport } from "../src/lib/storage.js";
 import { isCustomWordId, VIDEO_GOAL } from "../src/lib/words.js";
+import { workspaceRequest } from "../server/workspace.js";
 
 const CLIP_LIMIT = 480_000;
 const REQUEST_LIMIT = 4_000_000;
@@ -128,6 +129,7 @@ export default {
         401,
       );
 
+    if (action === "workspace") return workspaceRequest(request, name, accessToken);
     if (action === "inventory" && request.method === "GET") {
       const labels: string[] = [];
       try {

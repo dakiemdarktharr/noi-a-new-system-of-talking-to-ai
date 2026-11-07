@@ -23,7 +23,11 @@ export function graphMeanings(graph: MeaningGraph, words: GraphWord[]): Record<s
   for (const chain of graph.chains) {
     const valid = chain.filter(id => labels.has(id));
     if (valid.length < 2) continue;
-    valid.forEach((id, i) => { result[id] = [...valid.slice(i), ...valid.slice(0, i)].map(key => labels.get(key)!); });
+    const row = valid.map(id => labels.get(id)!);
+    // Keep one shared row per chain; rotate only the recognized word on access.
+    // Materializing every rotation made a long chain consume quadratic memory.
+    valid.forEach((id, i) => Object.defineProperty(result, id, { enumerable: true,
+      get: () => [...row.slice(i), ...row.slice(0, i)] }));
   }
   return result;
 }

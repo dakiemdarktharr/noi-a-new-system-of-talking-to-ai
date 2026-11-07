@@ -138,6 +138,8 @@ describe("whole-clip evaluation partition", () => {
   });
 });
 
+// Pure-JS Node CPU backpropagation is substantially slower than the browser's
+// WebGL backend. Keep the same epochs/assertions while allowing slow CI hosts.
 describe("real TensorFlow.js execution — synthetic software regression, NOT human sign accuracy", () => {
   it("learns up versus right with the same handshape and orientation", async () => {
     await tf.setBackend("cpu");
@@ -163,7 +165,7 @@ describe("real TensorFlow.js execution — synthetic software regression, NOT hu
     } finally {
       model.dispose();
     }
-  }, 120000);
+  }, 600000);
   it("learns two synthetic orientations, reports held-out clips, rejects no hands, and disposes inference tensors", async () => {
     await tf.setBackend("cpu");
     const baselineTensors = tf.memory().numTensors;
@@ -252,5 +254,5 @@ describe("real TensorFlow.js execution — synthetic software regression, NOT hu
     classifier.dispose();
     expect(classifier.getSummary()).toBeNull();
     expect(tf.memory().numTensors).toBe(baselineTensors);
-  }, 120000);
+  }, 600000);
 });

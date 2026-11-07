@@ -57,6 +57,10 @@ h1 { font-size: clamp(30px, 3vw, 43px); font-weight: 700; line-height: 1.2; lett
 .collect-modes { display: inline-flex; border: 1px solid var(--ink); margin: 0 0 18px; }
 .collect-modes button { border: 0; border-radius: 0; padding: 11px 22px; background: transparent; font-size: 13px; font-weight: 600; }
 .collect-modes button[aria-pressed="true"] { color: white; background: var(--ink); }
+.workspace-sync { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 14px; font: 12px var(--mono); }
+.workspace-sync > button { padding: 8px 12px; }
+.workspace-error { color: #9a1b16; }
+.workspace-conflicts { display: flex; gap: 8px; flex-wrap: wrap; width: 100%; }
 .meaning-graph { --graph-ink: #eaf4ff; border: 2px solid #172e50; background: #0b2345; color: var(--graph-ink); }
 .graph-toolbar { display: flex; align-items: center; gap: 20px; padding: 14px 18px; border-bottom: 1px solid #476a94; background: #102e54; flex-wrap: wrap; }
 .graph-toolbar > strong { font: 600 16px var(--mono); letter-spacing: 2px; white-space: nowrap; }

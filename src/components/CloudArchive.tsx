@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { Download, Trash2, Upload } from "lucide-react";
 import { readDataset } from "../lib/dataset";
 import { VIDEO_GOAL } from "../lib/words";
@@ -33,6 +33,8 @@ export function CloudArchive({
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState("");
   const [code, setCode] = useState("");
+  const currentLabel = useRef(entry.id), refreshVersion = useRef(0);
+  currentLabel.current = entry.id;
   const local = samples.filter(
     (s) => s.labelId === entry.id && s.videoBlob?.size,
   );
@@ -40,18 +42,23 @@ export function CloudArchive({
     remote?.filter((r) => !samples.some((s) => s.id === r.id && s.videoBlob?.size)) ?? [];
 
   const refresh = useCallback(async () => {
+    const version = ++refreshVersion.current;
     const result = (await (
       await archiveRequest("GET", { label: entry.id })
     ).json()) as {
       samples: RemoteSample[];
       completed?: string[];
     };
-    setRemote(result.samples);
-    if (result.completed) onCompleted(result.completed);
+    if (currentLabel.current === entry.id && refreshVersion.current === version) {
+      setRemote(result.samples);
+      if (result.completed) onCompleted(result.completed);
+    }
     return result.samples;
   }, [entry.id, onCompleted]);
+  useEffect(() => { setRemote(null); }, [entry.id]);
   useEffect(() => {
     if (!connection.connected) {
+      refreshVersion.current++;
       setRemote(null);
       return;
     }
