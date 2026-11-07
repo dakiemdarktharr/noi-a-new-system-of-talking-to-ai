@@ -45,7 +45,9 @@ import {
   extractHand,
 } from "./lib/geometry";
 import { SignSegmenter } from "./lib/motion";
-import { DEFAULT_MEANINGS, MeaningCycleGesture, nextMeaning } from "./lib/meaning-cycle";
+import { MeaningCycleGesture, nextMeaning } from "./lib/meaning-cycle";
+import { MeaningGraph } from "./components/MeaningGraph";
+import { GRAPH_KEY, graphWords, graphMeanings, readGraph, placeWord, positionsFor, BLOCK_W, type MeaningGraph as GraphState } from "./lib/meaning-graph";
 import { diagnoseSamples } from "./lib/diagnostics";
 import { quality } from "./lib/recognizer";
 import { fixtureHand } from "./lib/fixtures";
@@ -133,15 +135,7 @@ export default function App() {
   const [resetting, setResetting] = useState(false);
   const [busyCloud, setBusyCloud] = useState(false);
   const samplesRef = useRef(samples); samplesRef.current = samples;
-  const [showMeanings, setShowMeanings] = useState(false), [meaningText, setMeaningText] = useState("");
-  const [meanings, setMeanings] = useState<Record<string, string[]>>(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem("noi-meanings-v1") || "null");
-      if (!stored || typeof stored !== "object" || Array.isArray(stored)) return DEFAULT_MEANINGS;
-      return Object.fromEntries(Object.entries(stored).filter(([, row]) => Array.isArray(row) && row.length >= 2 && row.length <= 12 && row.every(v => typeof v === "string" && v.length > 0 && v.length <= 80))) as Record<string, string[]>;
-    } catch { return DEFAULT_MEANINGS; }
-  });
-  const meaningsRef = useRef(meanings); meaningsRef.current = meanings;
+  const [collectMode, setCollectMode] = useState<"camera" | "graph">("camera");
   const cycle = useRef(new MeaningCycleGesture());
   const cycleWord = useRef<{ prediction: Recognition; meanings: string[]; index: number } | null>(null);
   const [customEntries, setCustomEntries] = useState(loadCustomWords);
@@ -162,6 +156,14 @@ export default function App() {
     () => [...builtinEntries, ...customEntries],
     [customEntries],
   );
+  const [meaningGraph, setMeaningGraph] = useState(() => {
+    try { return readGraph(entries, localStorage.getItem(GRAPH_KEY), localStorage.getItem("noi-meanings-v1")); }
+    catch { return readGraph(entries, null, null); }
+  });
+  const graphEntries = useMemo(() => graphWords(entries, meaningGraph), [entries, meaningGraph]);
+  const meanings = useMemo(() => graphMeanings(meaningGraph, graphEntries), [meaningGraph, graphEntries]);
+  const meaningsRef = useRef(meanings); meaningsRef.current = meanings;
+  const graphOpen = view === "collect" && collectMode === "graph";
   const entriesRef = useRef(entries); entriesRef.current = entries;
   const wordCount = entries.length - 1;
   const model = useRef(new TemporalClassifier()),
@@ -694,6 +696,20 @@ export default function App() {
       return;
     }
     setCustomEntries(next);
+    if (graphOpen) {
+      const duplicate = meaningGraph.extraWords.find(w => wordKey(w.label) === wordKey(label));
+      let graph = meaningGraph;
+      if (duplicate) graph = { ...graph,
+        extraWords: graph.extraWords.filter(w => w.id !== duplicate.id),
+        chains: graph.chains.map(row => row.map(id => id === duplicate.id ? entry.id : id)),
+        positions: { ...graph.positions, [entry.id]: graph.positions[duplicate.id] ?? { x: 0, y: 0 } },
+      };
+      else {
+        const anchor = positionsFor(graphEntries, graph).get(selected.id) ?? { x: 0, y: 0 };
+        graph = placeWord(graph, [...graphEntries, entry], entry.id, { x: anchor.x + BLOCK_W + 48, y: anchor.y });
+      }
+      updateMeaningGraph(graph);
+    }
     setNewWord(false);
     setWordText("");
     void chooseLabel(entry);
@@ -711,6 +727,12 @@ export default function App() {
       setBusyFile(false);
     }
   }
+  function updateMeaningGraph(next: GraphState) {
+    try { localStorage.setItem(GRAPH_KEY, JSON.stringify(next)); }
+    catch { notify("Không lưu được graph. Thay đổi chưa được áp dụng."); return false; }
+    setMeaningGraph(next); clearPrediction(); return true;
+  }
+  function openGraph() { stopCamera(); setView("collect"); setCollectMode("graph"); }
   const tabs = (target: "recognize" | "collect") => {
     if (recording) abortRecording();
     setView(target);
@@ -792,9 +814,7 @@ export default function App() {
               : "Thu mẫu & huấn luyện"}
           </h1>
           <div className="heading-actions">
-            <button className="secondary" onClick={() => {
-              setMeaningText((meanings[selected.id] ?? [selected.label]).join("\n")); setShowMeanings(true);
-            }}>Chuyển nghĩa</button>
+            {!graphOpen && <button className="secondary" onClick={openGraph}>Chuyển nghĩa</button>}
             <span className={"model-state " + (summary ? "ready" : "")}>
               <i />
               {summary
@@ -812,6 +832,13 @@ export default function App() {
             </button>
           </div>
         </div>
+        {view === "collect" && <div className="collect-modes" role="group" aria-label="Chế độ thu mẫu">
+          <button aria-pressed={collectMode === "camera"} onClick={() => setCollectMode("camera")}>Quay & train</button>
+          <button aria-pressed={collectMode === "graph"} onClick={openGraph}>Block</button>
+        </div>}
+        {graphOpen ? <MeaningGraph words={graphEntries} graph={meaningGraph} onChange={updateMeaningGraph}
+          onSelect={id => { const entry = entries.find(e => e.id === id); if (entry) setSelected(entry); }}
+          onAddWord={() => { setWordText(""); setNewWord(true); }} /> : <>
         {view === "collect" && (
           <div className="goal-strip">
             <strong>Đủ 30 video</strong>
@@ -1432,6 +1459,7 @@ export default function App() {
             )}
           </section>
         )}
+        </>}
       </main>
       <footer>
         <span>Xử lý trên thiết bị</span>
@@ -1595,23 +1623,6 @@ export default function App() {
           </div>
         </div>
       </dialog>
-      {showMeanings && (
-        <Modal className="lab-modal" label="Chuyển nghĩa" onClose={() => setShowMeanings(false)}>
-          <div className="dialog-heading"><h2>{selected.label}</h2><button className="icon-button" aria-label="Đóng chuyển nghĩa" onClick={() => setShowMeanings(false)}><X size={21} /></button></div>
-          <label htmlFor="meaning-list">Chuỗi nghĩa · mỗi dòng một nghĩa</label>
-          <textarea id="meaning-list" rows={5} value={meaningText} onChange={event => setMeaningText(event.target.value)} />
-          <button className="primary" onClick={() => {
-            const row = meaningText.split("\n").map(s => s.normalize("NFC").trim()).filter(Boolean);
-            if (!row.length || row.length > 12 || row.some(s => s.length > 80) || new Set(row).size !== row.length || row[0] !== selected.label) {
-              notify(`Dòng đầu phải là “${selected.label}”; tối đa 12 nghĩa khác nhau.`); return;
-            }
-            const next = { ...meanings }; if (row.length > 1) next[selected.id] = row; else delete next[selected.id];
-            try { localStorage.setItem("noi-meanings-v1", JSON.stringify(next)); }
-            catch { notify("Không lưu được chuỗi nghĩa."); return; }
-            setMeanings(next); clearPrediction(); setShowMeanings(false);
-          }}>Lưu</button>
-        </Modal>
-      )}
       {newWord && (
         <Modal
           className="new-word-modal"

@@ -41,9 +41,17 @@ try {
   });
   await page.reload();
   await expect(page.locator(".model-state")).toHaveText("2 nhãn đã học", { timeout: 20000 });
+  // Existing user meanings must migrate into the graph without losing custom
+  // labels. Persist through the graph UI, then use that map in live decoding.
+  await page.evaluate(() => localStorage.setItem("noi-meanings-v1", JSON.stringify({ NOI0001: ["tôi", "chúng tôi", "nhóm tôi", "tất cả chúng tôi"] })));
+  await page.reload();
   await page.getByRole("button", { name: "Chuyển nghĩa", exact: true }).click();
-  await page.getByLabel("Chuỗi nghĩa · mỗi dòng một nghĩa").fill("tôi\nchúng tôi\nnhóm tôi\ntất cả chúng tôi");
-  await page.getByRole("button", { name: "Lưu", exact: true }).click();
+  await page.getByLabel("Tìm block", { exact: true }).fill("tôi");
+  await page.locator(".graph-search .graph-results").getByRole("button", { name: "tôi", exact: true }).click();
+  await expect(page.locator(".graph-chain button")).toHaveText(["tôi", "chúng tôi", "nhóm tôi", "tất cả chúng tôi"]);
+  await page.getByRole("button", { name: "Tách", exact: true }).click();
+  await page.getByLabel("Hoàn tác graph", { exact: true }).click();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("noi-meaning-graph-v1")).chains[0].length)).toBe(4);
   await page.reload();
   await expect(page.locator(".model-state")).toHaveText("2 nhãn đã học", { timeout: 20000 });
   await page.evaluate(async () => {

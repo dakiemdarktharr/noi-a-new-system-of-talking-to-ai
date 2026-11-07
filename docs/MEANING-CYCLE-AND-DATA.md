@@ -1,6 +1,17 @@
 # Nối: chuyển nghĩa và dữ liệu
 
-Mỗi chu kỳ **nắm → mở** hoàn chỉnh chuyển một bước trong chuỗi nghĩa của từ vừa nhận diện. Mặc định: `tôi → chúng tôi → tôi`. Hai hoặc ba chu kỳ được xử lý thành hai hoặc ba sự kiện riêng. Mở **Chuyển nghĩa** để sửa chuỗi của nhãn đang chọn; dòng đầu là từ gốc, mỗi dòng tiếp theo là một nghĩa. Chỉ cần thu mẫu cho ký hiệu gốc; các nghĩa thay thế là quy ước do người dùng gán, không phải các lớp CNN được tự học thêm.
+Mỗi chu kỳ **nắm → mở** hoàn chỉnh chuyển một bước trong chuỗi nghĩa của từ vừa nhận diện. Mặc định: `tôi → chúng tôi → tôi`. Hai hoặc ba chu kỳ được xử lý thành hai hoặc ba sự kiện riêng. Chỉ cần thu mẫu cho ký hiệu gốc; các nghĩa thay thế là quy ước do người dùng gán, không phải các lớp CNN được tự học thêm.
+
+## Graph chuỗi nghĩa
+
+Mở **Thu mẫu → Block** hoặc **Chuyển nghĩa**. Graph mở ở mức tổng quan toàn bộ danh mục trên nền blueprint. Tìm từ để tới block, lăn chuột hoặc chụm hai ngón để zoom, kéo nền để di chuyển. Thêm từ trong danh mục tự tạo block; thêm ngay trong graph sẽ đặt block gần từ đang chọn.
+
+- Kéo một block tới gần block khác: ô nét chấm sáng nhất là vị trí sẽ snap khi thả. Có thể chèn trên, dưới hoặc giữa chuỗi. Các block bị cản sẽ được đẩy ra để tránh che nhau.
+- Chuỗi đọc từ trên xuống dưới. Đặt `chúng ta` ngay dưới `tôi` sẽ tạo `tôi → chúng ta`; mỗi lần nắm–mở đi một bước và cuối chuỗi quay về đầu. Nhận diện trực tiếp một từ ở giữa chuỗi thì bắt đầu từ chính từ đó.
+- Một block thuộc tối đa một chuỗi. Kéo di chuyển một từ; phần chuỗi còn lại nối tiếp nhau. Thả vào vùng trống hoặc dùng **Tách** sẽ tách từ khỏi chuỗi, không xóa từ hay mẫu đã quay.
+- Có **Hoàn tác / Làm lại**, **Esc** hủy kéo, phím mũi tên di chuyển khung nhìn. **Ghép dưới** là lựa chọn dùng bàn phím thay cho kéo thả. Mất focus, hủy pointer hoặc bắt đầu zoom hai ngón sẽ hủy thao tác kéo dở.
+
+Vị trí và chuỗi được lưu ngay trong trình duyệt (`noi-meaning-graph-v1`); bộ nhận diện dùng cùng thứ tự này. Nếu lưu thất bại, thay đổi graph không được áp dụng. Cấu hình chuyển nghĩa cũ được chuyển sang graph khi chưa có graph; các nghĩa cũ ngoài danh mục vẫn có block riêng. Cấu hình graph hiện chưa đồng bộ lên kho video và chưa nằm trong ZIP dataset/model. Hoàn tác chỉ giữ tối đa 40 thay đổi trong phiên mở graph.
 
 Lệnh có hiệu lực trong 5 giây sau từ gốc hoặc sau một lần chuyển. Bốn ngón dài phải cùng nắm rồi cùng mở, dùng cùng một bàn tay cho trọn chu kỳ. Ngưỡng nắm/mở có khoảng trễ riêng để tránh rung qua lại; nắm được xác nhận sau ít nhất 65 ms, mở sau 50 ms, cần nhiều hơn một quan sát mỗi pha. Giữ nắm không lặp tự động. Mất tay hoặc khoảng trống tracking trên 180 ms hủy chu kỳ chưa hoàn tất. Tư thế mở kết thúc không được đưa trở lại bộ đoán từ cho đến khi có thay đổi tư thế/vị trí/hướng hoặc hết cửa sổ lệnh.
 
