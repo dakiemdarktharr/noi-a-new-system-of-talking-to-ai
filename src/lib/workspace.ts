@@ -1,4 +1,4 @@
-import vocabulary from "../data/vocabulary.json";
+import vocabulary from "../data/vocabulary.json" with { type: "json" };
 import type { MeaningGraph, GraphWord } from "./meaning-graph.js";
 import { isCustomWordId, wordKey } from "./words.js";
 
